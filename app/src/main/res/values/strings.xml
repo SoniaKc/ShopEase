@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ShopEase</string>
+    <string name="accueil">Accueil</string>
+    <string name="favoris">Favoris</string>
+    <string name="compte">Compte</string>
+    <string name="consultesRecemment">Consultés récemment</string>
+    <string name="clientsAdorent">Nos clients les adorent</string>
+    <string name="rechercher">Rechercher...</string>
 </resources>
