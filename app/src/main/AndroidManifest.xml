@@ -10,18 +10,37 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ShopEase"
-        tools:targetApi="31" >
-
+        android:theme="@style/Theme.Projet"
+        tools:targetApi="31">
         <activity
-            android:name=".AccueilClient"
-            android:exported="true"
-            android:theme="@style/Theme.ShopEase">
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".InscriptionClient"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".InscriptionBoutique"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".Connexion" />
+
+        <activity android:name=".FaqClient" />
+        <activity android:name=".FaqBoutique" />
+
+        <activity android:name=".Parametres" />
+        <activity android:name=".Apropos" />
+        <activity android:name=".MentionsLegales" />
+
 
     </application>
 

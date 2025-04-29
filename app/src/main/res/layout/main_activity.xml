@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <!-- Barre de titre -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#FFF5FB"
+        android:gravity="center"
+        android:paddingTop="24dp">
+
+        <TextView
+            android:id="@+id/titleBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ShopEase"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <!-- Contenu principal scrollable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <!-- Section Client -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Client"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/btnClientRegister"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:text="Inscription\nClient"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:backgroundTint="#F3D9F5"
+                android:textColor="#000000"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rounded_button" />
+
+            <Button
+                android:id="@+id/btnClientLogin"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:text="Connection\nClient"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:backgroundTint="#F3D9F5"
+                android:textColor="#000000"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/rounded_button" />
+
+            <!-- Section Boutique -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Boutique"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/btnShopRegister"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:text="Inscription\nBoutique"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:backgroundTint="#F3D9F5"
+                android:textColor="#000000"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rounded_button" />
+
+            <Button
+                android:id="@+id/btnShopLogin"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:text="Connection\nBoutique"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:backgroundTint="#F3D9F5"
+                android:textColor="#000000"
+                android:background="@drawable/rounded_button" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
