@@ -84,58 +84,58 @@
 
     <string name="aPropos">🛒 À propos de ShopEase \n
 Bienvenue sur ShopEase, votre nouvelle plateforme mobile de e-commerce intelligente, conçue pour rendre l’achat et la vente de produits plus simple, rapide et personnalisée que jamais. \n
-Notre mission ? Offrir à chacun, particulier ou commerçant, un espace sécurisé et intuitif pour acheter et vendre une grande variété de produits. Que vous soyez à la recherche d’un article spécifique ou que vous souhaitiez lancer votre propre boutique en ligne, ShopEase est là pour vous accompagner à chaque étape. \n
+Notre mission ? Offrir à chacun, particulier ou commerçant, un espace sécurisé et intuitif pour acheter et vendre une grande variété de produits. Que vous soyez à la recherche d’un article spécifique ou que vous souhaitiez lancer votre propre boutique en ligne, ShopEase est là pour vous accompagner à chaque étape. \n\n
 🚀 Ce que nous offrons : \n
 Un catalogue riche et facile à parcourir, avec des filtres avancés pour trouver rapidement ce que vous cherchez. \n
 Une expérience utilisateur fluide, adaptée à vos goûts grâce à notre moteur de recommandations intelligent. \n
 Des paiements sécurisés et un suivi en temps réel de vos commandes. \n
 Un système de notation et d’avis pour vous aider à faire les bons choix. \n
-Une interface moderne pensée à la fois pour les acheteurs et les vendeurs. \n
+Une interface moderne pensée à la fois pour les acheteurs et les vendeurs. \n\n
 🤝 Pour les vendeurs : \n
 Créez votre boutique en quelques minutes, gérez vos produits et suivez vos ventes en toute autonomie grâce à un tableau de bord complet et facile à utiliser. \n
-ShopEase, c’est bien plus qu’un simple marketplace : c’est une communauté dynamique, propulsée par la technologie et centrée sur la confiance et la qualité. \n
+ShopEase, c’est bien plus qu’un simple marketplace : c’est une communauté dynamique, propulsée par la technologie et centrée sur la confiance et la qualité. \n\n
 N’hésitez pas à nous contacter ou visiter la section FAQ pour toute question. Merci de faire partie de l’aventure ! 🌟</string>
 
     <string name="MentionsLegales">
-        **Nom de l application** : *ShopEase*\n
-**Éditeur** : *Sonia KECHAOU et Fannie RUIZ*\n
-**Forme juridique** : *Auto-entrepreneur*\n
-**Adresse du siège social** : *123 Rue de l Innovation, 75010 Paris, France*\n
-**Email de contact** : *contact@shopease.app*\n
-**Numéro de téléphone** : *(facultatif)*\n
-**SIRET** : *123 456 789 00010*\n
-**Directeur de la publication** : *Sonia KECHAOU*\n
+        Nom de l application : ShopEase\n
+        Éditeur : Sonia KECHAOU et Fannie RUIZ\n
+        Forme juridique : Auto-entrepreneur\n
+        Adresse du siège social : 123 Rue de l\'Innovation, 75010 Paris, France\n
+        Email de contact : contact@shopease.app\n
+        Numéro de téléphone : 04 34 11 45 66\n
+        SIRET : 123 456 789 00010\n
+        Directeur de la publication : Sonia KECHAOU\n
 \n
 ---\n
 \n
-### 📡 Hébergement\n
+        📡 Hébergement\n
 \n
-**Hébergeur** : *OVHcloud*\n
-**Adresse** : *2 Rue Kellermann, 59100 Roubaix, France*\n
-**Site web** : *[https://www.ovhcloud.com](https://www.ovhcloud.com)*\n
-\n
----\n
-\n
-### 🔒 Données personnelles\n
-\n
-Les données personnelles collectées sur l application sont traitées dans le respect de la réglementation applicable (notamment le **RGPD**). Vous disposez d’un droit d’accès, de rectification, de suppression et de portabilité de vos données.\n
-Pour exercer vos droits, contactez-nous à l adresse suivante : *contact@shopease.app*.\n
-\n
-Pour plus d informations, veuillez consulter notre **[Politique de confidentialité]**.\n
+Hébergeur : OVHcloud\n
+Adresse : 2 Rue Kellermann, 59100 Roubaix, France\n
+Site web : https://www.ovhcloud.com\n
 \n
 ---\n
 \n
-### ⚖️ Propriété intellectuelle\n
+ 🔒 Données personnelles\n
 \n
-Tous les contenus présents sur l application (textes, images, logos, icônes, interfaces, etc.) sont la propriété exclusive de *Sonia KECHAOU et Fannie RUIZ*, sauf mention contraire, et sont protégés par les lois en vigueur sur la propriété intellectuelle.\n
+Les données personnelles collectées sur l application sont traitées dans le respect de la réglementation applicable (notamment le RGPD). Vous disposez d’un droit d’accès, de rectification, de suppression et de portabilité de vos données.\n
+Pour exercer vos droits, contactez-nous à l adresse suivante : contact@shopease.app.\n
+\n
+Pour plus d informations, veuillez consulter notre Politique de confidentialité.\n
+\n
+---\n
+\n
+ ⚖️ Propriété intellectuelle\n
+\n
+Tous les contenus présents sur l application (textes, images, logos, icônes, interfaces, etc.) sont la propriété exclusive de Sonia KECHAOU et Fannie RUIZ, sauf mention contraire, et sont protégés par les lois en vigueur sur la propriété intellectuelle.\n
 Toute reproduction ou utilisation non autorisée est strictement interdite.\n
 \n
 ---\n
 \n
-### 📱 Conditions d’utilisation\n
+ 📱 Conditions d’utilisation\n
 \n
-L utilisation de l application implique l acceptation pleine et entière de nos **[Conditions Générales d’Utilisation]**.\n
-L éditeur se réserve le droit de modifier à tout moment les présentes mentions légales.\n
+L\'utilisation de l application implique l acceptation pleine et entière de nos Conditions Générales d’Utilisation.\n
+L\'éditeur se réserve le droit de modifier à tout moment les présentes mentions légales.\n
     </string>
 
 
