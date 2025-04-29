@@ -8,6 +8,78 @@
     <string name="consultesRecemment">Consultés récemment</string>
     <string name="clientsAdorent">Nos clients les adorent</string>
     <string name="rechercher">Rechercher...</string>
+    <string name="aProposTitre">À propos</string>
+    <string name="connexion">Connexion</string>
+
+    <string name="connexionEntrezID">Entrez votre identifiant</string>
+    <string name="mdp">Mot de passe :</string>
+    <string name="mdpSecu">Mot de passe sécurisé</string>
+    <string name="seConnecter">Se connecter</string>
+    <string name="FAQBoutique">FAQ Boutique</string>
+    <string name="FAQClient">FAQ Client</string>
+    <string name="label">Label :</string>
+
+    <string name="inscriptionBoutique">Inscription \nBoutique</string>
+    <string name="identifiant">Identifiant :</string>
+    <string name="entrezIndentifiant">Entrez votre identifiant</string>
+    <string name="nomBoutique">Nom de la Boutique :</string>
+    <string name="nomCommercial">Nom commercial</string>
+    <string name="numSiret">Numéro de Siret :</string>
+    <string name="exempleNumSiret">123 456 789 00012</string>
+    <string name="formeJur">Forme juridique :</string>
+    <string name="SARL">SAS, SARL, etc</string>
+    <string name="sInscrire">S\’inscrire</string>
+
+    <string name="inscriptionClient">Inscription Client</string>
+    <string name="mdpSimple">Mot de passe</string>
+    <string name="indentifiantSimple">Identifiant</string>
+    <string name="nom">Nom</string>
+    <string name="prenom">Prénom</string>
+    <string name="mail">Adresse mail</string>
+    <string name="dob">Date de naissance</string>
+
+
+    <string name="client">Client</string>
+    <string name="inscClient2">Inscription\nClient</string>
+    <string name="connClient">Connection\nClient</string>
+    <string name="boutique">Boutique</string>
+    <string name="connBoutique">Connection\nBoutique</string>
+
+    <string name="mentionsLegales">Mentions Légales</string>
+
+    <string name="params">Paramètres</string>
+    <string name="paramLangue">Langue : Français</string>
+    <string name="paramCookie">Cookies : Acceptés</string>
+    <string name="paramNotifs">Notifications : Push, e-mail, SMS</string>
+    <string name="supprCompte">Supprimer le compte</string>
+
+    <string name="mesInfos">Mes informations</string>
+    <string name="fleurCie">Nom boutique : Fleur et Cie</string>
+    <string name="modifNomBoutique">Modifier Nom boutique</string>
+    <string name="mailBoutique">E-mail : FleurCie@gmail.com</string>
+    <string name="modifMail">Modifier E-mail</string>
+    <string name="telBoutique">Téléphone : 0458510269</string>
+    <string name="modifTel">Modifier Téléphone</string>
+    <string name="idBoutique">Identifiant : FleurCie</string>
+    <string name="modifId">Modifier Identifiant</string>
+    <string name="mdpBoutique">Mot de Passe : **********</string>
+    <string name="modifMdp">Modifier Mot de Passe</string>
+    <string name="formeJurBoutique">Forme juridique : SARL</string>
+    <string name="modifFormeJur">Modifier Forme juridique</string>
+    <string name="numSiretBoutique">Numéro SIRET : 31J</string>
+    <string name="modifSiret">Modifier SIRET</string>
+    <string name="siegeSocialBoutique">Siège social : 21 rue Albert, Paris</string>
+    <string name="modifAdresse">Modifier adresse</string>
+    <string name="paysBoutique">Pays d\'enregistrement : France</string>
+    <string name="modifPays">Modifier pays</string>
+    <string name="iban">IBAN : **********</string>
+    <string name="modifIban">Modifier IBAN</string>
+    <string name="supprBoutique">Supprimer la boutique</string>
+
+
+
+
+
 
 
     <string name="aPropos">🛒 À propos de ShopEase \n

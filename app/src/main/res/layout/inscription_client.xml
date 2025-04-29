@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Inscription Client"
+        android:text="@string/inscriptionClient"
         android:textStyle="bold"
         android:textSize="24sp"
         android:layout_gravity="center_horizontal"
@@ -17,7 +17,7 @@
 
     <EditText
         android:id="@+id/identifiant"
-        android:hint="Identifiant"
+        android:hint="@string/indentifiantSimple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F3D1F4"
@@ -26,7 +26,7 @@
 
     <EditText
         android:id="@+id/mot_de_passe"
-        android:hint="Mot de passe"
+        android:hint="@string/mdpSimple"
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
 
     <EditText
         android:id="@+id/nom"
-        android:hint="Nom"
+        android:hint="@string/nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F3D1F4"
@@ -45,7 +45,7 @@
 
     <EditText
         android:id="@+id/prenom"
-        android:hint="Prénom"
+        android:hint="@string/prenom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F3D1F4"
@@ -54,7 +54,7 @@
 
     <EditText
         android:id="@+id/email"
-        android:hint="Adresse mail"
+        android:hint="@string/mail"
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
 
     <EditText
         android:id="@+id/date_naissance"
-        android:hint="Date de naissance"
+        android:hint="@string/dob"
         android:inputType="date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
 
     <Button
         android:id="@+id/btn_inscription"
-        android:text="S’inscrire"
+        android:text="@string/sInscrire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

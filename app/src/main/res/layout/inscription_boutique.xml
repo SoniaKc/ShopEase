@@ -15,7 +15,7 @@
         android:paddingTop="24dp">
 
         <TextView
-            android:text="ShopEase"
+            android:text="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -37,7 +37,7 @@
             android:gravity="center_horizontal">
 
             <TextView
-                android:text="Inscription\nBoutique"
+                android:text="@string/inscriptionBoutique"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
@@ -46,38 +46,50 @@
                 android:textColor="#000000"
                 android:layout_marginBottom="24dp" />
 
-            <!-- Champ : Identifiant -->
+            <!-- Identifiant -->
             <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle" android:text="Identifiant :" />
-                <EditText style="@style/FormEditStyle" android:hint="Entrez votre identifiant"
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/identifiant" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/entrezIndentifiant"
                     android:id="@+id/identifiant"/>
             </LinearLayout>
 
-            <!-- Champ : Nom de la Boutique -->
+            <!-- Nom de la Boutique -->
             <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle" android:text="Nom de la Boutique :" />
-                <EditText style="@style/FormEditStyle" android:hint="Nom commercial"
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/nomBoutique" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/nomCommercial"
                     android:id="@+id/nom"/>
             </LinearLayout>
 
-            <!-- Champ : Numéro de Siret -->
+            <!-- Numéro de Siret -->
             <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle" android:text="Numéro de Siret :" />
-                <EditText style="@style/FormEditStyle" android:hint="123 456 789 00012" android:inputType="number"
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/numSiret" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/exempleNumSiret"
+                    android:inputType="number"
                     android:id="@+id/siret"/>
             </LinearLayout>
 
-            <!-- Champ : Forme juridique -->
+            <!-- Forme juridique -->
             <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle" android:text="Forme juridique :" />
-                <EditText style="@style/FormEditStyle" android:hint="SAS, SARL, etc."
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/formeJur" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/SARL"
                     android:id="@+id/forme_juridique"/>
             </LinearLayout>
 
-            <!-- Champ : Mot de passe -->
+            <!-- Mot de passe -->
             <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle" android:text="Mot de passe :" />
-                <EditText style="@style/FormEditStyle" android:hint="Mot de passe sécurisé" android:inputType="textPassword"
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/mdp" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/mdpSecu"
+                    android:inputType="textPassword"
                     android:id="@+id/mdp"/>
             </LinearLayout>
 
@@ -86,7 +98,7 @@
                 android:id="@+id/inscription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="S’inscrire"
+                android:text="@string/sInscrire"
                 android:textStyle="bold"
                 android:backgroundTint="#D8A7D9"
                 android:textColor="#000000"

@@ -28,7 +28,7 @@
         android:id="@+id/titre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mentions Légales"
+        android:text="@string/mentionsLegales"
         android:textSize="16sp"
         android:textColor="#1E1E1E"
         android:fontFamily="sans-serif-medium"

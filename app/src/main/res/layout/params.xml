@@ -35,7 +35,7 @@
         android:id="@+id/titre"
         android:layout_width="0dp"
         android:layout_height="53dp"
-        android:text="Paramètres"
+        android:text="@string/params"
         android:textSize="32sp"
         android:textColor="#000000"
         android:gravity="center"
@@ -51,18 +51,15 @@
         tools:ignore="MissingConstraints" /> <!-- Espacement personnalisé -->
 
 
-    <!-- Rectangles and Labels -->
-    <!-- Each setting row: Rectangle + Label + Icon -->
-    <!-- Repeat for each of the 4 items + last pink one -->
 
-    <!-- Example setting row -->
-    <!-- Option 1: Langue -->
+
+
     <TextView
         android:id="@+id/rowLangue"
         android:layout_width="0dp"
         android:layout_height="41dp"
         android:background="#F0DDEF"
-        android:text="Langue : Français"
+        android:text="@string/paramLangue"
         android:textSize="22sp"
         android:paddingStart="24dp"
         android:gravity="center_vertical"
@@ -77,7 +74,7 @@
         android:layout_width="0dp"
         android:layout_height="41dp"
         android:background="#E4CAE5"
-        android:text="Cookies : Acceptés"
+        android:text="@string/paramCookie"
         android:textSize="22sp"
         android:paddingStart="24dp"
         android:gravity="center_vertical"
@@ -92,7 +89,7 @@
         android:layout_width="0dp"
         android:layout_height="41dp"
         android:background="#F0DDEF"
-        android:text="Notifications : Push, e-mail, SMS"
+        android:text="@string/paramNotifs"
         android:textSize="22sp"
         android:paddingStart="24dp"
         android:gravity="center_vertical"
@@ -108,7 +105,7 @@
         android:layout_width="0dp"
         android:layout_height="47dp"
         android:backgroundTint="#FDCBFC"
-        android:text="Supprimer le compte"
+        android:text="@string/supprCompte"
         android:textSize="22sp"
         android:textColor="#000000"
         android:fontFamily="sans-serif"
