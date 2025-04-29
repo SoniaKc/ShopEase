@@ -1,4 +1,5 @@
-package com.example.shopease;
+package com.example.projet;
+
 
 import android.app.Activity;
 import android.os.Bundle;
