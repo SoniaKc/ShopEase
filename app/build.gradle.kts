@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.shopease"
+    namespace = "com.example.projet"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.shopease"
+        applicationId = "com.example.projet"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

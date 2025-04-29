@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#FFF5FB"
+        android:gravity="center"
+        android:paddingTop="24dp">
+
+        <TextView
+            android:text="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <!-- Form -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/inscriptionBoutique"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Identifiant -->
+            <LinearLayout style="@style/FormFieldStyle">
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/identifiant" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/entrezIndentifiant"
+                    android:id="@+id/identifiant"/>
+            </LinearLayout>
+
+            <!-- Nom de la Boutique -->
+            <LinearLayout style="@style/FormFieldStyle">
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/nomBoutique" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/nomCommercial"
+                    android:id="@+id/nom"/>
+            </LinearLayout>
+
+            <!-- Numéro de Siret -->
+            <LinearLayout style="@style/FormFieldStyle">
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/numSiret" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/exempleNumSiret"
+                    android:inputType="number"
+                    android:id="@+id/siret"/>
+            </LinearLayout>
+
+            <!-- Forme juridique -->
+            <LinearLayout style="@style/FormFieldStyle">
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/formeJur" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/SARL"
+                    android:id="@+id/forme_juridique"/>
+            </LinearLayout>
+
+            <!-- Mot de passe -->
+            <LinearLayout style="@style/FormFieldStyle">
+                <TextView style="@style/FormLabelStyle"
+                    android:text="@string/mdp" />
+                <EditText style="@style/FormEditStyle"
+                    android:hint="@string/mdpSecu"
+                    android:inputType="textPassword"
+                    android:id="@+id/mdp"/>
+            </LinearLayout>
+
+            <!-- Bouton -->
+            <Button
+                android:id="@+id/inscription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sInscrire"
+                android:textStyle="bold"
+                android:backgroundTint="#D8A7D9"
+                android:textColor="#000000"
+                android:layout_marginTop="24dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

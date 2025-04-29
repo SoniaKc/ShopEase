@@ -1,4 +1,4 @@
-package com.example.shopease;
+package com.example.projet;
 
 import org.junit.Test;
 
