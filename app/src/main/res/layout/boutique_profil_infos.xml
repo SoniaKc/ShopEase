@@ -1,0 +1,396 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Status Bar -->
+    <View
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/purple_50"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- Top bar -->
+    <include
+        android:id="@+id/topAppBar"
+        layout="@layout/boutique_top_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/topPanel"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
+        app:layout_constraintBottom_toTopOf="@+id/include">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Sous-titre -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mesInfos"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:padding="8dp" />
+
+            <!-- Image de profil -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp">
+
+                <ImageView
+                    android:id="@+id/profilePhoto"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/picture_boutique"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id = "@+id/BtnModifPhoto"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_edit"
+                    android:contentDescription="@string/modifPhoto"
+                    android:padding="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Infos vendeur -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp">
+
+                <!-- Nom boutique -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne1"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/nom"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/fleurCie"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifNom"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifNomBoutique"
+                        android:padding="2dp" />
+                </LinearLayout>
+
+                <!-- E-mail -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne2"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/mailBoutique"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifEmail"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifMail"
+                        android:padding="2dp" />
+                </LinearLayout>
+
+                <!-- Téléphone -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne1"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/tel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/telBoutique"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifTel"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifTel"
+                        android:padding="2dp" />
+                </LinearLayout>
+
+                <!-- Identifiant -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne2"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/id"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/idBoutique"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifId"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifId"
+                        android:padding="2dp" />
+                </LinearLayout>
+
+                <!-- Mot de Passe -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne1"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/mdp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/mdpBoutique"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifMdp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifMdp"
+                        android:padding="2dp" />
+                </LinearLayout>
+
+                <!-- Ligne de séparation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#C0C0C0"
+                    android:layout_marginVertical="8dp" />
+
+                <!-- Forme juridique -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne2"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/formeJuridique"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/formeJurBoutique"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifFormeJuridique"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifFormeJur"
+                        android:padding="2dp" />
+                </LinearLayout>
+
+                <!-- Numéro SIRET -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne1"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/siret"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/numSiretBoutique"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifSiret"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifSiret"
+                        android:padding="2dp" />
+                </LinearLayout>
+
+                <!-- Siège social -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne2"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/siegeSocial"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/siegeSocialBoutique"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifSiegeSocial"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifAdresse"
+                        android:padding="2dp" />
+                </LinearLayout>
+
+                <!-- Pays -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne1"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/paysEnregitrement"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/paysBoutique"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifPaysEnregistrement"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifPays"
+                        android:padding="2dp" />
+                </LinearLayout>
+
+                <!-- IBAN -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne2"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/iban"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/iban"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifIban"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit"
+                        android:contentDescription="@string/modifIban"
+                        android:padding="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- Bouton suppression -->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/supprBoutique"
+                android:backgroundTint="#CC185A"
+                android:textColor="#000000"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!-- Barre du bas -->
+    <include
+        android:id="@+id/include"
+        layout="@layout/boutique_bottom_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomPanel"/>
+
+    <!-- Panel bas -->
+    <View
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/purple_50"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

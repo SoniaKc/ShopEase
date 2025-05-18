@@ -1,21 +1,19 @@
 package com.example.projet;
 
-import static java.sql.DriverManager.println;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.projet.bdd.DBHelper;
 
 public class MainActivity extends Activity {
-    Button btnInscClient;
-    Button btnInscBoutique;
-    Button btnConnexionClient;
-    Button btnConnexionBoutique;
+    TextView btnInscClient;
+    TextView btnInscBoutique;
+    TextView btnConnexionClient;
+    TextView btnConnexionBoutique;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +33,7 @@ public class MainActivity extends Activity {
         btnInscClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, InscriptionClient.class);
+                Intent i = new Intent(MainActivity.this, ClientInscription.class);
                 startActivity(i);
             }
         }
@@ -44,7 +42,7 @@ public class MainActivity extends Activity {
         btnInscBoutique.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, InscriptionBoutique.class);
+                Intent i = new Intent(MainActivity.this, BoutiqueInscription.class);
                 startActivity(i);
             }
         }

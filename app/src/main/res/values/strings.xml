@@ -4,6 +4,7 @@
 
     <string name="accueil">Accueil</string>
     <string name="favoris">Favoris</string>
+    <string name="ventes">Ventes</string>
     <string name="compte">Compte</string>
     <string name="consultesRecemment">Consultés récemment</string>
     <string name="clientsAdorent">Nos clients les adorent</string>
@@ -23,10 +24,10 @@
     <string name="identifiant">Identifiant :</string>
     <string name="entrezIndentifiant">Entrez votre identifiant</string>
     <string name="nomBoutique">Nom de la Boutique :</string>
-    <string name="nomCommercial">Nom commercial</string>
-    <string name="numSiret">Numéro de Siret :</string>
+    <string name="nomCommercial">Nom commercial de la Boutique</string>
+    <string name="numSiret">Numéro de Siret</string>
     <string name="exempleNumSiret">123 456 789 00012</string>
-    <string name="formeJur">Forme juridique :</string>
+    <string name="formeJur">Forme juridique</string>
     <string name="SARL">SAS, SARL, etc</string>
     <string name="sInscrire">S\’inscrire</string>
 
@@ -75,6 +76,7 @@
     <string name="iban">IBAN : **********</string>
     <string name="modifIban">Modifier IBAN</string>
     <string name="supprBoutique">Supprimer la boutique</string>
+    <string name="modifPhoto">Modifier Photo</string>
 
 
 

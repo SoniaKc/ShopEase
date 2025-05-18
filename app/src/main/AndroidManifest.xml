@@ -23,28 +23,35 @@
         </activity>
 
         <activity
-            android:name=".InscriptionClient"
+            android:name=".ClientInscription"
             android:exported="false">
         </activity>
 
         <activity
-            android:name=".InscriptionBoutique"
+            android:name=".BoutiqueInscription"
             android:exported="false">
         </activity>
 
         <activity android:name=".Connexion" />
 
-        <activity android:name=".FaqClient" />
-        <activity android:name=".FaqBoutique" />
+        <activity android:name=".ClientFaq" />
+        <activity android:name=".BoutiqueFaq" />
 
-        <activity android:name=".AccueilClient" />
+        <activity android:name=".ClientAccueil" />
+        <activity android:name=".ClientProfilAcceuil" />
 
-        <activity android:name=".ProfilBoutiqueInfos" />
-        <activity android:name=".ProfilBoutiqueAcceuil" />
+        <activity android:name=".BoutiqueProfilInfos" />
+        <activity android:name=".BoutiqueProfilAccueil" />
 
-        <activity android:name=".Parametres" />
-        <activity android:name=".Apropos" />
-        <activity android:name=".MentionsLegales" />
+        <activity android:name=".ClientParametres" />
+        <activity android:name=".ClientApropos" />
+        <activity android:name=".ClientMentionsLegales" />
+
+        <activity android:name=".ClientPanier" />
+        <activity android:name=".ClientFavoris" />
+        <activity android:name=".ClientProfilInfos" />
+        <activity android:name=".ClientAdresses" />
+        <activity android:name=".ClientHistoriqueAchats" />
 
 
 

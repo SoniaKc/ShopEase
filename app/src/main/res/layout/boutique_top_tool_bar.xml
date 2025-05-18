@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topToolBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/purple_50"
+    android:padding="12dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <!-- Nom de l’app au centre -->
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_centerInParent="true" />
+
+    <!-- Image profil -->
+    <ImageView
+        android:id="@+id/profilePhoto"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/picture_boutique"
+        android:layout_alignParentEnd="true"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_background" />
+</RelativeLayout>
