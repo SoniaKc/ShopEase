@@ -11,7 +11,7 @@ public class AccueilClient extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_accueil_client);
+        setContentView(R.layout.client_layout_accueil);
 
 
         // TOP NAVIGATION BAR

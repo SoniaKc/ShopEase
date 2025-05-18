@@ -16,7 +16,7 @@ public class InscriptionBoutique extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.inscription_boutique);
+        setContentView(R.layout.boutique_inscription);
 
         BoutiqueTable boutiqueTable = BoutiqueTable.getInstance();
 

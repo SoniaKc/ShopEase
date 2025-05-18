@@ -18,7 +18,7 @@
     <!-- Top bar -->
     <include
         android:id="@+id/topAppBar"
-        layout="@layout/top_tool_bar"
+        layout="@layout/client_top_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/topPanel" />
@@ -107,7 +107,7 @@
     <!-- Barre du bas -->
     <include
         android:id="@+id/include"
-        layout="@layout/bottom_tool_bar"
+        layout="@layout/client_bottom_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomPanel" />

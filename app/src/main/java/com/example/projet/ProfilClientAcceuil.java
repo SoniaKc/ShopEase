@@ -3,12 +3,9 @@ package com.example.projet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.projet.bdd.BoutiqueTable;
 import com.example.projet.bdd.ClientTable;
 
 public class ProfilClientAcceuil extends Activity {
@@ -17,7 +14,7 @@ public class ProfilClientAcceuil extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profil_client_acceuil);
+        setContentView(R.layout.client_profil_acceuil);
 
 
         Bundle info = getIntent().getExtras();
@@ -45,7 +42,7 @@ public class ProfilClientAcceuil extends Activity {
         });
 
         addresses.setOnClickListener(v -> {
-            Intent intent = new Intent(this, Adresses.class);
+            Intent intent = new Intent(this, AdressesListe.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });

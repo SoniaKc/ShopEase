@@ -22,7 +22,7 @@ public class ProfilBoutiqueInfos extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profil_boutique_infos);
+        setContentView(R.layout.boutique_profil_infos);
 
         BoutiqueTable shop = BoutiqueTable.getInstance();
 

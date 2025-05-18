@@ -44,7 +44,7 @@ public class ProduitTable{
     public void createTable() {
         String createTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_ID_BOUTIQUE + "INTEGER," +
+                COLUMN_ID_BOUTIQUE + "TEXT," +
                 COLUMN_NOM + " TEXT, " +
                 COLUMN_CATEGORIES + " TEXT, " +
                 COLUMN_REDUCTION + " TEXT, " +
@@ -58,7 +58,7 @@ public class ProduitTable{
     }
 
 
-    public boolean insertProduit(Integer id_boutique, String nom, String categorie, String prix, String description) {
+    public boolean insertProduit(String id_boutique, String nom, String categorie, String prix, String description) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID_BOUTIQUE, id_boutique);
         values.put(COLUMN_NOM, nom);

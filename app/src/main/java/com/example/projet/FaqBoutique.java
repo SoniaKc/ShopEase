@@ -7,6 +7,6 @@ public class FaqBoutique extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.faq_boutique);
+        setContentView(R.layout.boutique_faq);
     }
 }

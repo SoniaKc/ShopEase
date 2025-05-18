@@ -7,6 +7,6 @@ public class Apropos extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.a_propos);
+        setContentView(R.layout.client_a_propos);
     }
 }

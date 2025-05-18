@@ -9,7 +9,7 @@
     <!-- Toolbar -->
     <include
         android:id="@+id/topAppBar"
-        layout="@layout/top_tool_bar_boutique"
+        layout="@layout/boutique_top_tool_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -93,7 +93,7 @@
     <!-- Bottom bar -->
     <include
         android:id="@+id/bottomBar"
-        layout="@layout/bottom_tool_bar_boutique"
+        layout="@layout/boutique_bottom_tool_bar"
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -14,7 +14,7 @@ public class ProfilBoutiqueAcceuil extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profil_boutique_acceuil);
+        setContentView(R.layout.boutique_profil_acceuil);
 
         Bundle info = getIntent().getExtras();
         assert info !=null;

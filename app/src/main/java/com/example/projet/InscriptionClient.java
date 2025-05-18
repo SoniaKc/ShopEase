@@ -17,7 +17,7 @@ public class InscriptionClient extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.inscription_client);
+        setContentView(R.layout.client_inscription);
 
         ClientTable clientTable = ClientTable.getInstance();
 

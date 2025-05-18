@@ -177,4 +177,85 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
     <string name="validerAjoutProduit">✔ Valider les modifications de ce produit</string>
     <string name="AnnulerAjoutProduit">🗑 Supprimer ce produit</string>
     <string name="bienvenue">Bonjour, NOM Prénom :)</string>
+
+    <string name="payment_methods_title">Moyens de Paiement</string>
+    <string name="add_address_button">+ Ajouter une adresse</string>
+
+    <!-- Adresses -->
+    <string name="address_1">Adresse 1</string>
+    <string name="address_1_street">49 rue de l\'olivette</string>
+    <string name="address_1_city">34089 St Jacques France</string>
+
+    <string name="address_2">Adresse 2</string>
+    <string name="address_2_street">42 rue des Licornes Volantes,</string>
+    <string name="address_2_city">99999 Fantaisie-sur-Mer Bolivie</string>
+
+
+    <string name="adresses">Mes Adresses</string>
+    <string name="add_card_button">+ Ajouter une carte</string>
+
+    <!-- Cartes de paiement -->
+    <string name="card_1">Carte 1</string>
+    <string name="card_1_number">Numéro de carte : 4111 **** **** 1111</string>
+    <string name="card_1_holder">Titulaire : Jean Testeur</string>
+    <string name="card_1_expiry">Date d\'expiration : 12/27</string>
+
+    <string name="card_2">Carte 2</string>
+    <string name="card_2_number">Numéro de carte : 5500 **** **** 0004</string>
+    <string name="card_2_holder">Nom : Marie Démo</string>
+    <string name="card_2_expiry">Date d\'expiration : 08/26</string>
+
+    <!-- Boutons -->
+    <string name="edit_button">Modifier</string>
+    <string name="delete_button">Supprimer</string>
+
+    <!-- Titres et en-têtes -->
+    <string name="my_infos_title">Mes informations</string>
+    <string name="delete_account_button">Supprimer mon compte</string>
+
+    <!-- Labels des champs -->
+    <string name="name_label">Prénom Nom :</string>
+    <string name="email_label">E-mail :</string>
+    <string name="phone_label">Téléphone :</string>
+    <string name="username_label">Identifiant :</string>
+    <string name="password_label">Mot de Passe :</string>
+
+
+    <!-- Content descriptions -->
+    <string name="edit_name_desc">Modifier le nom</string>
+    <string name="edit_email_desc">Modifier l\'email</string>
+    <string name="edit_phone_desc">Modifier le téléphone</string>
+    <string name="edit_username_desc">Modifier l\'identifiant</string>
+    <string name="edit_password_desc">Modifier le mot de passe</string>
+
+
+    <!-- Titres et textes -->
+    <string name="purchase_confirmation_title">Page Validation Achat</string>
+    <string name="customer_name">Prénom Nom</string>
+    <string name="congratulations_message">Félicitation pour votre achat !</string>
+    <string name="preparation_message">Il est en cours de préparation et ne tardera pas à arriver devant votre porte.</string>
+    <string name="thank_you_message">Merci pour votre confiance. En espérant vous revoir rapidement, L\'équipe de ShopEase.</string>
+
+
+
+    <!-- Titres et en-têtes -->
+    <string name="payment_page_title">Page de paiement</string>
+    <string name="payment_method_section">Votre moyen de règlement</string>
+    <string name="delivery_address_section">Votre adresse de Livraison</string>
+    <string name="promo_code_section">Code promotion ou carte cadeau</string>
+    <string name="validate_button">Valider et Payer</string>
+
+    <!-- Textes des cartes et adresses -->
+    <string name="card_example">Carte 1 : 4111 **** **** 1111</string>
+    <string name="address_example">Adresse 1 : 49 rue de l\'Olivette, 34089 St Jacques, France</string>
+
+    <!-- Boutons -->
+    <string name="choose_another_card">Choisir une autre carte</string>
+    <string name="choose_another_address">Choisir une autre adresse</string>
+    <string name="promo_code_hint">Code :</string>
+
+    <!-- Navigation -->
+    <string name="home">Accueil</string>
+    <string name="favorites">Favoris</string>
+    <string name="account">Compte</string>
 </resources>

@@ -40,7 +40,7 @@ public class Connexion extends Activity {
                 if (temp) {
                     Toast.makeText(this, "Connexion réussie.", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Connexion.this, ProfilBoutiqueInfos.class);
-                    i.putExtra("log", Stridentifiant);
+                    i.putExtra("id", Stridentifiant);
                     startActivity(i);
                 } else {
                     Toast.makeText(this, "Erreur lors de la connexion.", Toast.LENGTH_SHORT).show();
@@ -53,7 +53,7 @@ public class Connexion extends Activity {
                 if (temp) {
                     Toast.makeText(this, "Connexion réussie.", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Connexion.this, AccueilClient.class);
-                    i.putExtra("log", Stridentifiant);
+                    i.putExtra("id", Stridentifiant);
                     startActivity(i);
                 } else {
                     Toast.makeText(this, "Erreur lors de la connexion.", Toast.LENGTH_SHORT).show();

@@ -10,4 +10,6 @@
     <color name="button_text_color">#000000</color>
     <color name="purple_50">#F3EDF7</color>
     <color name="purple_51">#E7DEED</color>
+    <color name="colorcartes">#F2E1FD</color>
+    <color name="colorcartes2">#E1E8FD</color>
 </resources>
