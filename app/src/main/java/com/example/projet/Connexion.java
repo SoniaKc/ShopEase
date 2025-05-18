@@ -39,7 +39,7 @@ public class Connexion extends Activity {
                 boolean temp = shop.getShopExistence(Stridentifiant, Strmdp);
                 if (temp) {
                     Toast.makeText(this, "Connexion réussie.", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Connexion.this, ProfilBoutique.class);
+                    Intent i = new Intent(Connexion.this, ProfilBoutiqueInfos.class);
                     i.putExtra("log", Stridentifiant);
                     startActivity(i);
                 } else {

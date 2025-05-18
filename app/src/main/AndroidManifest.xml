@@ -38,10 +38,14 @@
         <activity android:name=".FaqBoutique" />
 
         <activity android:name=".AccueilClient" />
-        <activity android:name=".ProfilBoutique" />
+
+        <activity android:name=".ProfilBoutiqueInfos" />
+        <activity android:name=".ProfilBoutiqueAcceuil" />
+
         <activity android:name=".Parametres" />
         <activity android:name=".Apropos" />
         <activity android:name=".MentionsLegales" />
+
 
 
     </application>

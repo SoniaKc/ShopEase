@@ -161,4 +161,20 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
         R : Oui, vous pouvez mettre à jour le stock de chaque produit depuis l’interface vendeur. Le stock s’ajuste également automatiquement après chaque vente.</string>
 
 
+    <string name="TVmodif">Nouveau</string>
+    <string name="Confirmer">Confirmer</string>
+    <string name="Retour">Retour</string>
+
+    <string name="mesProduits"> Mes produits</string>
+    <string name="Historique">Historique des ventes</string>
+    <string name="faq">FAQ</string>
+
+    <string name="recherche">Rechercher...</string>
+    <string name="Categorie">Catégories :</string>
+    <string name="reduction">Réduction :</string>
+    <string name="prix">Prix :</string>
+    <string name="description">Description :</string>
+    <string name="validerAjoutProduit">✔ Valider les modifications de ce produit</string>
+    <string name="AnnulerAjoutProduit">🗑 Supprimer ce produit</string>
+    <string name="bienvenue">Bonjour, NOM Prénom :)</string>
 </resources>

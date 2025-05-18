@@ -61,6 +61,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/nom"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -68,6 +69,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifNom"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"
@@ -86,6 +88,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/email"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -93,6 +96,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifEmail"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"
@@ -111,6 +115,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/tel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -118,6 +123,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifTel"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"
@@ -136,6 +142,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/id"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -143,6 +150,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifId"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"
@@ -161,6 +169,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/mdp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -168,6 +177,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifMdp"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"
@@ -193,6 +203,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/formeJuridique"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -200,6 +211,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifFormeJuridique"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"
@@ -218,6 +230,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/siret"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -225,6 +238,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifSiret"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"
@@ -243,6 +257,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/siegeSocial"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -250,6 +265,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifSiegeSocial"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"
@@ -268,6 +284,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/paysEnregitrement"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -275,6 +292,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifPaysEnregistrement"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"
@@ -293,6 +311,7 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/iban"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -300,6 +319,7 @@
                         android:textSize="16sp" />
 
                     <ImageButton
+                        android:id = "@+id/BtnModifIban"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@android:color/transparent"

@@ -1,5 +1,6 @@
 package com.example.projet.bdd;
 
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,7 @@ public class BoutiqueTable {
     private static final String COLUMN_LOGIN = "login";
     private static final String COLUMN_PASSWORD = "password";
     private static final String COLUMN_NOM = "nom";
+    private static final String COLUMN_EMAIL = "nom";
     private static final String COLUMN_TEL = "tel";
     private static final String COLUMN_SIRET = "siret";
     private static final String COLUMN_FORME_JURIDIQUE = "forme_juridique";
@@ -41,6 +43,7 @@ public class BoutiqueTable {
                 COLUMN_PASSWORD + " TEXT, " +
                 COLUMN_NOM + " TEXT, " +
                 COLUMN_TEL + " TEXT, "+
+                COLUMN_EMAIL + "TEXT ,"+
                 COLUMN_SIRET + " TEXT, " +
                 COLUMN_FORME_JURIDIQUE + " TEXT, " +
                 COLUMN_SIEGE_SOCIAL + " TEXT, " +
@@ -62,6 +65,7 @@ public class BoutiqueTable {
         values.put(COLUMN_PASSWORD, password);
         values.put(COLUMN_NOM, nom);
         values.put(COLUMN_TEL,"");
+        values.put(COLUMN_EMAIL,"");
         values.put(COLUMN_SIRET, siret);
         values.put(COLUMN_FORME_JURIDIQUE, forme_juridique);
         values.put(COLUMN_SIEGE_SOCIAL, "");
@@ -103,6 +107,14 @@ public class BoutiqueTable {
     public boolean setTel(String login, String tel){
         ContentValues values = new ContentValues();
         values.put(COLUMN_TEL, tel);
+
+        int rows = database.update(TABLE_NAME, values, COLUMN_LOGIN + " = ?", new String[]{login});
+        return rows > 0;
+    }
+
+    public boolean setEmail(String login, String email){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_EMAIL, email);
 
         int rows = database.update(TABLE_NAME, values, COLUMN_LOGIN + " = ?", new String[]{login});
         return rows > 0;
@@ -205,6 +217,26 @@ public class BoutiqueTable {
             cursor.close();
         }
         return nom;
+    }
+
+    public String getMdp(String login) {
+        Cursor cursor = database.rawQuery("SELECT " + COLUMN_PASSWORD + " FROM " + TABLE_NAME + " WHERE " + COLUMN_LOGIN + " = ?",new String[]{login});
+        String nom = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            nom = cursor.getString(0);
+            cursor.close();
+        }
+        return nom;
+    }
+
+    public String getEmail(String login) {
+        Cursor cursor = database.rawQuery("SELECT " + COLUMN_EMAIL + " FROM " + TABLE_NAME + " WHERE " + COLUMN_LOGIN + " = ?",new String[]{login});
+        String email = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            email = cursor.getString(0);
+            cursor.close();
+        }
+        return email;
     }
 
     public String getSiret(String login) {
