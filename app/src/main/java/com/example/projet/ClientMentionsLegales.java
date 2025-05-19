@@ -12,7 +12,6 @@ public class ClientMentionsLegales extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_mentions_legales);
 
-
         String identifiant = getIntent().getStringExtra("id");
 
         // TOP NAVIGATION BAR

@@ -179,7 +179,7 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
     <string name="validerAjoutProduit">✔ Valider les modifications de ce produit</string>
     <string name="AnnulerAjoutProduit">🗑 Supprimer ce produit</string>
     <string name="bienvenue">Bonjour, NOM Prénom :)</string>
-
+    
     <string name="payment_methods_title">Moyens de Paiement</string>
     <string name="add_address_button">+ Ajouter une adresse</string>
 

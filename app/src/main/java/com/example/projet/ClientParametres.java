@@ -1,10 +1,6 @@
 package com.example.projet;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -27,10 +23,13 @@ public class ClientParametres extends Activity {
     TextView Notifs;
     private List<String> selectedItems = new ArrayList<>();
     private List<String> allItems = Arrays.asList("push", "email", "sms");
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_params);
+        
+        String identifiant = getIntent().getStringExtra("id");
 
         TextView Langue = findViewById(R.id.rowLangue);
         Spinner spinnerLangue = findViewById(R.id.spinnerLangue);
@@ -102,9 +101,8 @@ public class ClientParametres extends Activity {
 
         Notifs = findViewById(R.id.rowNotifications);
         Notifs.setOnClickListener(v -> showCheckboxPopup());
-
-        String identifiant = getIntent().getStringExtra("id");
-
+        
+        
         // TOP NAVIGATION BAR
         ImageView navCart = findViewById(R.id.cartIcon);
 
@@ -193,5 +191,6 @@ public class ClientParametres extends Activity {
             Notifs.setText(TextUtils.join(", ", selectedItems));
         }
     }
+
 
 }

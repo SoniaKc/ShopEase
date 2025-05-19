@@ -11,7 +11,8 @@ public class ClientFaq extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_faq);
-        
+
+
         String identifiant = getIntent().getStringExtra("id");
 
         // TOP NAVIGATION BAR
@@ -45,6 +46,5 @@ public class ClientFaq extends Activity {
             i.putExtra("id", identifiant);
             startActivity(i);
         });
-
     }
 }

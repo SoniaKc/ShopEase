@@ -60,7 +60,7 @@ public class BoutiqueAjouterProduit extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
-                intent.putExtra("id", identifiant);
+                intent.putExtra("log", identifiant);
                 startActivity(intent);
             }
         });

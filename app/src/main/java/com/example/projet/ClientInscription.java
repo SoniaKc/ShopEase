@@ -44,7 +44,7 @@ public class ClientInscription extends Activity {
                 temp = false;
             }
             if (clientTable.getUserClientLogin(Stridentifiant)) {
-                identifiant.setError("identifiant déjà pris");
+                identifiant.setError("Identifiant déjà pris");
                 temp = false;
             }
             if (Strmot_de_passe.length() < 6) {

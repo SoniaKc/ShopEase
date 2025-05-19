@@ -41,12 +41,12 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/vente" />
+            android:src="@drawable/heart" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ventes"
+            android:text="@string/favoris"
             android:textSize="12sp"
             android:textColor="@color/black" />
     </LinearLayout>

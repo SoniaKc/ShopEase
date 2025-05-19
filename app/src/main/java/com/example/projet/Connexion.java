@@ -22,9 +22,7 @@ public class Connexion extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connexion);
 
-        Bundle info = getIntent().getExtras();
-        assert info != null;
-        this.type = info.getString("type");
+        type = getIntent().getStringExtra("type");
 
         identifiant = findViewById(R.id.inputID);
         mdp = findViewById(R.id.mot_de_passe);
@@ -34,8 +32,6 @@ public class Connexion extends Activity {
         btn_connexion.setOnClickListener(b -> {
             String Stridentifiant = identifiant.getText().toString();
             String Strmdp = mdp.getText().toString();
-
-
             if (Objects.equals(type, "boutique")) {
                 BoutiqueTable shop = BoutiqueTable.getInstance();
                 boolean temp = shop.getShopExistence(Stridentifiant, Strmdp);
