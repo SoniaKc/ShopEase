@@ -16,7 +16,7 @@ import com.example.projet.bdd.BoutiqueTable;
 
 // Pb ici sur comment récupérer le nouveau identifiant modifié
 
-public class ProfilBoutiqueInfos extends Activity {
+public class BoutiqueProfilInfos extends Activity {
     String identifiant;
 
     @Override
@@ -95,7 +95,7 @@ public class ProfilBoutiqueInfos extends Activity {
 
         TVmodif.setText("Entrez un nouveau " + param + " pour votre boutique :");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(ProfilBoutiqueInfos.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(BoutiqueProfilInfos.this);
         builder.setView(dialogView);
 
         builder.setPositiveButton(R.string.Confirmer, new DialogInterface.OnClickListener() {
@@ -104,12 +104,12 @@ public class ProfilBoutiqueInfos extends Activity {
                 if (!nouveauParam.isEmpty()) {
                     boolean success = fonction.appliquer(identifiant, nouveauParam);
                     if (success) {
-                        Toast.makeText(ProfilBoutiqueInfos.this, param + " modifié.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BoutiqueProfilInfos.this, param + " modifié.", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(ProfilBoutiqueInfos.this, "Échec lors de la modification du " + param + ".", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BoutiqueProfilInfos.this, "Échec lors de la modification du " + param + ".", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(ProfilBoutiqueInfos.this, param + " ne peut pas être vide.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BoutiqueProfilInfos.this, param + " ne peut pas être vide.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

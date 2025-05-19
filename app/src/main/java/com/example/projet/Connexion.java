@@ -39,7 +39,7 @@ public class Connexion extends Activity {
                 boolean temp = shop.getShopExistence(Stridentifiant, Strmdp);
                 if (temp) {
                     Toast.makeText(this, "Connexion réussie.", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Connexion.this, ProfilBoutiqueInfos.class);
+                    Intent i = new Intent(Connexion.this, BoutiqueProfilInfos.class);
                     i.putExtra("id", Stridentifiant);
                     startActivity(i);
                 } else {
@@ -52,7 +52,7 @@ public class Connexion extends Activity {
                 boolean temp = clientTable.getClientExistence(Stridentifiant, Strmdp);
                 if (temp) {
                     Toast.makeText(this, "Connexion réussie.", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Connexion.this, AccueilClient.class);
+                    Intent i = new Intent(Connexion.this, ClientAccueil.class);
                     i.putExtra("id", Stridentifiant);
                     startActivity(i);
                 } else {

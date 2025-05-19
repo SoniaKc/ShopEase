@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class AccueilClient extends Activity {
+public class ClientAccueil extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

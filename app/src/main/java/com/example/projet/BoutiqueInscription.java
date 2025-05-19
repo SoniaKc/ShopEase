@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.example.projet.bdd.BoutiqueTable;
 
-public class InscriptionBoutique extends Activity {
+public class BoutiqueInscription extends Activity {
     private EditText identifiant, mot_de_passe, nom, siret, forme_juridique;
     private Button btn_inscription;
 
@@ -53,7 +53,7 @@ public class InscriptionBoutique extends Activity {
                 boolean inserted = boutiqueTable.insertShopAdmin(Stridentifiant, Strmot_de_passe, Strnom, Strsiret, Strforme_juridique);
                 if (inserted) {
                     Toast.makeText(this, "Inscription réussie !", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(InscriptionBoutique.this, Connexion.class);
+                    Intent i = new Intent(BoutiqueInscription.this, Connexion.class);
                     i.putExtra("type", "boutique");
                     startActivity(i);
 

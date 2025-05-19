@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.projet.bdd.ClientTable;
 
-public class ProfilClientAcceuil extends Activity {
+public class ClientProfilAcceuil extends Activity {
     String identifiant;
 
     @Override
@@ -36,43 +36,43 @@ public class ProfilClientAcceuil extends Activity {
 
         // Gestion des clics
         informations.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ProfilClient.class);
+            Intent intent = new Intent(this, ClientProfilInfos.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });
 
         addresses.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdressesListe.class);
+            Intent intent = new Intent(this, ClientAdresses.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });
 
         historique.setOnClickListener(v -> {
-            Intent intent = new Intent(this, HistoriqueAchats.class);
+            Intent intent = new Intent(this, ClientHistoriqueAchats.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });
 
         params.setOnClickListener(v -> {
-            Intent intent = new Intent(this, Parametres.class);
+            Intent intent = new Intent(this, ClientParametres.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });
 
         faq.setOnClickListener(v -> {
-            Intent intent = new Intent(this, FaqClient.class);
+            Intent intent = new Intent(this, ClientFaq.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });
 
         aPropos.setOnClickListener(v -> {
-            Intent intent = new Intent(this, Apropos.class);
+            Intent intent = new Intent(this, ClientApropos.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });
 
         mentions.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MentionsLegales.class);
+            Intent intent = new Intent(this, ClientMentionsLegales.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });

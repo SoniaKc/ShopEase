@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.projet.bdd.BoutiqueTable;
 import com.example.projet.bdd.ClientTable;
 
-public class PaiementValidation extends Activity {
+public class ClientPaiementValidation extends Activity {
     String identifiant;
 
     @Override

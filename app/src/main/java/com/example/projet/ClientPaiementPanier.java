@@ -14,13 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projet.bdd.AdressesTable;
-import com.example.projet.bdd.ClientTable;
 import com.example.projet.bdd.PayementsTable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaiementPanier extends Activity {
+public class ClientPaiementPanier extends Activity {
     private String identifiant;
     private String selectedCard;
     private String selectedAddress = "Adresse 1 : 49 rue de l'Olivette, 34089 St Jacques, France";
@@ -143,7 +142,7 @@ public class PaiementPanier extends Activity {
         Toast.makeText(this, "Paiement effectué avec la carte : " + selectedCard, Toast.LENGTH_SHORT).show();
 
         // Redirection vers l'activité de confirmation
-        Intent intent = new Intent(this, PaiementValidation.class);
+        Intent intent = new Intent(this, ClientPaiementValidation.class);
         intent.putExtra("id", identifiant);
         startActivity(intent);
     }

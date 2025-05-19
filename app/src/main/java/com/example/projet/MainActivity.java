@@ -1,7 +1,5 @@
 package com.example.projet;
 
-import static java.sql.DriverManager.println;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,7 +33,7 @@ public class MainActivity extends Activity {
         btnInscClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, InscriptionClient.class);
+                Intent i = new Intent(MainActivity.this, ClientInscription.class);
                 startActivity(i);
             }
         }
@@ -44,7 +42,7 @@ public class MainActivity extends Activity {
         btnInscBoutique.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, InscriptionBoutique.class);
+                Intent i = new Intent(MainActivity.this, BoutiqueInscription.class);
                 startActivity(i);
             }
         }

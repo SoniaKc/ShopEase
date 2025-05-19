@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.projet.bdd.ClientTable;
 
-public class InscriptionClient extends Activity {
+public class ClientInscription extends Activity {
     private EditText identifiant, mot_de_passe, nom, prenom, email, date_naissance;
     private Button btn_inscription;
 
@@ -69,7 +69,7 @@ public class InscriptionClient extends Activity {
                 boolean inserted = clientTable.insertUser(Stridentifiant, Strmot_de_passe, Strnom, Strprenom, Strdate_naissance, Stremail);
                 if (inserted) {
                     Toast.makeText(this, "Paramètres initilisés !", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(InscriptionClient.this, Connexion.class);
+                    Intent i = new Intent(ClientInscription.this, Connexion.class);
                     i.putExtra("type", "client");
                     startActivity(i);
                 } else {

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.projet.bdd.BoutiqueTable;
 
-public class ProfilBoutiqueAcceuil extends Activity {
+public class BoutiqueProfilAccueil extends Activity {
     String identifiant;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class ProfilBoutiqueAcceuil extends Activity {
         informations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfilBoutiqueInfos.class);
+                Intent intent = new Intent(getApplicationContext(), BoutiqueProfilInfos.class);
                 intent.putExtra("log", identifiant);
                 startActivity(intent);
             }
@@ -44,7 +44,7 @@ public class ProfilBoutiqueAcceuil extends Activity {
         mesProduits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MesProduits.class);
+                Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
                 intent.putExtra("log", identifiant);
                 startActivity(intent);
             }
@@ -53,7 +53,7 @@ public class ProfilBoutiqueAcceuil extends Activity {
         historique.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Historique.class);
+                Intent intent = new Intent(getApplicationContext(), BoutiqueHistoriqueVentes.class);
                 intent.putExtra("log", identifiant);
                 startActivity(intent);
             }
@@ -62,7 +62,7 @@ public class ProfilBoutiqueAcceuil extends Activity {
         params.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Parametres.class);
+                Intent intent = new Intent(getApplicationContext(), ClientParametres.class);
                 intent.putExtra("log", identifiant);
                 startActivity(intent);
             }
@@ -71,7 +71,7 @@ public class ProfilBoutiqueAcceuil extends Activity {
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), FaqBoutique.class);
+                Intent intent = new Intent(getApplicationContext(), BoutiqueFaq.class);
                 intent.putExtra("log", identifiant);
                 startActivity(intent);
             }
@@ -80,7 +80,7 @@ public class ProfilBoutiqueAcceuil extends Activity {
         aPropos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Apropos.class);
+                Intent intent = new Intent(getApplicationContext(), ClientApropos.class);
                 intent.putExtra("log", identifiant);
                 startActivity(intent);
             }
@@ -89,7 +89,7 @@ public class ProfilBoutiqueAcceuil extends Activity {
         mentionsLegales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MentionsLegales.class);
+                Intent intent = new Intent(getApplicationContext(), ClientMentionsLegales.class);
                 intent.putExtra("log", identifiant);
                 startActivity(intent);
             }

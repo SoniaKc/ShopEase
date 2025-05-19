@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Parametres extends Activity {
+public class ClientParametres extends Activity {
     TextView Notifs;
     private List<String> selectedItems = new ArrayList<>();
     private List<String> allItems = Arrays.asList("push", "email", "sms");

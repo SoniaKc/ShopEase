@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Status Bar -->
     <View
@@ -26,32 +22,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/topAppBar"
-        app:layout_constraintBottom_toTopOf="@+id/include"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar">
 
         <!-- Settings Header -->
         <TextView
             android:id="@+id/titre"
-            android:paddingTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="50dp"
             android:text="@string/params"
-            android:textSize="32sp"
             android:textColor="#000000"
-            android:gravity="center" />
+            android:textSize="32sp" />
 
         <ImageView
             android:id="@+id/cleMolette"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:src="@drawable/clefmolette"
             android:layout_gravity="center"
-            android:padding="15dp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"/>
-
+            android:layout_marginBottom="15dp"
+            android:padding="15dp"
+            android:src="@drawable/clefmolette" />
 
 
         <TextView
@@ -59,17 +54,17 @@
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:background="@color/alterne1"
-            android:text="@string/paramLangue"
-            android:textSize="22sp"
-            android:paddingStart="24dp"
             android:gravity="center_vertical"
-            android:textColor="@color/black"/>
+            android:paddingStart="24dp"
+            android:text="@string/paramLangue"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
 
         <Spinner
             android:id="@+id/spinnerLangue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <!-- Option 2: Cookies -->
         <TextView
@@ -77,16 +72,17 @@
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:background="@color/alterne2"
-            android:text="@string/paramCookie"
-            android:textSize="22sp"
-            android:paddingStart="24dp"
             android:gravity="center_vertical"
-            android:textColor="@color/black" />
+            android:paddingStart="24dp"
+            android:text="@string/paramCookie"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
         <Spinner
             android:id="@+id/spinnerCookies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <!-- Option 3: Notifications -->
         <TextView
@@ -94,11 +90,11 @@
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:background="@color/alterne1"
-            android:text="@string/paramNotifs"
-            android:textSize="22sp"
-            android:paddingStart="24dp"
             android:gravity="center_vertical"
-            android:textColor="#000000" />
+            android:paddingStart="24dp"
+            android:text="@string/paramNotifs"
+            android:textColor="#000000"
+            android:textSize="22sp" />
 
         <View
             android:layout_width="match_parent"
@@ -112,8 +108,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#CC185A"
             android:text="@string/supprCompte"
-            android:textSize="18sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

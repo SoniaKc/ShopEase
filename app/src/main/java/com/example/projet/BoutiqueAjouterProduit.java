@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.example.projet.bdd.BoutiqueTable;
 import com.example.projet.bdd.ProduitTable;
 
-public class AjouterProduit extends Activity {
+public class BoutiqueAjouterProduit extends Activity {
     String identifiant;
 
     @Override
@@ -46,13 +46,13 @@ public class AjouterProduit extends Activity {
                 if(!nom.isEmpty()) {
                     boolean temp = produits.insertProduit(identifiant, nom, categorie, prix, description);
                     if(temp){
-                        Toast.makeText(AjouterProduit.this, "nouveau produit mis en ligne", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MesProduits.class);
+                        Toast.makeText(BoutiqueAjouterProduit.this, "nouveau produit mis en ligne", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
                         intent.putExtra("log", identifiant);
                         startActivity(intent);
                     }
                     else {
-                        Toast.makeText(AjouterProduit.this, "échec lors de la mise en ligne du nouveau produit", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BoutiqueAjouterProduit.this, "échec lors de la mise en ligne du nouveau produit", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -61,7 +61,7 @@ public class AjouterProduit extends Activity {
         supprimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MesProduits.class);
+                Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
                 intent.putExtra("log", identifiant);
                 startActivity(intent);
             }

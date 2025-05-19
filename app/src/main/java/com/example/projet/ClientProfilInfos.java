@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.projet.bdd.ClientTable;
 
-public class ProfilClient extends Activity {
+public class ClientProfilInfos extends Activity {
     String identifiant;
 
     @Override
