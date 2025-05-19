@@ -79,9 +79,10 @@ public class BoutiqueProfilInfos extends Activity {
         BtnModifIban.setOnClickListener(b -> { modif("IBAN", (id, val) -> BoutiqueTable.getInstance().setIban(id, val)); });
 
 
+
         // BOTTOM NAVIGATION BAR
         LinearLayout navHome = findViewById(R.id.navHome);
-        LinearLayout navFavorites = findViewById(R.id.navFavorites);
+        LinearLayout navVentes = findViewById(R.id.navVentes);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
 
         navHome.setOnClickListener(v -> {
@@ -90,14 +91,14 @@ public class BoutiqueProfilInfos extends Activity {
             startActivity(i);
         });
 
-        navFavorites.setOnClickListener(v -> {
+        navVentes.setOnClickListener(v -> {
             Intent i = new Intent(this, BoutiqueHistoriqueVentes.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
         navProfile2.setOnClickListener(v -> {
-            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
+            Intent i = new Intent(this, BoutiqueProfilInfos.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });

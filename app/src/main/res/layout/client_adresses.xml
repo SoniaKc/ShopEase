@@ -28,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/adresses"
+        android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -68,12 +69,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/address_1"
+                    android:textColor="#000000"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/address_1_street"
                     android:layout_marginTop="4dp"/>
 
@@ -81,11 +84,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/address_1_city"
+                    android:textColor="#000000"
                     android:layout_marginTop="4dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:orientation="horizontal"
                     android:layout_marginTop="8dp">
 
@@ -121,18 +126,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/address_2"
+                    android:textColor="#000000"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/address_2_street"
                     android:layout_marginTop="4dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/address_2_city"
                     android:layout_marginTop="4dp"/>
 

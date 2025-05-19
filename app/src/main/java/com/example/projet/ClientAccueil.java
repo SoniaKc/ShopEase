@@ -14,14 +14,14 @@ public class ClientAccueil extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_layout_accueil);
 
-        String Stridentifiant = getIntent().getStringExtra("id");
+        String identifiant = getIntent().getStringExtra("id");
 
         // TOP NAVIGATION BAR
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
             Intent i = new Intent(ClientAccueil.this, ClientPanier.class);
-            i.putExtra("id", Stridentifiant);
+            i.putExtra("id", identifiant);
             startActivity(i);
         });
 
@@ -33,19 +33,19 @@ public class ClientAccueil extends Activity {
 
         navHome.setOnClickListener(v -> {
             Intent i = new Intent(ClientAccueil.this, ClientAccueil.class);
-            i.putExtra("id", Stridentifiant);
+            i.putExtra("id", identifiant);
             startActivity(i);
         });
 
         navFavorites.setOnClickListener(v -> {
             Intent i = new Intent(ClientAccueil.this, ClientFavoris.class);
-            i.putExtra("id", Stridentifiant);
+            i.putExtra("id", identifiant);
             startActivity(i);
         });
 
         navProfile2.setOnClickListener(v -> {
             Intent i = new Intent(ClientAccueil.this, ClientProfilAcceuil.class);
-            i.putExtra("id", Stridentifiant);
+            i.putExtra("id", identifiant);
             startActivity(i);
         });
     }

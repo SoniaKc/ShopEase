@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/customer_name"
+            android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -60,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/congratulations_message"
+            android:textColor="#000000"
             android:textSize="16sp"
             android:gravity="center"
             android:layout_marginBottom="16dp"/>
@@ -67,6 +69,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:text="@string/preparation_message"
             android:textSize="14sp"
             android:gravity="center"
@@ -75,6 +78,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:text="@string/thank_you_message"
             android:textSize="14sp"
             android:gravity="center"

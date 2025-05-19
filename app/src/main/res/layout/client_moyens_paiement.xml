@@ -28,6 +28,7 @@
         android:id="@+id/titre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000000"
         android:text="@string/payment_methods_title"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -68,6 +69,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/card_1"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
@@ -75,18 +77,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/card_1_number"
                     android:layout_marginTop="4dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/card_1_holder"
                     android:layout_marginTop="4dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/card_1_expiry"
                     android:layout_marginTop="4dp"/>
 
@@ -128,24 +133,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/card_2"
+                    android:textColor="#000000"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/card_2_number"
                     android:layout_marginTop="4dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/card_2_holder"
                     android:layout_marginTop="4dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="@string/card_2_expiry"
                     android:layout_marginTop="4dp"/>
 
