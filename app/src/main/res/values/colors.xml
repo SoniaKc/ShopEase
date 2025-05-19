@@ -8,8 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="button_text_color">#000000</color>
-    <color name="purple_50">#F3EDF7</color>
+    <color name="purple_50">#F2EDF6</color>
     <color name="purple_51">#E7DEED</color>
     <color name="colorcartes">#F2E1FD</color>
     <color name="colorcartes2">#E1E8FD</color>
+    <color name="alterne1">#EECFF7</color>
+    <color name="alterne2">#F5D7F9</color>
 </resources>

@@ -26,14 +26,16 @@ public class Connexion extends Activity {
         assert info != null;
         this.type = info.getString("type");
 
-        identifiant = findViewById(R.id.identifiant);
-        mdp = findViewById(R.id.mdp);
+        identifiant = findViewById(R.id.inputID);
+        mdp = findViewById(R.id.mot_de_passe);
         Button btn_connexion = findViewById(R.id.Connexion);
 
 
         btn_connexion.setOnClickListener(b -> {
             String Stridentifiant = identifiant.getText().toString();
             String Strmdp = mdp.getText().toString();
+
+
             if (Objects.equals(type, "boutique")) {
                 BoutiqueTable shop = BoutiqueTable.getInstance();
                 boolean temp = shop.getShopExistence(Stridentifiant, Strmdp);
@@ -51,7 +53,7 @@ public class Connexion extends Activity {
                 ClientTable clientTable = ClientTable.getInstance();
                 boolean temp = clientTable.getClientExistence(Stridentifiant, Strmdp);
                 if (temp) {
-                    Toast.makeText(this, "Connexion réussie.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Connexion réussie.", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Connexion.this, ClientAccueil.class);
                     i.putExtra("id", Stridentifiant);
                     startActivity(i);

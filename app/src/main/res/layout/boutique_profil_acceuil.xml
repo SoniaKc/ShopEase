@@ -2,10 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:layout_height="match_parent">
 
     <!-- Status Bar -->
     <View
@@ -26,12 +24,11 @@
     <!-- Image profil -->
     <ImageView
         android:id="@+id/profilePhoto"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/picture_client"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/picture_boutique"
         android:layout_alignParentEnd="true"
         android:gravity="center"
-        android:background="@drawable/circle_background"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +36,7 @@
 
 
     <!-- Titre -->
+    <!-- texte modifié par setter, tout va bien -->
     <TextView
         android:id="@+id/titre"
         android:layout_width="wrap_content"
@@ -85,7 +83,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_info"
+                    android:src="@drawable/ic_profile"
                     android:contentDescription="@string/mesInfos" />
 
                 <TextView
@@ -114,7 +112,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_products"
+                    android:src="@drawable/ic_mes_produits"
                     android:contentDescription="@string/mesProduits" />
 
                 <TextView
@@ -143,7 +141,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_history"
+                    android:src="@drawable/ic_hist_achat"
                     android:contentDescription="@string/Historique" />
 
                 <TextView
@@ -172,7 +170,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_settings"
+                    android:src="@drawable/ic_params"
                     android:contentDescription="@string/params" />
 
                 <TextView
@@ -230,7 +228,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_about"
+                    android:src="@drawable/ic_apropos"
                     android:contentDescription="@string/aProposTitre" />
 
                 <TextView
@@ -259,7 +257,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_legal"
+                    android:src="@drawable/ic_mentions_legales"
                     android:contentDescription="@string/mentionsLegales" />
 
                 <TextView

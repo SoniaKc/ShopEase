@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:layout_height="match_parent">
+
 
     <!-- Status Bar -->
     <View
@@ -18,7 +18,7 @@
     <!-- Top bar -->
     <include
         android:id="@+id/topAppBar"
-        layout="@layout/boutique_top_tool_bar"
+        layout="@layout/client_top_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/topPanel" />
@@ -82,7 +82,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_info"/>
+                    android:src="@drawable/ic_profile"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -110,7 +110,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_check"/>
+                    android:src="@drawable/ic_adresses"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -120,6 +120,8 @@
                     android:textSize="16sp"
                     android:textColor="#1E1E1E"/>
             </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9"/>
 
             <!-- Historique des achats -->
             <LinearLayout
@@ -136,7 +138,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_carte"/>
+                    android:src="@drawable/ic_hist_achat"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,7 +149,35 @@
                     android:textColor="#1E1E1E"/>
             </LinearLayout>
 
-            <!-- ... Répétez le même pattern pour les autres options ... -->
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9"/>
+
+            <!-- Historique des achats -->
+            <LinearLayout
+                android:id="@+id/cartesBancaires"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:background="#E8DAF8"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_cb"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Moyens de paiement"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp"
+                    android:textColor="#1E1E1E"/>
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9"/>
 
             <!-- Paramètres -->
             <LinearLayout
@@ -164,8 +194,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_settings"
-                    android:contentDescription="@string/params" />
+                    android:src="@drawable/ic_params" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -208,30 +237,30 @@
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9" />
 
             <!-- Item: À propos de -->
+
             <LinearLayout
                 android:id="@+id/btnAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
                 android:background="#E8DAF8"
-                android:gravity="center_vertical"
                 android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_about"
-                    android:contentDescription="@string/aProposTitre" />
+                    android:src="@drawable/ic_apropos" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/aProposTitre"
                     android:layout_marginStart="16dp"
-                    android:textSize="16sp"
-                    android:textColor="#1E1E1E" />
+                    android:text="@string/aProposTitre"
+                    android:textColor="#1E1E1E"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9" />
@@ -251,8 +280,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_legal"
-                    android:contentDescription="@string/mentionsLegales" />
+                    android:src="@drawable/ic_mentions_legales"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -269,7 +297,7 @@
     <!-- Barre de navigation du bas -->
     <include
         android:id="@+id/include"
-        layout="@layout/boutique_bottom_tool_bar"
+        layout="@layout/client_bottom_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomPanel" />

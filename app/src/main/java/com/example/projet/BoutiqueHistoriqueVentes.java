@@ -1,4 +1,6 @@
 package com.example.projet;
 
-public class BoutiqueHistoriqueVentes {
+import android.app.Activity;
+
+public class BoutiqueHistoriqueVentes extends Activity {
 }

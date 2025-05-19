@@ -22,9 +22,7 @@ public class BoutiqueAjouterProduit extends Activity {
         BoutiqueTable shop = BoutiqueTable.getInstance();
         ProduitTable produits = ProduitTable.getInstance();
 
-        Bundle info = getIntent().getExtras();
-        assert info != null;
-        this.identifiant = info.getString("id");
+        identifiant = getIntent().getStringExtra("id");
 
         Button valider = findViewById(R.id.btnValider);
         Button supprimer = findViewById(R.id.btnSupprimer);
@@ -62,7 +60,7 @@ public class BoutiqueAjouterProduit extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });

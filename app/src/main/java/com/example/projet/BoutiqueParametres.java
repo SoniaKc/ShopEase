@@ -6,25 +6,14 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-
-public class ClientAccueil extends Activity {
-
+public class BoutiqueParametres extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.client_layout_accueil);
+        setContentView(R.layout.boutique_params);
 
 
         String identifiant = getIntent().getStringExtra("id");
-
-        // TOP NAVIGATION BAR
-        ImageView navCart = findViewById(R.id.cartIcon);
-
-        navCart.setOnClickListener(v -> {
-            Intent i = new Intent(this, ClientPanier.class);
-            i.putExtra("id", identifiant);
-            startActivity(i);
-        });
 
         // BOTTOM NAVIGATION BAR
         LinearLayout navHome = findViewById(R.id.navHome);
@@ -32,19 +21,19 @@ public class ClientAccueil extends Activity {
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
 
         navHome.setOnClickListener(v -> {
-            Intent i = new Intent(this, ClientAccueil.class);
+            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
         navFavorites.setOnClickListener(v -> {
-            Intent i = new Intent(this, ClientFavoris.class);
+            Intent i = new Intent(this, BoutiqueHistoriqueVentes.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
         navProfile2.setOnClickListener(v -> {
-            Intent i = new Intent(this, ClientProfilAcceuil.class);
+            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });

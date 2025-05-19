@@ -2,11 +2,13 @@ package com.example.projet;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +28,7 @@ public class BoutiqueProfilInfos extends Activity {
 
         BoutiqueTable shop = BoutiqueTable.getInstance();
 
-        Bundle info = getIntent().getExtras();
-        assert info != null;
-        this.identifiant = info.getString("id");
+        identifiant = getIntent().getStringExtra("id");
 
         TextView Nom = findViewById(R.id.nom);
         TextView Email = findViewById(R.id.email);
@@ -78,6 +78,29 @@ public class BoutiqueProfilInfos extends Activity {
         BtnModifPaysEnregistrement.setOnClickListener(b -> { modif("pays d'enregistrement", (id, val) -> BoutiqueTable.getInstance().setPaysEnregistrement(id, val));});
         BtnModifIban.setOnClickListener(b -> { modif("IBAN", (id, val) -> BoutiqueTable.getInstance().setIban(id, val)); });
 
+
+        // BOTTOM NAVIGATION BAR
+        LinearLayout navHome = findViewById(R.id.navHome);
+        LinearLayout navFavorites = findViewById(R.id.navFavorites);
+        LinearLayout navProfile2 = findViewById(R.id.navProfile);
+
+        navHome.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navFavorites.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueHistoriqueVentes.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navProfile2.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
 
     }
     public interface BoutiqueModifier {

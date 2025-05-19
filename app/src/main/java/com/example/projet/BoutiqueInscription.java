@@ -20,8 +20,8 @@ public class BoutiqueInscription extends Activity {
 
         BoutiqueTable boutiqueTable = BoutiqueTable.getInstance();
 
-        identifiant = findViewById(R.id.identifiant);
-        mot_de_passe = findViewById(R.id.mdp);
+        identifiant = findViewById(R.id.inputID);
+        mot_de_passe = findViewById(R.id.mot_de_passe);
         nom = findViewById(R.id.nom);
         siret = findViewById(R.id.siret);
         forme_juridique = findViewById(R.id.forme_juridique);

@@ -1,4 +1,12 @@
 package com.example.projet;
 
-public class BoutiqueMesProduits {
+import android.app.Activity;
+import android.os.Bundle;
+
+public class BoutiqueMesProduits extends Activity {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.boutique_mes_produits);
+    }
 }

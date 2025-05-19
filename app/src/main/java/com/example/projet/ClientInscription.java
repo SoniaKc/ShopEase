@@ -21,7 +21,7 @@ public class ClientInscription extends Activity {
 
         ClientTable clientTable = ClientTable.getInstance();
 
-        identifiant = findViewById(R.id.identifiant);
+        identifiant = findViewById(R.id.inputID);
         mot_de_passe = findViewById(R.id.mot_de_passe);
         nom = findViewById(R.id.nom);
         prenom = findViewById(R.id.prenom);
@@ -47,8 +47,8 @@ public class ClientInscription extends Activity {
                 identifiant.setError("identifiant déjà pris");
                 temp = false;
             }
-            if (Strmot_de_passe.length() != 6) {
-                mot_de_passe.setError("Le mot de passe doit contenir exactement 6 caractères");
+            if (Strmot_de_passe.length() < 6) {
+                mot_de_passe.setError("Le mot de passe doit contenir au moins 6 caractères");
                 temp = false;
             }
             if (!Strnom.matches("^[A-Za-zÀ-ÖØ-öø-ÿ -]+$")) {
@@ -68,7 +68,7 @@ public class ClientInscription extends Activity {
             if (temp) {
                 boolean inserted = clientTable.insertUser(Stridentifiant, Strmot_de_passe, Strnom, Strprenom, Strdate_naissance, Stremail);
                 if (inserted) {
-                    Toast.makeText(this, "Paramètres initilisés !", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Paramètres initilisés !", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(ClientInscription.this, Connexion.class);
                     i.putExtra("type", "client");
                     startActivity(i);

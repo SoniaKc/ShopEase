@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <!-- Status Bar -->
     <View
@@ -18,7 +15,7 @@
     <!-- Top bar -->
     <include
         android:id="@+id/topAppBar"
-        layout="@layout/client_top_tool_bar"
+        layout="@layout/boutique_top_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/topPanel" />
@@ -109,7 +106,7 @@
     <!-- Barre du bas -->
     <include
         android:id="@+id/include"
-        layout="@layout/client_bottom_tool_bar"
+        layout="@layout/boutique_bottom_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomPanel" />

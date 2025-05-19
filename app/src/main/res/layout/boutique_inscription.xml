@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:orientation="vertical">
 
     <!-- Header -->
     <LinearLayout
@@ -46,52 +46,92 @@
                 android:textColor="#000000"
                 android:layout_marginBottom="24dp" />
 
-            <!-- Identifiant -->
-            <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle"
-                    android:text="@string/identifiant" />
-                <EditText style="@style/FormEditStyle"
-                    android:hint="@string/entrezIndentifiant"
-                    android:id="@+id/identifiant"/>
-            </LinearLayout>
+            <!-- ID -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#EFDBFF"
+                app:hintEnabled="true"
+                app:boxBackgroundMode="outline">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/indentifiantSimple"
+                    android:gravity="start|center_vertical"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- MDP -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#EFDBFF"
+                app:hintEnabled="true"
+                app:boxBackgroundMode="outline">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mot_de_passe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/mdpSimple"
+                    android:inputType="textPassword"
+                    android:gravity="start|center_vertical"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <!-- Nom de la Boutique -->
-            <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle"
-                    android:text="@string/nomBoutique" />
-                <EditText style="@style/FormEditStyle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#EFDBFF"
+                app:hintEnabled="true"
+                app:boxBackgroundMode="outline">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nom"
                     android:hint="@string/nomCommercial"
-                    android:id="@+id/nom"/>
-            </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <!-- Numéro de Siret -->
-            <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle"
-                    android:text="@string/numSiret" />
-                <EditText style="@style/FormEditStyle"
-                    android:hint="@string/exempleNumSiret"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#EFDBFF"
+                app:hintEnabled="true"
+                app:boxBackgroundMode="outline">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/siret"
+                    android:hint="@string/numSiret"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:id="@+id/siret"/>
-            </LinearLayout>
+                    android:gravity="start|center_vertical"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <!-- Forme juridique -->
-            <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle"
-                    android:text="@string/formeJur" />
-                <EditText style="@style/FormEditStyle"
-                    android:hint="@string/SARL"
-                    android:id="@+id/forme_juridique"/>
-            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#EFDBFF"
+                app:hintEnabled="true"
+                app:boxBackgroundMode="outline">
 
-            <!-- Mot de passe -->
-            <LinearLayout style="@style/FormFieldStyle">
-                <TextView style="@style/FormLabelStyle"
-                    android:text="@string/mdp" />
-                <EditText style="@style/FormEditStyle"
-                    android:hint="@string/mdpSecu"
-                    android:inputType="textPassword"
-                    android:id="@+id/mdp"/>
-            </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/forme_juridique"
+                    android:hint="@string/formeJur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <!-- Bouton -->
             <Button

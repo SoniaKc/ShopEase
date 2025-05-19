@@ -4,33 +4,28 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:orientation="vertical">
 
-    <!-- Barre de titre -->
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#FFF5FB"
+        android:paddingTop="15dp"
+        android:text="@string/app_name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:paddingTop="24dp">
+        android:textColor="#000000"
+        android:background="#FFF5FB" />
 
-        <TextView
-            android:id="@+id/titleBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#000000" />
-    </LinearLayout>
 
     <!-- Contenu principal scrollable -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#FFFFFF">
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +44,7 @@
                 android:layout_marginBottom="16dp"
                 android:textColor="#000000" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnClientRegister"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
@@ -57,12 +52,13 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:backgroundTint="#F3D9F5"
                 android:textColor="#000000"
                 android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@drawable/rounded_button" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnClientLogin"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
@@ -73,6 +69,8 @@
                 android:backgroundTint="#F3D9F5"
                 android:textColor="#000000"
                 android:layout_marginBottom="32dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@drawable/rounded_button" />
 
             <!-- Section Boutique -->
@@ -85,7 +83,7 @@
                 android:layout_marginBottom="16dp"
                 android:textColor="#000000" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnShopRegister"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
@@ -96,9 +94,11 @@
                 android:backgroundTint="#F3D9F5"
                 android:textColor="#000000"
                 android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@drawable/rounded_button" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnShopLogin"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
@@ -108,6 +108,8 @@
                 android:gravity="center"
                 android:backgroundTint="#F3D9F5"
                 android:textColor="#000000"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@drawable/rounded_button" />
         </LinearLayout>
     </ScrollView>

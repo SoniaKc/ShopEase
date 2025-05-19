@@ -16,9 +16,7 @@ public class BoutiqueProfilAccueil extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_profil_acceuil);
 
-        Bundle info = getIntent().getExtras();
-        assert info !=null;
-        this.identifiant =info.getString("id");
+        identifiant = getIntent().getStringExtra("id");
 
         BoutiqueTable shop = BoutiqueTable.getInstance();
         TextView titre = findViewById(R.id.titre);
@@ -36,7 +34,7 @@ public class BoutiqueProfilAccueil extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BoutiqueProfilInfos.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });
@@ -45,7 +43,7 @@ public class BoutiqueProfilAccueil extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });
@@ -54,7 +52,7 @@ public class BoutiqueProfilAccueil extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BoutiqueHistoriqueVentes.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });
@@ -63,7 +61,7 @@ public class BoutiqueProfilAccueil extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ClientParametres.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });
@@ -72,7 +70,7 @@ public class BoutiqueProfilAccueil extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BoutiqueFaq.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });
@@ -81,7 +79,7 @@ public class BoutiqueProfilAccueil extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ClientApropos.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });
@@ -90,7 +88,7 @@ public class BoutiqueProfilAccueil extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ClientMentionsLegales.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });
