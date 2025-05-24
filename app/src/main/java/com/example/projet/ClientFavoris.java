@@ -15,12 +15,14 @@ import android.widget.Toast;
 import com.example.projet.bdd.ClientTable;
 
 public class ClientFavoris extends Activity {
+    String identifiant;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_favoris);
 
-        /*
+        identifiant = getIntent().getStringExtra("id");
+
         // TOP NAVIGATION BAR
         ImageView navCart = findViewById(R.id.cartIcon);
 
@@ -53,7 +55,6 @@ public class ClientFavoris extends Activity {
             i.putExtra("id", identifiant);
             startActivity(i);
         });
-        */
 
     }
 }

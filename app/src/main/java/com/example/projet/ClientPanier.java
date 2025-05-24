@@ -8,17 +8,21 @@ import android.util.Patterns;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.projet.bdd.ClientTable;
 
 public class ClientPanier extends Activity {
+    String identifiant;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_panier);
 
-        /*
+        identifiant = getIntent().getStringExtra("id");
+
         // TOP NAVIGATION BAR
         ImageView navCart = findViewById(R.id.cartIcon);
 
@@ -51,6 +55,6 @@ public class ClientPanier extends Activity {
             i.putExtra("id", identifiant);
             startActivity(i);
         });
-         */
+
     }
 }
