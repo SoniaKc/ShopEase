@@ -32,7 +32,8 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
     implementation(libs.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
