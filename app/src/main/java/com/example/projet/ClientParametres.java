@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,6 +144,7 @@ public class ClientParametres extends Activity {
         });
     }
 
+
     private void showCheckboxPopup() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_checkbox_list, null);
@@ -161,6 +163,17 @@ public class ClientParametres extends Activity {
                 View view = super.getView(position, convertView, parent);
                 CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
                 checkBox.setChecked(selectedItems.contains(allItems.get(position)));
+
+                // Ajout d'un écouteur direct sur la CheckBox
+                checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    String item = allItems.get(position);
+                    if (isChecked && !selectedItems.contains(item)) {
+                        selectedItems.add(item);
+                    } else {
+                        selectedItems.remove(item);
+                    }
+                });
+
                 return view;
             }
         };
@@ -168,14 +181,7 @@ public class ClientParametres extends Activity {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
-            checkBox.setChecked(!checkBox.isChecked());
-
-            String item = allItems.get(position);
-            if (checkBox.isChecked() && !selectedItems.contains(item)) {
-                selectedItems.add(item);
-            } else {
-                selectedItems.remove(item);
-            }
+            checkBox.toggle(); // Cela déclenchera le OnCheckedChangeListener
         });
 
         Button btnValider = popupView.findViewById(R.id.btnValider);
@@ -189,22 +195,31 @@ public class ClientParametres extends Activity {
     }
 
     private void updateSelectionText() {
+        String prefix = "Notifs : ";
         if (selectedItems.isEmpty()) {
-            Notifs.setText("Aucune sélection");
+            Notifs.setText(prefix + "Aucune sélection");
         } else {
-            Notifs.setText(TextUtils.join(", ", selectedItems));
+            Notifs.setText(prefix + TextUtils.join(", ", selectedItems));
         }
     }
 
     private void enregistrerParametres() {
         Parametre param = new Parametre();
         param.login = identifiant;
-        param.langue = ((TextView) findViewById(R.id.rowLangue)).getText().toString();
-        param.cookies = ((TextView) findViewById(R.id.rowCookies)).getText().toString();
+
+        // Nettoyer les préfixes "Langue :" et "Cookies :" si présents
+        String langueText = ((TextView) findViewById(R.id.rowLangue)).getText().toString();
+        param.langue = langueText.replace("Langue :", "").trim();
+
+        String cookiesText = ((TextView) findViewById(R.id.rowCookies)).getText().toString();
+        param.cookies = cookiesText.replace("Cookies :", "").trim();
+
         param.notifications = TextUtils.join(", ", selectedItems);
         param.type = "client";
-        Call<Void> call = apiService.updateParametre(param);
 
+        Log.d("PARAMS_SAVE", "Saving params: " + param.langue + " | " + param.cookies + " | " + param.notifications);
+
+        Call<Void> call = apiService.updateParametre(param);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -229,21 +244,28 @@ public class ClientParametres extends Activity {
             public void onResponse(Call<Parametre> call, Response<Parametre> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Parametre param = response.body();
+                    Log.d("PARAMS_LOAD", "Loaded params: " + param.langue + " | " + param.cookies + " | " + param.notifications);
 
                     TextView langueView = findViewById(R.id.rowLangue);
                     TextView cookiesView = findViewById(R.id.rowCookies);
                     Notifs = findViewById(R.id.rowNotifications);
 
-                    langueView.setText(param.langue);
-                    cookiesView.setText(param.cookies);
+                    // Ajout des préfixes seulement à l'affichage
+                    langueView.setText("Langue :" + param.langue);
+                    cookiesView.setText("Cookies :" + param.cookies);
 
-                    if (param.notifications != null && !param.notifications.isEmpty()) {
-                        selectedItems = new ArrayList<>(Arrays.asList(param.notifications.split("\\s*,\\s*")));
-                    } else {
-                        selectedItems.clear();
+                    // Nettoyage des notifications avant traitement
+                    String notifications = param.notifications;
+                    if (notifications != null && notifications.startsWith("Notifs :")) {
+                        notifications = notifications.replace("Notifs :", "").trim();
                     }
 
-                    updateSelectionText(); // met à jour le texte affiché pour les notifs
+                    selectedItems.clear();
+                    if (notifications != null && !notifications.isEmpty() && !notifications.equals("Aucune sélection")) {
+                        selectedItems.addAll(Arrays.asList(notifications.split("\\s*,\\s*")));
+                    }
+
+                    updateSelectionText();
                 } else {
                     Toast.makeText(ClientParametres.this, "Impossible de charger les paramètres", Toast.LENGTH_SHORT).show();
                 }
@@ -255,6 +277,4 @@ public class ClientParametres extends Activity {
             }
         });
     }
-
-
 }

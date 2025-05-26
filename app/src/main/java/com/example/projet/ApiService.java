@@ -41,30 +41,38 @@ public interface ApiService {
     Call<Void> updateBoutique(@Body Boutique boutique);
 
     // === PARAMETRE ===
-    @POST("/paiement/add")
+    @POST("/api/parametre/add")
     Call<Void> addParametre(@Body Parametre parametre); // Equivalent à AddParametre handler
 
-    @GET("/paiement/get")
+    @GET("/api/parametre/get")
     Call<Parametre> getParametre(@Query("login") String login, @Query("type") String type); // Equivalent à GetParametre handler
 
-    @DELETE("/paiement/delete")
+    @DELETE("/api/parametre/delete")
     Call<Void> deleteParametre(@Query("login") String login, @Query("type") String type); // Equivalent à DeleteParametre handler
 
-    @PUT("/paiement/update")
+    @PUT("/api/parametre/update")
     Call<Void> updateParametre(@Body Parametre parametre); // Equivalent à UpdateParametre handler
 
     // === PAIEMENT ===
-    @POST("/api/paiement/add")
+    // Ajouter une méthode de paiement
+    @POST("api/paiement/add")
     Call<Void> addPaiement(@Body Paiement paiement);
 
-    @GET("/api/paiement/get")
-    Call<Paiement> getPaiement(@Query("id") String id);
+    // Récupérer une méthode de paiement
+    @GET("api/paiement/get")
+    Call<Paiement> getPaiement(@Query("login") String login, @Query("nom_carte") String nomCarte);
 
-    @DELETE("/api/paiement/delete")
-    Call<Void> deletePaiement(@Query("id") String id);
+    // Supprimer une méthode de paiement
+    @DELETE("api/paiement/delete")
+    Call<Void> deletePaiement(@Query("login") String login, @Query("nom_carte") String nomCarte);
 
-    @PUT("/api/paiement/update")
+    // Mettre à jour une méthode de paiement
+    @PUT("api/paiement/update")
     Call<Void> updatePaiement(@Body Paiement paiement);
+
+    // Récupérer toutes les méthodes de paiement
+    @GET("api/paiement/getAll")
+    Call<List<Paiement>> getAllPaiement(@Query("login") String login);
 
     // === ADRESSE ===
     @POST("/api/adresse/add")

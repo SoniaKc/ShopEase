@@ -55,6 +55,9 @@
         <activity android:name=".ClientAdresses" />
         <activity android:name=".ClientHistoriqueAchats" />
 
+        <activity android:name=".ClientCB" />
+        <activity android:name=".ClientEditPayement" />
+        <activity android:name=".ClientAddPayment" />
 
 
     </application>

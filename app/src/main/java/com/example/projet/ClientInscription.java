@@ -86,8 +86,8 @@ public class ClientInscription extends Activity {
                 Call<Void> call2 = apiService.addParametre(params);
                 call2.enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Void> call2, Response<Void> response) {
-                        if (response.isSuccessful()) {
+                    public void onResponse(Call<Void> call2, Response<Void> response2) {
+                        if (response2.isSuccessful()) {
                             Toast.makeText(ClientInscription.this, "paramètres initialisés !", Toast.LENGTH_SHORT).show();
                             Call<Void> call = apiService.addClient(newClient);
 
