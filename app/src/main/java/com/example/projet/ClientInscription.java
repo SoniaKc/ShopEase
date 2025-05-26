@@ -23,8 +23,6 @@ public class ClientInscription extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_inscription);
 
-        ClientTable clientTable = ClientTable.getInstance();
-
         identifiant = findViewById(R.id.inputID);
         mot_de_passe = findViewById(R.id.mot_de_passe);
         nom = findViewById(R.id.nom);
@@ -47,10 +45,7 @@ public class ClientInscription extends Activity {
                 identifiant.setError("Le login doit commencer par une lettre et être ≤ 10 caractères");
                 temp = false;
             }
-            if (clientTable.getUserClientLogin(Stridentifiant)) {
-                identifiant.setError("Identifiant déjà pris");
-                temp = false;
-            }
+
             if (Strmot_de_passe.length() < 6) {
                 mot_de_passe.setError("Le mot de passe doit contenir au moins 6 caractères");
                 temp = false;
@@ -79,25 +74,49 @@ public class ClientInscription extends Activity {
                 newClient.date_naissance = Strdate_naissance;
                 newClient.telephone = ""; // facultatif
 
-                ApiService apiService = ApiClient.getClient().create(ApiService.class);
-                Call<Void> call = apiService.addClient(newClient);
+                Parametre params = new Parametre();
+                params.login=Stridentifiant;
+                params.langue = "Français";
+                params.notifications="push, email";
+                params.cookies = "Accepter";
+                params.type = "client";
 
-                call.enqueue(new Callback<Void>() {
+
+                ApiService apiService = ApiClient.getClient().create(ApiService.class);
+                Call<Void> call2 = apiService.addParametre(params);
+                call2.enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<Void> call2, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(ClientInscription.this, "Inscription réussie !", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(ClientInscription.this, Connexion.class);
-                            i.putExtra("type", "client");
-                            startActivity(i);
+                            Toast.makeText(ClientInscription.this, "paramètres initialisés !", Toast.LENGTH_SHORT).show();
+                            Call<Void> call = apiService.addClient(newClient);
+
+                            call.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    if (response.isSuccessful()) {
+                                        Toast.makeText(ClientInscription.this, "Inscription réussie !", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(ClientInscription.this, Connexion.class);
+                                        i.putExtra("type", "client");
+                                        startActivity(i);
+                                    } else {
+                                        Toast.makeText(ClientInscription.this, "Erreur: identifiant peut-être déjà utilisé", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    Toast.makeText(ClientInscription.this, "Échec de la connexion au serveur", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         } else {
-                            Toast.makeText(ClientInscription.this, "Erreur: identifiant peut-être déjà utilisé", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ClientInscription.this, "Erreur : paramètrenon initialisés veuillez réitérer votre inscription", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(ClientInscription.this, "Échec de la connexion au serveur", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ClientInscription.this, "Erreur de connexion au serveur", Toast.LENGTH_LONG).show();
                     }
                 });
             }

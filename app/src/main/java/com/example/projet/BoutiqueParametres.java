@@ -17,22 +17,32 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class BoutiqueParametres extends Activity {
     TextView Notifs;
     private List<String> selectedItems = new ArrayList<>();
     private List<String> allItems = Arrays.asList("push", "email", "sms");
+    String identifiant;
+    ApiService apiService;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_params);
 
+        apiService = ApiClient.getClient().create(ApiService.class);
+        identifiant = getIntent().getStringExtra("id");
 
-        String identifiant = getIntent().getStringExtra("id");
+        chargerParametres();
 
         TextView Langue = findViewById(R.id.rowLangue);
         Spinner spinnerLangue = findViewById(R.id.spinnerLangue);
@@ -42,23 +52,22 @@ public class BoutiqueParametres extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLangue.setAdapter(adapter);
 
-        // Gérer le clic sur le TextView
         Langue.setOnClickListener(v -> {
-            if(spinnerLangue.getVisibility() == View.VISIBLE) {
+            if (spinnerLangue.getVisibility() == View.VISIBLE) {
                 spinnerLangue.setVisibility(View.GONE);
             } else {
                 spinnerLangue.setVisibility(View.VISIBLE);
-                spinnerLangue.performClick(); // Ouvre le dropdown
+                spinnerLangue.performClick();
             }
         });
 
-        // Gérer la sélection dans le Spinner
         spinnerLangue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selection = (String) parent.getItemAtPosition(position);
                 Langue.setText(selection);
                 spinnerLangue.setVisibility(View.GONE);
+                enregistrerParametres();
             }
 
             @Override
@@ -67,33 +76,31 @@ public class BoutiqueParametres extends Activity {
             }
         });
 
-
         TextView Cookies = findViewById(R.id.rowCookies);
         Spinner spinnerCookies = findViewById(R.id.spinnerCookies);
+        List<String> optionsCookies = Arrays.asList("Accepter", "Refuser");
 
-        List<String> optionsCookies = Arrays.asList("", "Option 2", "Option 3", "Option 4");
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, optionsCookies);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCookies.setAdapter(adapter2);
 
-        // Gérer le clic sur le TextView
         Cookies.setOnClickListener(v -> {
-            if(spinnerCookies.getVisibility() == View.VISIBLE) {
+            if (spinnerCookies.getVisibility() == View.VISIBLE) {
                 spinnerCookies.setVisibility(View.GONE);
             } else {
                 spinnerCookies.setVisibility(View.VISIBLE);
-                spinnerCookies.performClick(); // Ouvre le dropdown
+                spinnerCookies.performClick();
             }
         });
 
-        // Gérer la sélection dans le Spinner
         spinnerCookies.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selection = (String) parent.getItemAtPosition(position);
                 Cookies.setText(selection);
                 spinnerCookies.setVisibility(View.GONE);
+                enregistrerParametres();
             }
 
             @Override
@@ -140,7 +147,6 @@ public class BoutiqueParametres extends Activity {
                 true
         );
 
-        // Configuration de la ListView
         ListView listView = popupView.findViewById(R.id.checkBoxListView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_checkbox, R.id.textViewItem, allItems) {
             @Override
@@ -153,7 +159,6 @@ public class BoutiqueParametres extends Activity {
         };
         listView.setAdapter(adapter);
 
-        // Gestion des clics sur les items
         listView.setOnItemClickListener((parent, view, position, id) -> {
             CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
             checkBox.setChecked(!checkBox.isChecked());
@@ -165,14 +170,14 @@ public class BoutiqueParametres extends Activity {
                 selectedItems.remove(item);
             }
         });
-        // Bouton Valider
+
         Button btnValider = popupView.findViewById(R.id.btnValider);
         btnValider.setOnClickListener(v -> {
             updateSelectionText();
+            enregistrerParametres();
             popupWindow.dismiss();
         });
 
-        // Afficher le popup
         popupWindow.showAsDropDown(Notifs);
     }
 
@@ -182,5 +187,57 @@ public class BoutiqueParametres extends Activity {
         } else {
             Notifs.setText(TextUtils.join(", ", selectedItems));
         }
+    }
+
+    private void enregistrerParametres() {
+        Parametre param = new Parametre();
+        param.login = identifiant;
+        param.langue = ((TextView) findViewById(R.id.rowLangue)).getText().toString();
+        param.cookies = ((TextView) findViewById(R.id.rowCookies)).getText().toString();
+        param.notifications = TextUtils.join(", ", selectedItems);
+        param.type = "boutique";
+
+        Call<Void> call = apiService.updateParametre(param);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                String msg = response.isSuccessful() ? "Paramètres mis à jour" : "Paramètres non mis à jour";
+                Toast.makeText(BoutiqueParametres.this, msg, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(BoutiqueParametres.this, "Erreur serveur", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void chargerParametres() {
+        Call<Parametre> call = apiService.getParametre(identifiant, "boutique");
+        call.enqueue(new Callback<Parametre>() {
+            @Override
+            public void onResponse(Call<Parametre> call, Response<Parametre> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Parametre param = response.body();
+                    ((TextView) findViewById(R.id.rowLangue)).setText(param.langue);
+                    ((TextView) findViewById(R.id.rowCookies)).setText(param.cookies);
+
+                    if (param.notifications != null && !param.notifications.isEmpty()) {
+                        selectedItems = new ArrayList<>(Arrays.asList(param.notifications.split("\\s*,\\s*")));
+                    } else {
+                        selectedItems.clear();
+                    }
+
+                    updateSelectionText();
+                } else {
+                    Toast.makeText(BoutiqueParametres.this, "Impossible de charger les paramètres", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Parametre> call, Throwable t) {
+                Toast.makeText(BoutiqueParametres.this, "Erreur de chargement : " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

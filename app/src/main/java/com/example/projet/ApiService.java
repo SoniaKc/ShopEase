@@ -41,17 +41,17 @@ public interface ApiService {
     Call<Void> updateBoutique(@Body Boutique boutique);
 
     // === PARAMETRE ===
-    @POST("/api/parametre/add")
-    Call<Void> addParametre(@Body Parametre parametre);
+    @POST("/paiement/add")
+    Call<Void> addParametre(@Body Parametre parametre); // Equivalent à AddParametre handler
 
-    @GET("/api/parametre/get")
-    Call<Parametre> getParametre(@Query("id") String id);
+    @GET("/paiement/get")
+    Call<Parametre> getParametre(@Query("login") String login, @Query("type") String type); // Equivalent à GetParametre handler
 
-    @DELETE("/api/parametre/delete")
-    Call<Void> deleteParametre(@Query("id") String id);
+    @DELETE("/paiement/delete")
+    Call<Void> deleteParametre(@Query("login") String login, @Query("type") String type); // Equivalent à DeleteParametre handler
 
-    @PUT("/api/parametre/update")
-    Call<Void> updateParametre(@Body Parametre parametre);
+    @PUT("/paiement/update")
+    Call<Void> updateParametre(@Body Parametre parametre); // Equivalent à UpdateParametre handler
 
     // === PAIEMENT ===
     @POST("/api/paiement/add")

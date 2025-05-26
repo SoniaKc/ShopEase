@@ -193,6 +193,7 @@
 
             <!-- Bouton suppression -->
             <Button
+                android:id="@+id/btnSupprimer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/delete_account_button"

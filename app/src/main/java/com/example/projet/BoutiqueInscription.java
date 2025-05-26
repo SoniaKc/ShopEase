@@ -23,8 +23,6 @@ public class BoutiqueInscription extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_inscription);
 
-        BoutiqueTable boutiqueTable = BoutiqueTable.getInstance();
-
         identifiant = findViewById(R.id.inputID);
         mot_de_passe = findViewById(R.id.mot_de_passe);
         nom = findViewById(R.id.nom);
@@ -47,10 +45,11 @@ public class BoutiqueInscription extends Activity {
                 identifiant.setError("Le login doit commencer par une lettre et être ≤ 10 caractères");
                 temp = false;
             }
+            /*
             if (boutiqueTable.getUserClientLogin(Stridentifiant)) {
                 identifiant.setError("identifiant déjà pris");
                 temp = false;
-            }
+            }*/
             if (!Strnom.matches("^[A-Za-zÀ-ÖØ-öø-ÿ -]+$")) {
                 nom.setError("Le nom doit contenir uniquement des lettres");
                 temp = false;
@@ -74,19 +73,42 @@ public class BoutiqueInscription extends Activity {
                 boutique.pays_enregistrement = "";
                 boutique.iban = "";
 
-                ApiService apiService = ApiClient.getClient().create(ApiService.class);
-                Call<Void> call = apiService.addBoutique(boutique);
+                Parametre params = new Parametre();
+                params.login=Stridentifiant;
+                params.langue = "Français";
+                params.notifications="push, email";
+                params.cookies = "Accepter";
+                params.type = "boutique";
 
-                call.enqueue(new Callback<Void>() {
+
+                ApiService apiService = ApiClient.getClient().create(ApiService.class);
+                Call<Void> call2 = apiService.addParametre(params);
+                call2.enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<Void> call2, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(BoutiqueInscription.this, "Inscription réussie !", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(BoutiqueInscription.this, Connexion.class);
-                            i.putExtra("type", "boutique");
-                            startActivity(i);
+                            Toast.makeText(BoutiqueInscription.this, "paramètres initialisés !", Toast.LENGTH_SHORT).show();
+                            Call<Void> call = apiService.addBoutique(boutique);
+                            call.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    if (response.isSuccessful()) {
+                                        Toast.makeText(BoutiqueInscription.this, "Inscription réussie !", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(BoutiqueInscription.this, Connexion.class);
+                                        i.putExtra("type", "boutique");
+                                        startActivity(i);
+                                    } else {
+                                        Toast.makeText(BoutiqueInscription.this, "Erreur : identifiant peut-être déjà utilisé", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    Toast.makeText(BoutiqueInscription.this, "Erreur de connexion au serveur", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         } else {
-                            Toast.makeText(BoutiqueInscription.this, "Erreur : identifiant peut-être déjà utilisé", Toast.LENGTH_LONG).show();
+                            Toast.makeText(BoutiqueInscription.this, "Erreur : paramètrenon initialisés veuillez réitérer votre inscription", Toast.LENGTH_LONG).show();
                         }
                     }
 
