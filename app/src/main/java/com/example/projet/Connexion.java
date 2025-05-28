@@ -50,7 +50,7 @@ public class Connexion extends Activity {
                             Boutique boutique = response.body();
                             if (boutique.password.equals(Strmdp)) {
                                 Toast.makeText(Connexion.this, "Connexion réussie.", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(Connexion.this, BoutiqueProfilInfos.class);
+                                Intent i = new Intent(Connexion.this, BoutiqueProfilAccueil.class);
                                 i.putExtra("id", boutique.login);
                                 startActivity(i);
                             } else {

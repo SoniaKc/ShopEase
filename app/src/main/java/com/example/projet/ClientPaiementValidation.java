@@ -7,9 +7,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.widget.Toast;
+
+import androidx.core.app.NotificationCompat;
+
 import com.example.projet.bdd.ClientTable;
 
 public class ClientPaiementValidation extends Activity {
+    String identifiant;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,7 +29,7 @@ public class ClientPaiementValidation extends Activity {
 
         ClientTable client = ClientTable.getInstance();
 
-        String identifiant = getIntent().getStringExtra("id");
+        identifiant = getIntent().getStringExtra("id");
 
         TextView nomPrenom = findViewById(R.id.nomPrenom);
         nomPrenom.setText(client.getNom(identifiant) + " " + client.getPrenom(identifiant));
@@ -56,5 +67,39 @@ public class ClientPaiementValidation extends Activity {
             startActivity(i);
         });
 
+        Toast.makeText(ClientPaiementValidation.this, "achat effectué", Toast.LENGTH_SHORT).show();
+        showLocalNotification("achat effectué", "achat effectué");
+
+
     }
+
+    public void showLocalNotification(String title, String message) {
+        String channelId = "produit_channel";
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Créer le canal (obligatoire pour Android 8+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    channelId,
+                    "Notification Produit",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        // Intent pour ouvrir l’activité quand on clique sur la notif
+        Intent intent = new Intent(this, BoutiqueMesProduits.class);
+        intent.putExtra("log", identifiant);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.validation_achats) // Ton icône dans drawable
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
+
+        notificationManager.notify(1, builder.build());
+    }
+
 }

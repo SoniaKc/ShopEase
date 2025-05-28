@@ -1,6 +1,5 @@
 package com.example.projet;
 
-import com.example.projet.bdd.*;
 
 import java.util.List;
 

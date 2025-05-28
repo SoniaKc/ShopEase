@@ -85,6 +85,7 @@
                 android:foreground="?attr/selectableItemBackground">
 
                 <TextView
+                    android:id="@+id/TVcategorie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Categorie"
@@ -93,7 +94,7 @@
                     android:textColor="#1E1E1E" />
 
                 <TextView
-                    android:id="@+id/TVcategorie"
+                    android:id="@+id/TVcategorie2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"

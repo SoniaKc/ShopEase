@@ -72,11 +72,11 @@ public class BoutiqueEditProduit extends Activity {
 
                 if (!nom.isEmpty()) {
                     Produit produit = new Produit();
-                    produit.id_boutique = identifiant;
+                    produit.login_boutique = identifiant;
                     produit.nom = nom;
                     produit.categories = Categories;
-                    produit.prix = prix;
                     produit.reduction = reduction;
+                    produit.prix = prix;
                     produit.description = description;
 
                     apiService = ApiClient.getClient().create(ApiService.class);
@@ -87,7 +87,7 @@ public class BoutiqueEditProduit extends Activity {
                             if (response.isSuccessful()) {
                                 Toast.makeText(BoutiqueEditProduit.this, "Produit ajouté avec succès", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
-                                intent.putExtra("log", identifiant);
+                                intent.putExtra("id", identifiant);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(BoutiqueEditProduit.this, "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
@@ -109,7 +109,7 @@ public class BoutiqueEditProduit extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });

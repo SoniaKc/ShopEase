@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +37,8 @@ import java.util.List;
 public class BoutiqueAjouterProduit extends Activity {
     private List<String> selectedItems = new ArrayList<>();
     private List<String> allItems = Arrays.asList("Informatique", "Electronique", "Livre","Animaux","Jeux enfant", "Jeux de sociétés", "Papetterie");
-    TextView TVcategories;
+    LinearLayout categorie;
+    TextView TVcategorie;
     String Categories ="";
     String identifiant;
 
@@ -44,17 +48,20 @@ public class BoutiqueAjouterProduit extends Activity {
         setContentView(R.layout.boutique_ajouter_produit);
 
         identifiant = getIntent().getStringExtra("id");
+        Log.e("id", identifiant);
+
 
         Button valider = findViewById(R.id.btnValider);
         Button supprimer = findViewById(R.id.btnSupprimer);
 
         EditText nomProduit = findViewById(R.id.nomProduit);
-        TVcategories = findViewById(R.id.TVcategorie);
+        categorie = findViewById(R.id.categorie);
+        TVcategorie = findViewById(R.id.TVcategorie);
         EditText reductionProduit = findViewById(R.id.reductionProduit);
         EditText prixProduit = findViewById(R.id.prixProduit);
         EditText descriptionProduit = findViewById(R.id.descriptionProduit);
 
-        TVcategories.setOnClickListener(v -> showCheckboxPopup());
+        categorie.setOnClickListener(v -> showCheckboxPopup());
 
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +73,11 @@ public class BoutiqueAjouterProduit extends Activity {
 
                 if (!nom.isEmpty()) {
                     Produit produit = new Produit();
-                    produit.id_boutique = identifiant;
+                    produit.login_boutique = identifiant;
                     produit.nom = nom;
                     produit.categories = Categories;
-                    produit.prix = prix;
                     produit.reduction = reduction;
+                    produit.prix = prix;
                     produit.description = description;
 
                     ApiService apiService = ApiClient.getClient().create(ApiService.class);
@@ -79,18 +86,27 @@ public class BoutiqueAjouterProduit extends Activity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(BoutiqueAjouterProduit.this, "Produit ajouté avec succès", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BoutiqueAjouterProduit.this, "Produit ajouté", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
-                                intent.putExtra("log", identifiant);
+                                intent.putExtra("id", identifiant);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(BoutiqueAjouterProduit.this, "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
+                                try {
+                                    String errorBody = response.errorBody().string();
+                                    Log.e("API_ERROR", "Code: " + response.code() + " - " + errorBody);
+                                    Toast.makeText(BoutiqueAjouterProduit.this,
+                                            "Erreur: " + errorBody, Toast.LENGTH_LONG).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(BoutiqueAjouterProduit.this, "Échec réseau: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.e("NETWORK_ERROR", t.getMessage());
+                            Toast.makeText(BoutiqueAjouterProduit.this,
+                                    "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
@@ -103,7 +119,7 @@ public class BoutiqueAjouterProduit extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
-                intent.putExtra("log", identifiant);
+                intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
         });
@@ -136,57 +152,59 @@ public class BoutiqueAjouterProduit extends Activity {
 
     private void showCheckboxPopup() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.popup_checkbox_list, null);
+        View popupView = inflater.inflate(R.layout.popup_checkbox_list2, null);
 
         PopupWindow popupWindow = new PopupWindow(
                 popupView,
-                TVcategories.getWidth(),
+                ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 true
         );
 
-        // Configuration de la ListView
         ListView listView = popupView.findViewById(R.id.checkBoxListView);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_checkbox, R.id.textViewItem, allItems) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
                 checkBox.setChecked(selectedItems.contains(allItems.get(position)));
+
+                checkBox.setOnClickListener(v -> {
+                    String item = allItems.get(position);
+                    if (checkBox.isChecked()) {
+                        if (!selectedItems.contains(item)) selectedItems.add(item);
+                    } else {
+                        selectedItems.remove(item);
+                    }
+                });
+
                 return view;
             }
         };
         listView.setAdapter(adapter);
 
-        // Gestion des clics sur les items
         listView.setOnItemClickListener((parent, view, position, id) -> {
             CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
-            checkBox.setChecked(!checkBox.isChecked());
-
-            String item = allItems.get(position);
-            if (checkBox.isChecked() && !selectedItems.contains(item)) {
-                selectedItems.add(item);
-            } else {
-                selectedItems.remove(item);
-            }
+            checkBox.toggle(); // Active le OnClickListener du checkbox
         });
-        // Bouton Valider
+
         Button btnValider = popupView.findViewById(R.id.btnValider);
         btnValider.setOnClickListener(v -> {
             updateSelectionText();
             popupWindow.dismiss();
         });
 
-        // Afficher le popup
-        popupWindow.showAsDropDown(TVcategories);
+        popupWindow.showAsDropDown(TVcategorie);
     }
 
     private void updateSelectionText() {
         if (selectedItems.isEmpty()) {
-            TVcategories.setText("Aucune sélection");
+            TVcategorie.setText("Catégories : Aucune sélection");
         } else {
             Categories = TextUtils.join(", ", selectedItems);
-            TVcategories.setText(TextUtils.join(", ", selectedItems));
+            TVcategorie.setText("Catégories : " + Categories);
         }
     }
+
 }
