@@ -62,7 +62,9 @@ public class ClientAddPayment extends Activity {
                 if (response.isSuccessful()) {
                     Toast.makeText(ClientAddPayment.this, "Carte ajoutée avec succès", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
-                    finish();
+                    Intent i = new Intent(getBaseContext(), ClientCB.class);
+                    i.putExtra("id", identifiant);
+                    startActivity(i);
                 } else {
                     Toast.makeText(ClientAddPayment.this, "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
                 }

@@ -75,16 +75,25 @@ public interface ApiService {
     Call<List<Paiement>> getAllPaiement(@Query("login") String login);
 
     // === ADRESSE ===
-    @POST("/api/adresse/add")
+    @POST("api/adresse/add")
     Call<Void> addAdresse(@Body Adresse adresse);
 
-    @GET("/api/adresse/get")
-    Call<Adresse> getAdresse(@Query("id") String id);
+    @GET("api/adresse/get")
+    Call<Adresse> getAdresse(
+            @Query("login") String login,
+            @Query("nom_adresse") String nomAdresse
+    );
 
-    @DELETE("/api/adresse/delete")
-    Call<Void> deleteAdresse(@Query("id") String id);
+    @GET("api/adresse/getAll")
+    Call<List<Adresse>> getAllAdresse(@Query("login") String login);
 
-    @PUT("/api/adresse/update")
+    @DELETE("api/adresse/delete")
+    Call<Void> deleteAdresse(
+            @Query("login") String login,
+            @Query("nom_adresse") String nomAdresse
+    );
+
+    @PUT("api/adresse/update")
     Call<Void> updateAdresse(@Body Adresse adresse);
 
     // === PRODUIT ===

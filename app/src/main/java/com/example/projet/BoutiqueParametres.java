@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,7 @@ public class BoutiqueParametres extends Activity {
         spinnerLangue.setAdapter(adapter);
 
         Langue.setOnClickListener(v -> {
-            if (spinnerLangue.getVisibility() == View.VISIBLE) {
+            if(spinnerLangue.getVisibility() == View.VISIBLE) {
                 spinnerLangue.setVisibility(View.GONE);
             } else {
                 spinnerLangue.setVisibility(View.VISIBLE);
@@ -65,7 +66,7 @@ public class BoutiqueParametres extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selection = (String) parent.getItemAtPosition(position);
-                Langue.setText(selection);
+                Langue.setText("Langue : " + selection);
                 spinnerLangue.setVisibility(View.GONE);
                 enregistrerParametres();
             }
@@ -86,7 +87,7 @@ public class BoutiqueParametres extends Activity {
         spinnerCookies.setAdapter(adapter2);
 
         Cookies.setOnClickListener(v -> {
-            if (spinnerCookies.getVisibility() == View.VISIBLE) {
+            if(spinnerCookies.getVisibility() == View.VISIBLE) {
                 spinnerCookies.setVisibility(View.GONE);
             } else {
                 spinnerCookies.setVisibility(View.VISIBLE);
@@ -98,7 +99,7 @@ public class BoutiqueParametres extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selection = (String) parent.getItemAtPosition(position);
-                Cookies.setText(selection);
+                Cookies.setText("Cookies : " + selection);
                 spinnerCookies.setVisibility(View.GONE);
                 enregistrerParametres();
             }
@@ -154,6 +155,14 @@ public class BoutiqueParametres extends Activity {
                 View view = super.getView(position, convertView, parent);
                 CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
                 checkBox.setChecked(selectedItems.contains(allItems.get(position)));
+                checkBox.setOnClickListener(v -> {
+                    String item = allItems.get(position);
+                    if (checkBox.isChecked()) {
+                        if (!selectedItems.contains(item)) selectedItems.add(item);
+                    } else {
+                        selectedItems.remove(item);
+                    }
+                });
                 return view;
             }
         };
@@ -161,14 +170,7 @@ public class BoutiqueParametres extends Activity {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
-            checkBox.setChecked(!checkBox.isChecked());
-
-            String item = allItems.get(position);
-            if (checkBox.isChecked() && !selectedItems.contains(item)) {
-                selectedItems.add(item);
-            } else {
-                selectedItems.remove(item);
-            }
+            checkBox.toggle();
         });
 
         Button btnValider = popupView.findViewById(R.id.btnValider);
@@ -183,26 +185,32 @@ public class BoutiqueParametres extends Activity {
 
     private void updateSelectionText() {
         if (selectedItems.isEmpty()) {
-            Notifs.setText("Aucune sélection");
+            Notifs.setText("Notifs : Aucune sélection");
         } else {
-            Notifs.setText(TextUtils.join(", ", selectedItems));
+            Notifs.setText("Notifs : " + TextUtils.join(", ", selectedItems));
         }
     }
 
     private void enregistrerParametres() {
         Parametre param = new Parametre();
         param.login = identifiant;
-        param.langue = ((TextView) findViewById(R.id.rowLangue)).getText().toString();
-        param.cookies = ((TextView) findViewById(R.id.rowCookies)).getText().toString();
+
+        String langueText = ((TextView) findViewById(R.id.rowLangue)).getText().toString();
+        param.langue = langueText.replace("Langue :", "").trim();
+
+        String cookiesText = ((TextView) findViewById(R.id.rowCookies)).getText().toString();
+        param.cookies = cookiesText.replace("Cookies :", "").trim();
+
         param.notifications = TextUtils.join(", ", selectedItems);
         param.type = "boutique";
+
+        Log.d("PARAMS_SAVE", "Saving params: " + param.langue + " | " + param.cookies + " | " + param.notifications);
 
         Call<Void> call = apiService.updateParametre(param);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                String msg = response.isSuccessful() ? "Paramètres mis à jour" : "Paramètres non mis à jour";
-                Toast.makeText(BoutiqueParametres.this, msg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BoutiqueParametres.this, response.isSuccessful() ? "Paramètres mis à jour" : "Paramètres non mis à jour", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -219,13 +227,21 @@ public class BoutiqueParametres extends Activity {
             public void onResponse(Call<Parametre> call, Response<Parametre> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Parametre param = response.body();
-                    ((TextView) findViewById(R.id.rowLangue)).setText(param.langue);
-                    ((TextView) findViewById(R.id.rowCookies)).setText(param.cookies);
+                    TextView langueView = findViewById(R.id.rowLangue);
+                    TextView cookiesView = findViewById(R.id.rowCookies);
+                    Notifs = findViewById(R.id.rowNotifications);
 
-                    if (param.notifications != null && !param.notifications.isEmpty()) {
-                        selectedItems = new ArrayList<>(Arrays.asList(param.notifications.split("\\s*,\\s*")));
-                    } else {
-                        selectedItems.clear();
+                    langueView.setText("Langue : " + param.langue);
+                    cookiesView.setText("Cookies : " + param.cookies);
+
+                    String notifications = param.notifications;
+                    if (notifications != null && notifications.startsWith("Notifs :")) {
+                        notifications = notifications.replace("Notifs :", "").trim();
+                    }
+
+                    selectedItems.clear();
+                    if (notifications != null && !notifications.isEmpty() && !notifications.equals("Aucune sélection")) {
+                        selectedItems.addAll(Arrays.asList(notifications.split("\\s*,\\s*")));
                     }
 
                     updateSelectionText();

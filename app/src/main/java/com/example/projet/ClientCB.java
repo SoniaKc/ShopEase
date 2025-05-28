@@ -121,7 +121,7 @@ public class ClientCB extends Activity {
 
             for (Paiement paiement : paiements) {
                 try {
-                    View cardView = getLayoutInflater().inflate(R.layout.payment_card_item, null);
+                    View cardView = getLayoutInflater().inflate(R.layout.payment_card_item, cardsContainer, false);
 
                     TextView cardName = cardView.findViewById(R.id.card_name);
                     TextView cardNumber = cardView.findViewById(R.id.card_number);
@@ -141,9 +141,26 @@ public class ClientCB extends Activity {
                     cardExpiry.setText(paiement.date_expiration != null ? paiement.date_expiration : "N/A");
 
                     cardsContainer.addView(cardView);
+
+                    Button editButton = cardView.findViewById(R.id.edit_button);
+                    Button deleteButton = cardView.findViewById(R.id.delete_button);
+
+                    deleteButton.setOnClickListener(v -> {
+                        deletePaymentCard(paiement.nom_carte);
+                    });
+
+                    editButton.setOnClickListener(v -> {
+                        Intent i = new Intent(ClientCB.this, ClientEditPayement.class);
+                        i.putExtra("id", identifiant);
+                        i.putExtra("carte_nom", paiement.nom_carte);
+                        startActivity(i);
+                    });
+
                 } catch (Exception e) {
                     Log.e("CARD_ERROR", "Erreur affichage carte", e);
                 }
+
+
             }
         });
     }

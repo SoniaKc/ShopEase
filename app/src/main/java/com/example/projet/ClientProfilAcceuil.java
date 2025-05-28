@@ -42,7 +42,7 @@ public class ClientProfilAcceuil extends Activity {
         });
 
         addresses.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ClientAdresses.class);
+            Intent intent = new Intent(this, ClientAdresse.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });

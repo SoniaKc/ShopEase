@@ -24,7 +24,7 @@ public class ClientEditPayement extends Activity {
 
         apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
-        originalCardName = getIntent().getStringExtra("card_name");
+        originalCardName = getIntent().getStringExtra("carte_nom");
 
         cardName = findViewById(R.id.card_name_input);
         cardNumber = findViewById(R.id.card_number_input);
@@ -75,6 +75,7 @@ public class ClientEditPayement extends Activity {
         }
 
         Paiement updatedPaiement = new Paiement();
+        updatedPaiement.login = identifiant;
         updatedPaiement.nom_carte = newCardName;
         updatedPaiement.numero = numeroCarte;
         updatedPaiement.nom_personne_carte = titulaire;
@@ -88,7 +89,10 @@ public class ClientEditPayement extends Activity {
                 if (response.isSuccessful()) {
                     Toast.makeText(ClientEditPayement.this, "Carte mise à jour", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
-                    finish();
+
+                    Intent i = new Intent(getBaseContext(), ClientCB.class);
+                    i.putExtra("id", identifiant);
+                    startActivity(i);
                 } else {
                     Toast.makeText(ClientEditPayement.this, "Erreur lors de la mise à jour", Toast.LENGTH_SHORT).show();
                 }
@@ -109,7 +113,9 @@ public class ClientEditPayement extends Activity {
                 if (response.isSuccessful()) {
                     Toast.makeText(ClientEditPayement.this, "Carte supprimée", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
-                    finish();
+                    Intent i = new Intent(getBaseContext(), ClientCB.class);
+                    i.putExtra("id", identifiant);
+                    startActivity(i);
                 } else {
                     Toast.makeText(ClientEditPayement.this, "Erreur lors de la suppression", Toast.LENGTH_SHORT).show();
                 }

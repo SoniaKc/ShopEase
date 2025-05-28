@@ -165,10 +165,10 @@ public class ClientParametres extends Activity {
                 checkBox.setChecked(selectedItems.contains(allItems.get(position)));
 
                 // Ajout d'un écouteur direct sur la CheckBox
-                checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                checkBox.setOnClickListener(v -> {
                     String item = allItems.get(position);
-                    if (isChecked && !selectedItems.contains(item)) {
-                        selectedItems.add(item);
+                    if (checkBox.isChecked()) {
+                        if (!selectedItems.contains(item)) selectedItems.add(item);
                     } else {
                         selectedItems.remove(item);
                     }
@@ -199,7 +199,8 @@ public class ClientParametres extends Activity {
         if (selectedItems.isEmpty()) {
             Notifs.setText(prefix + "Aucune sélection");
         } else {
-            Notifs.setText(prefix + TextUtils.join(", ", selectedItems));
+            // Affichage uniquement
+            Notifs.setText("Notifs : " + TextUtils.join(", ", selectedItems));
         }
     }
 

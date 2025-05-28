@@ -52,12 +52,15 @@
         <activity android:name=".ClientPanier" />
         <activity android:name=".ClientFavoris" />
         <activity android:name=".ClientProfilInfos" />
-        <activity android:name=".ClientAdresses" />
         <activity android:name=".ClientHistoriqueAchats" />
 
         <activity android:name=".ClientCB" />
         <activity android:name=".ClientEditPayement" />
         <activity android:name=".ClientAddPayment" />
+
+        <activity android:name=".ClientAdresse" />*
+        <activity android:name=".ClientEditAdresse" />
+        <activity android:name=".ClientAddAdresse" />
 
 
     </application>
