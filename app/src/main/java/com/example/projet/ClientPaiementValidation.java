@@ -19,6 +19,10 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.projet.bdd.ClientTable;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ClientPaiementValidation extends Activity {
     String identifiant;
 
@@ -27,12 +31,28 @@ public class ClientPaiementValidation extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_paiement_validation);
 
-        ClientTable client = ClientTable.getInstance();
 
         identifiant = getIntent().getStringExtra("id");
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
 
-        TextView nomPrenom = findViewById(R.id.nomPrenom);
-        nomPrenom.setText(client.getNom(identifiant) + " " + client.getPrenom(identifiant));
+        apiService.getClient(identifiant).enqueue(new Callback<Client>() {
+            @Override
+            public void onResponse(Call<Client> call, Response<Client> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Client client = response.body();
+                    TextView nomPrenom = findViewById(R.id.nomPrenom);
+                    nomPrenom.setText(client.nom + " " + client.prenom);
+
+                } else {
+                    Toast.makeText(ClientPaiementValidation.this, "Identifiant inconnu.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Client> call, Throwable t) {
+                Toast.makeText(ClientPaiementValidation.this, "Erreur réseau.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // TOP NAVIGATION BAR
         ImageView navCart = findViewById(R.id.cartIcon);
