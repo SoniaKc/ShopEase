@@ -97,15 +97,25 @@ public interface ApiService {
     Call<Void> updateAdresse(@Body Adresse adresse);
 
     // === PRODUIT ===
-    @POST("/api/produit/add")
+    @POST("api/produit/add")
     Call<Void> addProduit(@Body Produit produit);
 
-    @GET("/api/produit/get")
-    Call<Produit> getProduit(@Query("id") String id);
+    @GET("api/produit/get")
+    Call<Produit> getProduit(
+            @Query("login_boutique") String loginBoutique,
+            @Query("nom") String nom
+    );
 
     @DELETE("/api/produit/delete")
-    Call<Void> deleteProduit(@Query("id") String id);
+    Call<Void> deleteProduit(@Query("login_boutique") String loginBoutique, @Query("nom") String nom);
 
     @PUT("/api/produit/update")
     Call<Void> updateProduit(@Body Produit produit);
+
+
+    // Récupérer tous les produits
+    @GET("api/produit/getAll")
+    Call<List<Produit>> getAllProduits(@Query("login_boutique") String loginBoutique);
+
+
 }

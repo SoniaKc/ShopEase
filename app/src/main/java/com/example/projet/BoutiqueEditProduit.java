@@ -1,6 +1,7 @@
 package com.example.projet;
 
 import android.app.Activity;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,12 +32,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BoutiqueAjouterProduit extends Activity {
+public class BoutiqueEditProduit extends Activity {
     private List<String> selectedItems = new ArrayList<>();
     private List<String> allItems = Arrays.asList("Informatique", "Electronique", "Livre","Animaux","Jeux enfant", "Jeux de sociétés", "Papetterie");
+    EditText nomProduit, reductionProduit,prixProduit,descriptionProduit;
     TextView TVcategories;
     String Categories ="";
-    String identifiant;
+    String identifiant, nom_Produit;
+    ApiService apiService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,15 +47,18 @@ public class BoutiqueAjouterProduit extends Activity {
         setContentView(R.layout.boutique_ajouter_produit);
 
         identifiant = getIntent().getStringExtra("id");
+        nom_Produit = getIntent().getStringExtra("nomProduit");
 
         Button valider = findViewById(R.id.btnValider);
         Button supprimer = findViewById(R.id.btnSupprimer);
 
-        EditText nomProduit = findViewById(R.id.nomProduit);
+        nomProduit = findViewById(R.id.nomProduit);
         TVcategories = findViewById(R.id.TVcategorie);
-        EditText reductionProduit = findViewById(R.id.reductionProduit);
-        EditText prixProduit = findViewById(R.id.prixProduit);
-        EditText descriptionProduit = findViewById(R.id.descriptionProduit);
+        reductionProduit = findViewById(R.id.reductionProduit);
+        prixProduit = findViewById(R.id.prixProduit);
+        descriptionProduit = findViewById(R.id.descriptionProduit);
+
+        loadProduitDetails();
 
         TVcategories.setOnClickListener(v -> showCheckboxPopup());
 
@@ -73,28 +79,28 @@ public class BoutiqueAjouterProduit extends Activity {
                     produit.reduction = reduction;
                     produit.description = description;
 
-                    ApiService apiService = ApiClient.getClient().create(ApiService.class);
+                    apiService = ApiClient.getClient().create(ApiService.class);
                     Call<Void> call = apiService.addProduit(produit);
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(BoutiqueAjouterProduit.this, "Produit ajouté avec succès", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BoutiqueEditProduit.this, "Produit ajouté avec succès", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
                                 intent.putExtra("log", identifiant);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(BoutiqueAjouterProduit.this, "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BoutiqueEditProduit.this, "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(BoutiqueAjouterProduit.this, "Échec réseau: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BoutiqueEditProduit.this, "Échec réseau: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
-                    Toast.makeText(BoutiqueAjouterProduit.this, "Nom requis", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BoutiqueEditProduit.this, "Nom requis", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -131,6 +137,30 @@ public class BoutiqueAjouterProduit extends Activity {
             Intent i = new Intent(this, BoutiqueProfilInfos.class);
             i.putExtra("id", identifiant);
             startActivity(i);
+        });
+    }
+
+    private void loadProduitDetails() {
+        Call<Produit> call = apiService.getProduit(identifiant, nom_Produit);
+        call.enqueue(new Callback<Produit>() {
+            @Override
+            public void onResponse(Call<Produit> call, Response<Produit> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Produit produit = response.body();
+                    nomProduit.setText(produit.nom);
+                    reductionProduit.setText(produit.reduction);
+                    prixProduit.setText(produit.prix);
+                    descriptionProduit.setText(produit.description);
+                    TVcategories.setText(produit.categories);
+                } else {
+                    Toast.makeText(BoutiqueEditProduit.this, "Erreur de chargement", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Produit> call, Throwable t) {
+                Toast.makeText(BoutiqueEditProduit.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
