@@ -51,15 +51,15 @@ public class BoutiqueProfilInfos extends Activity {
                 if (response.isSuccessful() && response.body() != null) {
                     currentBoutique = response.body();
 
-                    Nom.setText(currentBoutique.nom);
-                    Email.setText(currentBoutique.email);
-                    Tel.setText(currentBoutique.telephone);
-                    Id.setText(currentBoutique.login);
-                    Mdp.setText("********"); // Mot de passe masqué
-                    FormeJuridique.setText(currentBoutique.forme_juridique);
-                    Siret.setText(currentBoutique.siret);
-                    SiegeSocial.setText(currentBoutique.siege_social);
-                    PaysEnregitrement.setText(currentBoutique.pays_enregistrement);
+                    Nom.setText("Nom : " + currentBoutique.nom);
+                    Email.setText("Email : " + currentBoutique.email);
+                    Tel.setText("Tel : " + currentBoutique.telephone);
+                    Id.setText("Identifiant : " + currentBoutique.login);
+                    Mdp.setText("Mot de passe : " + "********"); // Mot de passe masqué
+                    FormeJuridique.setText("Forme Juridique : " + currentBoutique.forme_juridique);
+                    Siret.setText("Siret : " + currentBoutique.siret);
+                    SiegeSocial.setText("Siege Social : " + currentBoutique.siege_social);
+                    PaysEnregitrement.setText("Pays d' Enregitrement : " + currentBoutique.pays_enregistrement);
                 } else {
                     Toast.makeText(BoutiqueProfilInfos.this, "Boutique introuvable.", Toast.LENGTH_SHORT).show();
                 }

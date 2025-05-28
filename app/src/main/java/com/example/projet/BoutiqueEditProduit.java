@@ -158,7 +158,11 @@ public class BoutiqueEditProduit extends Activity {
                     reductionProduit.setText(produit.reduction);
                     prixProduit.setText(produit.prix);
                     descriptionProduit.setText(produit.description);
-                    TVcategories.setText(produit.categories);
+                    selectedItems.clear();
+                    if (produit.categories != null && !produit.categories.trim().isEmpty()) {
+                        selectedItems.addAll(Arrays.asList(produit.categories.split("\\s*,\\s*")));
+                    }
+                    TVcategories.setText("Catégories : " + produit.categories);
                 } else {
                     Toast.makeText(BoutiqueEditProduit.this, "Erreur de chargement", Toast.LENGTH_SHORT).show();
                 }
@@ -173,11 +177,11 @@ public class BoutiqueEditProduit extends Activity {
 
     private void showCheckboxPopup() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.popup_checkbox_list, null);
+        View popupView = inflater.inflate(R.layout.popup_checkbox_list2, null);
 
         PopupWindow popupWindow = new PopupWindow(
                 popupView,
-                TVcategories.getWidth(),
+                ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 true
         );
@@ -189,9 +193,23 @@ public class BoutiqueEditProduit extends Activity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
-                checkBox.setChecked(selectedItems.contains(allItems.get(position)));
+                TextView textView = view.findViewById(R.id.textViewItem);
+
+                String item = getItem(position);
+                checkBox.setChecked(selectedItems.contains(item));
+                textView.setText(item);
+
+                checkBox.setOnClickListener(v -> {
+                    if (checkBox.isChecked()) {
+                        if (!selectedItems.contains(item)) selectedItems.add(item);
+                    } else {
+                        selectedItems.remove(item);
+                    }
+                });
+
                 return view;
             }
+
         };
         listView.setAdapter(adapter);
 
@@ -220,10 +238,10 @@ public class BoutiqueEditProduit extends Activity {
 
     private void updateSelectionText() {
         if (selectedItems.isEmpty()) {
-            TVcategories.setText("Aucune sélection");
+            TVcategories.setText("Catégories : Aucune sélection");
         } else {
             Categories = TextUtils.join(", ", selectedItems);
-            TVcategories.setText(TextUtils.join(", ", selectedItems));
+            TVcategories.setText("Catégories : " + Categories);
         }
     }
 }
