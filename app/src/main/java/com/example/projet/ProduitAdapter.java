@@ -1,6 +1,8 @@
 package com.example.projet;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,20 @@ public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ViewHold
         holder.titre.setText(produit.nom);
         holder.date.setText("Updated today"); // remplacer par produit.date si dispo
         holder.image.setImageResource(R.drawable.img1);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, BoutiqueEditProduit.class);
+            intent.putExtra("id", produit.login_boutique);
+            intent.putExtra("nomProduit", produit.nom);
+
+            Log.e("PRODUIT ADAPTER", "ID = "+produit.login_boutique);
+            Log.e("PRODUIT ADAPTER", "NOM = "+produit.nom);
+            //intent.putExtra("categorie", produit.categories);
+            //intent.putExtra("reduction", produit.reduction);
+            //intent.putExtra("prix", produit.prix);
+            //intent.putExtra("description", produit.description);
+            context.startActivity(intent);
+        });
     }
 
     @Override

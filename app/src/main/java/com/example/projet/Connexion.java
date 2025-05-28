@@ -9,9 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.projet.bdd.BoutiqueTable;
-import com.example.projet.bdd.ClientTable;
-
 import java.util.Objects;
 
 import retrofit2.Call;

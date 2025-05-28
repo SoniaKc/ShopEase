@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ import java.util.List;
 public class BoutiqueEditProduit extends Activity {
     private List<String> selectedItems = new ArrayList<>();
     private List<String> allItems = Arrays.asList("Informatique", "Electronique", "Livre","Animaux","Jeux enfant", "Jeux de sociétés", "Papetterie");
-    EditText nomProduit, reductionProduit,prixProduit,descriptionProduit;
+    EditText nomProduit, reductionProduit, prixProduit, descriptionProduit;
     TextView TVcategories;
     String Categories ="";
     String identifiant, nom_Produit;
@@ -48,6 +49,8 @@ public class BoutiqueEditProduit extends Activity {
 
         identifiant = getIntent().getStringExtra("id");
         nom_Produit = getIntent().getStringExtra("nomProduit");
+
+        apiService = ApiClient.getClient().create(ApiService.class);
 
         Button valider = findViewById(R.id.btnValider);
         Button supprimer = findViewById(R.id.btnSupprimer);
@@ -141,6 +144,10 @@ public class BoutiqueEditProduit extends Activity {
     }
 
     private void loadProduitDetails() {
+
+        Log.e("LOAD PRODUIT DETAILS", "ID = "+identifiant);
+        Log.e("LOAD PRODUIT DETAILS", "NOM = "+nom_Produit);
+
         Call<Produit> call = apiService.getProduit(identifiant, nom_Produit);
         call.enqueue(new Callback<Produit>() {
             @Override
