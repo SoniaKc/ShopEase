@@ -11,6 +11,7 @@
     <string name="rechercher">Rechercher...</string>
     <string name="aProposTitre">À propos</string>
     <string name="connexion">Connexion</string>
+    <string name="avis">Avis</string>
 
     <string name="connexionEntrezID">Entrez votre identifiant</string>
     <string name="mdp">Mot de passe :</string>

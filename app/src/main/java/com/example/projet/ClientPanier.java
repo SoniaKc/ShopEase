@@ -23,6 +23,14 @@ public class ClientPanier extends Activity {
 
         identifiant = getIntent().getStringExtra("id");
 
+        Button btnPayer = findViewById(R.id.btnPayer);
+        btnPayer.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientPaiementPanier.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+
         // TOP NAVIGATION BAR
         ImageView navCart = findViewById(R.id.cartIcon);
 

@@ -207,6 +207,34 @@
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9" />
 
+            <!-- Avis -->
+            <LinearLayout
+                android:id="@+id/avis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:background="#E8DAF8"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/etoile" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/avis"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp"
+                    android:textColor="#1E1E1E" />
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9" />
+
             <!-- Item: FAQ -->
             <LinearLayout
                 android:id="@+id/btnFaq"

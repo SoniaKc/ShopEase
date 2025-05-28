@@ -30,6 +30,7 @@ public class ClientProfilAcceuil extends Activity {
         LinearLayout cartesBancaires = findViewById(R.id.cartesBancaires);
         LinearLayout historique = findViewById(R.id.history);
         LinearLayout params = findViewById(R.id.btnSettings);
+        LinearLayout avis = findViewById(R.id.avis);
         LinearLayout faq = findViewById(R.id.btnFaq);
         LinearLayout aPropos = findViewById(R.id.btnAbout);
         LinearLayout mentions = findViewById(R.id.btnLegal);
@@ -61,6 +62,12 @@ public class ClientProfilAcceuil extends Activity {
 
         params.setOnClickListener(v -> {
             Intent intent = new Intent(this, ClientParametres.class);
+            intent.putExtra("id", identifiant);
+            startActivity(intent);
+        });
+
+        avis.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ClientAvis.class);
             intent.putExtra("id", identifiant);
             startActivity(intent);
         });
