@@ -3,6 +3,7 @@ package com.example.projet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -115,7 +116,11 @@ public class ClientPanier extends Activity {
                         panierVide.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.VISIBLE);
 
-                        for (Panier item : response.body()) {
+                        List<Panier> panierList = response.body();
+                        final int totalItems = panierList.size();
+                        final int[] loadedCount = {0};  // compteur mutable
+
+                        for (Panier item : panierList) {
                             apiService.getProduit(item.login_boutique, item.nom_produit)
                                     .enqueue(new Callback<Produit>() {
                                         @Override
@@ -125,11 +130,17 @@ public class ClientPanier extends Activity {
                                                 PanierDisplayItem displayItem = new PanierDisplayItem(produit, item);
                                                 panierDisplayItems.add(displayItem);
                                                 adapter.notifyDataSetChanged();
-                                                updateTotal();
-                                                Toast.makeText(ClientPanier.this, "Good chargement produit", Toast.LENGTH_SHORT).show();
 
+                                                loadedCount[0]++;
+                                                Log.d("DEBUG", "Produit chargé : " + produit.nom + ", loadedCount = " + loadedCount[0]);
+
+                                                if (loadedCount[0] == totalItems) {
+                                                    Log.d("DEBUG", "Tous produits chargés, updateTotal appelé");
+                                                    updateTotal();
+                                                }
                                             }
                                         }
+
 
                                         @Override
                                         public void onFailure(Call<Produit> call, Throwable t) {
@@ -148,20 +159,26 @@ public class ClientPanier extends Activity {
         });
     }
 
+
     private void updateTotal() {
         total = 0;
         for (PanierDisplayItem item : panierDisplayItems) {
             try {
-                double prix = Double.parseDouble(item.getProduit().prix);
-                int qte = Integer.parseInt(item.getPanier().quantite);
-                total += prix * qte;
-            } catch (NumberFormatException ignored) {
+                int qte = Integer.parseInt(item.getPanier().quantite.trim());
+                String prixStr = item.getProduit().prix.replace(",", ".");
+                double prix = Double.parseDouble(prixStr.trim());
+                double sousTotal = prix * qte;
+                total += sousTotal;
+                Toast.makeText(ClientPanier.this, "ite " + total, Toast.LENGTH_SHORT).show();
+                Log.e("test","Produit: " + item.getProduit().nom + " Prix: " + prixStr + " Qté: " + qte + " Sous-total: " + sousTotal);
+            } catch (NumberFormatException e) {
+                System.err.println("Erreur conversion prix ou quantité pour " + item.getProduit().nom);
             }
         }
         totalPanier.setText("Valeur totale : " + total + " $");
-        Toast.makeText(ClientPanier.this, "total chargement panier", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(ClientPanier.this, "total chargement panier = " + total, Toast.LENGTH_SHORT).show();
     }
+
 
     private void onDeleteClicked(PanierDisplayItem item) {
         apiService.removeFromCart(item.getProduit().login_boutique, item.getProduit().nom, idClient)
