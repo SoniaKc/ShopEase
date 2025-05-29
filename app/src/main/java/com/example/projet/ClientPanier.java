@@ -42,7 +42,7 @@ public class ClientPanier extends Activity {
 
         recyclerView = findViewById(R.id.recyclerPanier); // Assure-toi que tu as ce RecyclerView dans ton XML
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PanierAdapter(panierDisplayItems, this::onDeleteClicked);
+        adapter = new PanierAdapter(panierDisplayItems, this::onDeleteClicked, this::onQuantityChanged);
         recyclerView.setAdapter(adapter);
 
         totalPanier = findViewById(R.id.totalPanier);
@@ -196,4 +196,35 @@ public class ClientPanier extends Activity {
                     }
                 });
     }
+
+    private void onQuantityChanged(PanierDisplayItem item, int newQuantity) {
+        Log.d("Panier", "Modifier quantité pour produit " + item.getProduit().nom + " : " + newQuantity);
+        item.getPanier().quantite = String.valueOf(newQuantity);
+        item.getPanier().idClient = idClient;
+        Log.d("Panier", "updateCartItemQuantity envoi: boutique=" + item.getPanier().login_boutique
+                + ", produit=" + item.getPanier().nom_produit
+                + ", client=" + item.getPanier().idClient
+                + ", quantite=" + item.getPanier().quantite);
+
+        apiService.updateCartItemQuantity(item.getPanier()).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("Panier", "Réponse update quantité code: " + response.code());
+                if (response.isSuccessful()) {
+                    adapter.notifyDataSetChanged();
+                    updateTotal();
+                } else {
+                    Log.e("Panier", "Erreur update quantité, body: " + response.errorBody());
+                    Toast.makeText(ClientPanier.this, "Erreur mise à jour quantité", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("Panier", "Erreur réseau update quantité", t);
+                Toast.makeText(ClientPanier.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

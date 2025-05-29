@@ -3,6 +3,7 @@ package com.example.projet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,12 +19,20 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
         void onDeleteClick(PanierDisplayItem item);
     }
 
+    public interface OnQuantityChangeListener {
+        void onQuantityChange(PanierDisplayItem item, int newQuantity);
+    }
+
     private List<PanierDisplayItem> items;
     private OnDeleteClickListener deleteClickListener;
+    private OnQuantityChangeListener quantityChangeListener;
 
-    public PanierAdapter(List<PanierDisplayItem> items, OnDeleteClickListener deleteClickListener) {
+    public PanierAdapter(List<PanierDisplayItem> items,
+                         OnDeleteClickListener deleteClickListener,
+                         OnQuantityChangeListener quantityChangeListener) {
         this.items = items;
         this.deleteClickListener = deleteClickListener;
+        this.quantityChangeListener = quantityChangeListener;
     }
 
     @NonNull
@@ -46,17 +55,39 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
         holder.quantite.setText("Quantité : " + panier.quantite);
 
         try {
-            double total = Double.parseDouble(produit.prix) * Integer.parseInt(panier.quantite);
+            String prixStr = produit.prix.replace(",", ".").trim();
+            double prix = Double.parseDouble(prixStr);
+
+            int quantiteInt = Integer.parseInt(panier.quantite.trim());
+
+            double total = prix * quantiteInt;
             holder.totalProduit.setText("Total : " + total + " $");
         } catch (NumberFormatException e) {
             holder.totalProduit.setText("Total : -");
         }
+
 
         holder.btnSupprimer.setOnClickListener(v -> {
             if (deleteClickListener != null) {
                 deleteClickListener.onDeleteClick(item);
             }
         });
+
+        holder.btnDecrease.setOnClickListener(v -> {
+            int currentQty = Integer.parseInt(item.getPanier().quantite);
+            if (currentQty > 1) {
+                int newQty = currentQty - 1;
+                quantityChangeListener.onQuantityChange(item, newQty);
+            }
+        });
+
+        holder.btnIncrease.setOnClickListener(v -> {
+            int currentQty = Integer.parseInt(item.getPanier().quantite);
+            int newQty = currentQty + 1;
+            quantityChangeListener.onQuantityChange(item, newQty);
+        });
+
+
     }
 
     @Override
@@ -67,6 +98,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nomProduit, description, prixUnitaire, quantite, totalProduit;
         ImageView btnSupprimer;
+        Button btnDecrease, btnIncrease;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +107,8 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
             prixUnitaire = itemView.findViewById(R.id.prixUnitaire);
             quantite = itemView.findViewById(R.id.quantiteProduit);
             totalProduit = itemView.findViewById(R.id.prixTotal);
+            btnDecrease = itemView.findViewById(R.id.btnDecrease);
+            btnIncrease =itemView.findViewById(R.id.btnIncrease);
             btnSupprimer = itemView.findViewById(R.id.deleteIcon);
         }
     }
