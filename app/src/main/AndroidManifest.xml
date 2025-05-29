@@ -87,7 +87,7 @@
         <activity android:name=".BoutiqueAjouterProduit"/>
         <activity android:name=".BoutiqueEditProduit" />
 
-        <activity android:name=".BoutiqueHistoriqueVentes"/>
+        <activity android: name=".BoutiqueHistoriqueVentes"/>
 
 
 
