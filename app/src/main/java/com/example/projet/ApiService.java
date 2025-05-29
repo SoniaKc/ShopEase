@@ -157,4 +157,31 @@ public interface ApiService {
             @Query("nom_produit") String nomProduit,
             @Query("idClient") String idClient
     );
+
+
+    // === PANIER ===
+    @POST("/api/panier/add")
+    Call<Void> addToCart(@Body Panier panier);
+
+
+    @GET("/api/panier/getQte")
+    Call<Integer> getCartItemQuantity(
+            @Query("login_boutique") String loginBoutique,
+            @Query("nom_produit") String nomProduit,
+            @Query("idClient") String idClient
+    );
+
+
+    @GET("/api/panier/getAll")
+    Call<List<Panier>> getFullCart(@Query("idClient") String idClient);
+
+    @DELETE("/api/panier/delete")
+    Call<Void> removeFromCart(
+            @Query("login_boutique") String loginBoutique,
+            @Query("nom_produit") String nomProduit,
+            @Query("idClient") String idClient
+    );
+
+    @PUT("/api/panier/update")
+    Call<Void> updateCartItemQuantity(@Body Panier panier);
 }

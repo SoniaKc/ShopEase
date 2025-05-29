@@ -2,7 +2,12 @@ package com.example.projet;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,29 +20,44 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ClientProfilInfos extends Activity {
+    private static final String PROFILE_IMAGE_KEY = "profile_image_";
     String identifiant;
     ApiService apiService;
     Client currentClient;
+    ImageView profilePhoto;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private SharedPreferences sharedPreferences;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_profil_infos);
 
+        sharedPreferences = getSharedPreferences("profile_prefs", MODE_PRIVATE);
         apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
 
-        // Initialisation des TextView
+        // Initialisation des vues
         TextView nom = findViewById(R.id.nom);
         TextView email = findViewById(R.id.email);
         TextView tel = findViewById(R.id.tel);
         TextView identifiantView = findViewById(R.id.identifiant);
         TextView mdp = findViewById(R.id.mdp);
+        profilePhoto = findViewById(R.id.photo);
+
+        // Charger la photo de profil si elle existe
+        loadProfileImage();
+
+        profilePhoto.setOnClickListener(v -> openImageChooser());
 
         // Appel API pour récupérer les données client
         apiService.getClient(identifiant).enqueue(new Callback<Client>() {
@@ -69,7 +89,6 @@ public class ClientProfilInfos extends Activity {
         ImageButton btnModifTel = findViewById(R.id.BtnModifTel);
         ImageButton btnModifId = findViewById(R.id.BtnModifId);
         ImageButton btnModifMdp = findViewById(R.id.BtnModifMdp);
-
         Button btnSupprimer = findViewById(R.id.btnSupprimer);
 
         btnModifNom.setOnClickListener(b -> modif("nom complet", (id, val) -> {
@@ -100,7 +119,6 @@ public class ClientProfilInfos extends Activity {
             return updateClient(currentClient);
         }));
 
-
         btnSupprimer.setOnClickListener(v -> {
             new AlertDialog.Builder(ClientProfilInfos.this)
                     .setTitle("Confirmation")
@@ -110,9 +128,79 @@ public class ClientProfilInfos extends Activity {
                     .show();
         });
 
-
         // Navigation
         setupNavigation();
+    }
+
+    private void openImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Sélectionnez une image"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri selectedImageUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                Bitmap resizedBitmap = resizeBitmap(bitmap, 800, 800);
+                profilePhoto.setImageBitmap(resizedBitmap);
+                saveProfileImage(resizedBitmap);
+                Toast.makeText(this, "Photo de profil mise à jour", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Erreur lors du chargement de l'image", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private Bitmap resizeBitmap(Bitmap bitmap, int maxWidth, int maxHeight) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+
+        float ratioBitmap = (float) width / (float) height;
+        float ratioMax = (float) maxWidth / (float) maxHeight;
+
+        int finalWidth = maxWidth;
+        int finalHeight = maxHeight;
+
+        if (ratioMax > ratioBitmap) {
+            finalWidth = (int) ((float) maxHeight * ratioBitmap);
+        } else {
+            finalHeight = (int) ((float) maxWidth / ratioBitmap);
+        }
+
+        return Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true);
+    }
+
+    private void saveProfileImage(Bitmap bitmap) {
+        try {
+            File file = new File(getFilesDir(), "profile_" + identifiant + ".png");
+            try (FileOutputStream out = new FileOutputStream(file)) {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(PROFILE_IMAGE_KEY + identifiant, file.getAbsolutePath());
+                editor.apply();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur lors de la sauvegarde", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void loadProfileImage() {
+        String imagePath = sharedPreferences.getString(PROFILE_IMAGE_KEY + identifiant, null);
+        if (imagePath != null) {
+            File imgFile = new File(imagePath);
+            if (imgFile.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                profilePhoto.setImageBitmap(bitmap);
+            }
+        }
     }
 
     private void setupNavigation() {
@@ -168,7 +256,7 @@ public class ClientProfilInfos extends Activity {
                 boolean success = fonction.appliquer(identifiant, nouvelleValeur);
                 if (success) {
                     Toast.makeText(this, param + " modifié avec succès", Toast.LENGTH_SHORT).show();
-                    recreate(); // Rafraîchir
+                    recreate();
                 } else {
                     Toast.makeText(this, "Échec de la modification", Toast.LENGTH_SHORT).show();
                 }
@@ -194,7 +282,7 @@ public class ClientProfilInfos extends Activity {
                 success[0] = false;
             }
         });
-        return true; // On suppose ici que l'appel passera, sinon, adapte avec une approche asynchrone plus robuste
+        return success[0];
     }
 
     private void deleteClient(String login) {
