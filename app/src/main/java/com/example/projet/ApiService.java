@@ -141,4 +141,28 @@ public interface ApiService {
     Call<Void> updateCommentaire(@Body Commentaire commentaire); // Mise à jour d'un commentaire
 
 
+    // === COMMENTAIRE ===
+    @POST("api/commentaire/add")
+    Call<Void> addCommentaire(@Body Commentaire commentaire);
+
+    @GET("api/commentaire/getByProduit")
+    Call<List<Commentaire>> getCommentairesByProduit(
+            @Query("login_boutique") String loginBoutique,
+            @Query("nom") String nom
+    );
+
+    @GET("api/commentaire/getByClient")
+    Call<List<Commentaire>> getCommentairesByClient(@Query("idClient") String idClient);
+
+    @DELETE("/api/commentaire/delete")
+    Call<Void> deleteCommentaire(
+            @Query("login_boutique") String loginBoutique,
+            @Query("nom") String nom,
+            @Query("idClient") String idClient
+    );
+
+    @PUT("/api/commentaire/update")
+    Call<Void> updateCommentaire(@Body Commentaire commentaire);
+
+
 }

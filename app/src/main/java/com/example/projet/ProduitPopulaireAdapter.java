@@ -14,13 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ViewHolder> {
+public class ProduitPopulaireAdapter extends RecyclerView.Adapter<ProduitPopulaireAdapter.ViewHolder> {
     private List<Produit> produits;
     private Context context;
+    private String identifiant;
 
-    public ProduitAdapter(Context context, List<Produit> produits) {
+    public ProduitPopulaireAdapter(Context context, List<Produit> produits, String identifiant) {
         this.context = context;
         this.produits = produits;
+        this.identifiant = identifiant;
     }
 
     @NonNull
@@ -33,19 +35,16 @@ public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Produit produit = produits.get(position);
-        holder.titre.setText(produit.nom);
-        holder.date.setText("Updated today"); // remplacer par produit.date si dispo
-        holder.image.setImageResource(R.drawable.img1);
+
+        // possibilité de charger une image avec Glide si URL)
+        holder.imageProduit.setImageResource(R.drawable.img1);
+        holder.titreProduit.setText(produit.nom);
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, BoutiqueEditProduit.class);
-            intent.putExtra("id", produit.login_boutique);
+            Intent intent = new Intent(context, ClientPageProduit.class);
+            intent.putExtra("id", identifiant);
+            intent.putExtra("login_boutique", produit.login_boutique);
             intent.putExtra("nomProduit", produit.nom);
-
-            //intent.putExtra("categorie", produit.categories);
-            //intent.putExtra("reduction", produit.reduction);
-            //intent.putExtra("prix", produit.prix);
-            //intent.putExtra("description", produit.description);
             context.startActivity(intent);
         });
     }
@@ -56,14 +55,13 @@ public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView image;
-        TextView titre, date;
+        ImageView imageProduit;
+        TextView titreProduit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.imageProduit);
-            titre = itemView.findViewById(R.id.titreProduit);
-            date = itemView.findViewById(R.id.dateMaj);
+            imageProduit = itemView.findViewById(R.id.imageProduit);
+            titreProduit = itemView.findViewById(R.id.titreProduit);
         }
     }
 }
