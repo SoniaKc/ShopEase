@@ -126,7 +126,7 @@ public interface ApiService {
     @GET("api/commentaire/getByProduit")
     Call<List<Commentaire>> getCommentairesByProduit(
             @Query("login_boutique") String loginBoutique,
-            @Query("nom") String nom
+            @Query("nom_produit") String nom
     );
 
     @GET("api/commentaire/getByClient")
@@ -135,7 +135,7 @@ public interface ApiService {
     @DELETE("/api/commentaire/delete")
     Call<Void> deleteCommentaire(
             @Query("login_boutique") String loginBoutique,
-            @Query("nom") String nom,
+            @Query("nom_produit") String nom,
             @Query("idClient") String idClient
     );
 
