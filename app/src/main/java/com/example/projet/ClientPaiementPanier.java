@@ -27,8 +27,9 @@ import java.util.List;
 
 public class ClientPaiementPanier extends Activity {
     private String identifiant;
+    double total;
     private String selectedCard;
-    private String selectedAddress = "Adresse 1 : 49 rue de l'Olivette, 34089 St Jacques, France";
+    private String selectedAddress;
 
 
 
@@ -39,21 +40,18 @@ public class ClientPaiementPanier extends Activity {
 
         // Initialisation des données
         identifiant = getIntent().getStringExtra("id");
+        total = getIntent().getDoubleExtra("total",0.0);
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-
-
-        selectedCard = "Carte 1 : " + getMaskedCardNumber("4111111111111111"); // Valeur par défaut
 
         // Initialisation des vues
         Button carte = findViewById(R.id.carte);
         Button adresse = findViewById(R.id.adresse);
         Button validerPayer = findViewById(R.id.validerPayer);
         EditText code = findViewById(R.id.code);
-        TextView TVcarte = findViewById(R.id.TVcarte);
-        TextView TVadresse = findViewById(R.id.TVadresse);
 
-        TVcarte.setText(selectedCard);
-        TVadresse.setText(selectedAddress);
+        loadDefaultCard();
+        loadDefaultAddress();
+
 
         // Gestion du clic sur "Choisir une autre carte"
         carte.setOnClickListener(b -> showCardSelectionDialog());
@@ -104,6 +102,45 @@ public class ClientPaiementPanier extends Activity {
         });
 
     }
+
+    private void loadDefaultCard() {
+        getCardsFromDatabase(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                List<String> cards = response.body();
+                if (cards != null && !cards.isEmpty()) {
+                    selectedCard = cards.get(0); // première carte
+                    TextView TVcarte = findViewById(R.id.TVcarte);
+                    TVcarte.setText(selectedCard);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Toast.makeText(ClientPaiementPanier.this, "Impossible de charger les cartes", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void loadDefaultAddress() {
+        getAddressesFromDatabase(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                List<String> adresses = response.body();
+                if (adresses != null && !adresses.isEmpty()) {
+                    selectedAddress = adresses.get(0); // première adresse
+                    TextView TVadresse = findViewById(R.id.TVadresse);
+                    TVadresse.setText(selectedAddress);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Toast.makeText(ClientPaiementPanier.this, "Impossible de charger les adresses", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     private void showCardSelectionDialog() {
         getCardsFromDatabase(new Callback<List<String>>() {

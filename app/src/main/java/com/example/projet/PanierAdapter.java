@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,7 +66,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nomProduit, description, prixUnitaire, quantite, totalProduit;
-        ImageButton btnSupprimer;
+        ImageView btnSupprimer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

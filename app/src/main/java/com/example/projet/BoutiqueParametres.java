@@ -155,6 +155,8 @@ public class BoutiqueParametres extends Activity {
                 View view = super.getView(position, convertView, parent);
                 CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
                 checkBox.setChecked(selectedItems.contains(allItems.get(position)));
+
+                // Ajout d'un écouteur direct sur la CheckBox
                 checkBox.setOnClickListener(v -> {
                     String item = allItems.get(position);
                     if (checkBox.isChecked()) {
@@ -163,6 +165,7 @@ public class BoutiqueParametres extends Activity {
                         selectedItems.remove(item);
                     }
                 });
+
                 return view;
             }
         };
@@ -170,7 +173,7 @@ public class BoutiqueParametres extends Activity {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
-            checkBox.toggle();
+            checkBox.toggle(); // Cela déclenchera le OnCheckedChangeListener
         });
 
         Button btnValider = popupView.findViewById(R.id.btnValider);
@@ -184,9 +187,11 @@ public class BoutiqueParametres extends Activity {
     }
 
     private void updateSelectionText() {
+        String prefix = "Notifs : ";
         if (selectedItems.isEmpty()) {
-            Notifs.setText("Notifs : Aucune sélection");
+            Notifs.setText(prefix + "Aucune sélection");
         } else {
+            // Affichage uniquement
             Notifs.setText("Notifs : " + TextUtils.join(", ", selectedItems));
         }
     }
@@ -195,6 +200,7 @@ public class BoutiqueParametres extends Activity {
         Parametre param = new Parametre();
         param.login = identifiant;
 
+        // Nettoyer les préfixes "Langue :" et "Cookies :" si présents
         String langueText = ((TextView) findViewById(R.id.rowLangue)).getText().toString();
         param.langue = langueText.replace("Langue :", "").trim();
 
@@ -210,7 +216,11 @@ public class BoutiqueParametres extends Activity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(BoutiqueParametres.this, response.isSuccessful() ? "Paramètres mis à jour" : "Paramètres non mis à jour", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful()) {
+                    Toast.makeText(BoutiqueParametres.this, "Paramètres mis à jour", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(BoutiqueParametres.this, "Paramètres non mis à jour", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -227,13 +237,17 @@ public class BoutiqueParametres extends Activity {
             public void onResponse(Call<Parametre> call, Response<Parametre> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Parametre param = response.body();
+                    Log.d("PARAMS_LOAD", "Loaded params: " + param.langue + " | " + param.cookies + " | " + param.notifications);
+
                     TextView langueView = findViewById(R.id.rowLangue);
                     TextView cookiesView = findViewById(R.id.rowCookies);
                     Notifs = findViewById(R.id.rowNotifications);
 
-                    langueView.setText("Langue : " + param.langue);
-                    cookiesView.setText("Cookies : " + param.cookies);
+                    // Ajout des préfixes seulement à l'affichage
+                    langueView.setText("Langue :" + param.langue);
+                    cookiesView.setText("Cookies :" + param.cookies);
 
+                    // Nettoyage des notifications avant traitement
                     String notifications = param.notifications;
                     if (notifications != null && notifications.startsWith("Notifs :")) {
                         notifications = notifications.replace("Notifs :", "").trim();

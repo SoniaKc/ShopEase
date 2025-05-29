@@ -1,9 +1,13 @@
 package com.example.projet;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,11 +28,16 @@ public class ClientPanier extends Activity {
     private ApiService apiService;
     private String idClient;
     private TextView totalPanier;
+    String identifiant;
+    double total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_panier);
+
+
+        identifiant = getIntent().getStringExtra("id");
 
         recyclerView = findViewById(R.id.recyclerPanier); // Assure-toi que tu as ce RecyclerView dans ton XML
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -42,6 +51,52 @@ public class ClientPanier extends Activity {
 
 
         loadPanier();
+
+        Button btnPayer = findViewById(R.id.btnPayer);
+        btnPayer.setOnClickListener(v -> {
+            if (total > 0.0){
+            Intent i = new Intent(this, ClientPaiementPanier.class);
+            i.putExtra("id", identifiant);
+            i.putExtra("total",total);
+            startActivity(i);
+            }
+            else {
+                Toast.makeText(ClientPanier.this, "Il n'y a rien dans le panier", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // TOP NAVIGATION BAR
+        ImageView navCart = findViewById(R.id.cartIcon);
+
+        navCart.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientPanier.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+
+        // BOTTOM NAVIGATION BAR
+        LinearLayout navHome = findViewById(R.id.navHome);
+        LinearLayout navFavorites = findViewById(R.id.navFavorites);
+        LinearLayout navProfile2 = findViewById(R.id.navProfile);
+
+        navHome.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientAccueil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navFavorites.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientFavoris.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navProfile2.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientProfilAcceuil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
     }
 
     private void loadPanier() {
@@ -71,6 +126,8 @@ public class ClientPanier extends Activity {
                                                 panierDisplayItems.add(displayItem);
                                                 adapter.notifyDataSetChanged();
                                                 updateTotal();
+                                                Toast.makeText(ClientPanier.this, "Good chargement produit", Toast.LENGTH_SHORT).show();
+
                                             }
                                         }
 
@@ -92,7 +149,7 @@ public class ClientPanier extends Activity {
     }
 
     private void updateTotal() {
-        double total = 0;
+        total = 0;
         for (PanierDisplayItem item : panierDisplayItems) {
             try {
                 double prix = Double.parseDouble(item.getProduit().prix);
@@ -102,6 +159,8 @@ public class ClientPanier extends Activity {
             }
         }
         totalPanier.setText("Valeur totale : " + total + " $");
+        Toast.makeText(ClientPanier.this, "total chargement panier", Toast.LENGTH_SHORT).show();
+
     }
 
     private void onDeleteClicked(PanierDisplayItem item) {

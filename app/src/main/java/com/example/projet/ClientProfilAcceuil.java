@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projet.bdd.ClientTable;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ClientProfilAcceuil extends Activity {
     String identifiant;
@@ -20,10 +25,26 @@ public class ClientProfilAcceuil extends Activity {
 
         identifiant = getIntent().getStringExtra("id");
 
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        apiService.getClient(identifiant).enqueue(new Callback<Client>() {
+            @Override
+            public void onResponse(Call<Client> call, Response<Client> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Client currentClient = response.body();
+                    TextView bienvenue = findViewById(R.id.bienvenue);
+                    bienvenue.setText("Bonjour, " + currentClient.prenom + " " + currentClient.nom+ " :)");
 
-        ClientTable client = ClientTable.getInstance();
-        TextView bienvenue = findViewById(R.id.bienvenue);
-        bienvenue.setText("Bonjour, " + client.getNom(identifiant)+ " :)");
+                } else {
+                    Toast.makeText(ClientProfilAcceuil.this, "Client introuvable.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Client> call, Throwable t) {
+                Toast.makeText(ClientProfilAcceuil.this, "Erreur serveur", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         LinearLayout informations = findViewById(R.id.infos);
         LinearLayout addresses = findViewById(R.id.addresses);
