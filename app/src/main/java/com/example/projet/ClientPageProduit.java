@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class ClientPageProduit extends Activity {
         identifiant = getIntent().getStringExtra("id");
         login_boutique = getIntent().getStringExtra("login_boutique");
         nomProduit = getIntent().getStringExtra("nomProduit");
+
         apiService = ApiClient.getClient().create(ApiService.class);
 
         TextView nom = findViewById(R.id.nomProduit);
@@ -69,28 +71,33 @@ public class ClientPageProduit extends Activity {
         });
 
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerCommentaires);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        List<Commentaire> commentaires = new ArrayList<>();
-        CommentaireAdapter adapter = new CommentaireAdapter(this, commentaires);
-        recyclerView.setAdapter(adapter);
-
-
-
-        apiService.getCommentairesByProduit(login_boutique,nomProduit).enqueue(new Callback<List<Commentaire>>() {
+        Call<List<Commentaire>> call = apiService.getCommentairesByProduit(login_boutique,nomProduit);
+        call.enqueue(new Callback<List<Commentaire>>() {
             @Override
             public void onResponse(Call<List<Commentaire>> call, Response<List<Commentaire>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    commentaires.clear();
-                    commentaires.addAll(response.body());
-                    adapter.notifyDataSetChanged();
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        List<Commentaire> commentaires = response.body();
+                        CommentaireAdapter adapter = new CommentaireAdapter(ClientPageProduit.this, commentaires);
+                        ListView listView = findViewById(R.id.listeCommentaires);
+                        listView.setAdapter(adapter);
+                    } else {
+                        Log.e("API_ERROR", "Réponse vide");
+                        Toast.makeText(ClientPageProduit.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Log.e("API_ERROR", "Code: " + response.code() + " - " + response.message());
+                    Toast.makeText(ClientPageProduit.this,
+                            "Erreur serveur: " + response.code(),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<List<Commentaire>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Erreur de chargement des commentaires", Toast.LENGTH_SHORT).show();
+                Log.e("API_FAILURE", "Erreur réseau", t);
+                Toast.makeText(ClientPageProduit.this,
+                        "Erreur réseau: " + t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
 

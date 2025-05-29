@@ -118,15 +118,10 @@
                 android:gravity="center"
                 android:layout_marginTop="20dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerCommentaires"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="24dp"
-                android:orientation="vertical"
-                android:overScrollMode="never"
-                android:scrollbars="none" />
+            <ListView
+                android:id="@+id/listeCommentaires"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </ScrollView>
