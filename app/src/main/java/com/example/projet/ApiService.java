@@ -2,6 +2,7 @@ package com.example.projet;
 
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -141,16 +142,14 @@ public interface ApiService {
     @PUT("/api/commentaire/update")
     Call<Void> updateCommentaire(@Body Commentaire commentaire);
 
+
     // === FAVORIS ===
-    // Ajouter un favori
     @POST("/api/favoris/add")
     Call<Void> addFavori(@Body Favoris favoris);
 
-    // Récupérer tous les favoris d'un client
     @GET("/api/favoris/getAll")
     Call<List<Favoris>> getAllFavoris(@Query("idClient") String idClient);
 
-    // Supprimer un favori (avec loginBoutique, nomProduit et idClient)
     @DELETE("/api/favoris/delete")
     Call<Void> deleteFavori(
             @Query("login_boutique") String loginBoutique,
@@ -165,12 +164,12 @@ public interface ApiService {
 
 
     @GET("/api/panier/getQte")
+    // /!\ Call<String> probablement !!!
     Call<Integer> getCartItemQuantity(
             @Query("login_boutique") String loginBoutique,
             @Query("nom_produit") String nomProduit,
             @Query("idClient") String idClient
     );
-
 
     @GET("/api/panier/getAll")
     Call<List<Panier>> getFullCart(@Query("idClient") String idClient);
@@ -184,4 +183,30 @@ public interface ApiService {
 
     @PUT("/api/panier/update")
     Call<Void> updateCartItemQuantity(@Body Panier panier);
+
+
+    // === VENTES ===
+    @POST("/api/vente/add")
+    Call<Void> addVente(@Body LigneVente vente);
+
+
+    @GET("/api/vente/getByIdTransaction")
+    Call<List<Vente>> getByIdTransaction(@Query("idTransaction") String idTransaction);
+
+    @GET("/api/vente/getByClient")
+    Call<Map<String, List<LigneVente>>> getByClient(@Query("idClient") String idClient);
+
+    @GET("/api/vente/getByBoutique")
+    Call<Map<String, List<LigneVente>>> getByBoutique(@Query("login_boutique") String loginBoutique);
+
+    @DELETE("/api/vente/deleteByIdTransaction")
+    Call<Void> deleteByIdTransaction(@Query("idTransaction") String idTransaction);
+
+    @PUT("/api/vente/updateStatut")
+    Call<Void> updateStatut(
+            @Query("idTransaction") String idTransaction,
+            @Query("statut") String statut
+    );
+
+
 }

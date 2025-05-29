@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,9 +81,23 @@ public class ClientPageProduit extends Activity {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         List<Commentaire> commentaires = response.body();
-                        CommentaireAdapter adapter = new CommentaireAdapter(ClientPageProduit.this, commentaires);
-                        ListView listView = findViewById(R.id.listeCommentaires);
-                        listView.setAdapter(adapter);
+                        LinearLayout container = findViewById(R.id.commentairesContainer);
+                        container.removeAllViews();
+
+                        LayoutInflater inflater = LayoutInflater.from(ClientPageProduit.this);
+                        for (Commentaire commentaire : commentaires) {
+                            View view = inflater.inflate(R.layout.item_commentaire_page_produit, container, false);
+
+                            TextView nomClient = view.findViewById(R.id.nomClient);
+                            RatingBar noteProduit = view.findViewById(R.id.noteProduit);
+                            TextView texteCommentaire = view.findViewById(R.id.texteCommentaire);
+
+                            nomClient.setText(commentaire.idClient);
+                            noteProduit.setRating(Float.parseFloat(commentaire.note));
+                            texteCommentaire.setText(commentaire.commentaire);
+
+                            container.addView(view);
+                        }
                     } else {
                         Log.e("API_ERROR", "Réponse vide");
                         Toast.makeText(ClientPageProduit.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
@@ -99,6 +116,86 @@ public class ClientPageProduit extends Activity {
                         "Erreur réseau: " + t.getMessage(),
                         Toast.LENGTH_LONG).show();
             }
+        });
+
+
+        Button ajouterFavoris = findViewById(R.id.btn_favoris);
+        ajouterFavoris.setOnClickListener(v -> {
+            Favoris favoris = new Favoris();
+
+            favoris.idClient = identifiant;
+            favoris.login_boutique = login_boutique;
+            favoris.nom_produit = nomProduit;
+
+            Call<Void> callAllFavoris = apiService.addFavori(favoris);
+            callAllFavoris.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(ClientPageProduit.this, "Ajouté aux favoris: ", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.e("API_ERROR", "Code: " + response.code() + " - " + response.message());
+                        Toast.makeText(ClientPageProduit.this,
+                                "Erreur serveur: " + response.code(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.e("API_FAILURE", "Erreur réseau", t);
+                    Toast.makeText(ClientPageProduit.this,
+                            "Erreur réseau: " + t.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+        });
+
+
+        Button ajouterPanier = findViewById(R.id.btn_panier);
+        ajouterPanier.setOnClickListener(v -> {
+            String quantite = (String) ((TextView)findViewById(R.id.tv_quantite)).getText();
+
+            Panier panier = new Panier();
+
+            panier.idClient = identifiant;
+            panier.login_boutique = login_boutique;
+            panier.nom_produit = nomProduit;
+            panier.quantite = quantite;
+
+            Call<Void> callAddPanier = apiService.addToCart(panier);
+            callAddPanier.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(ClientPageProduit.this, "Ajouté au panier: ", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.e("API_ERROR", "Code: " + response.code() + " - " + response.message());
+                        Toast.makeText(ClientPageProduit.this,
+                                "Erreur serveur: " + response.code(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.e("API_FAILURE", "Erreur réseau", t);
+                    Toast.makeText(ClientPageProduit.this,
+                            "Erreur réseau: " + t.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+        });
+
+
+        Button plusQte = findViewById(R.id.btn_plus);
+        plusQte.setOnClickListener(v -> {
+            int quantite = Integer.parseInt((String) ((TextView)findViewById(R.id.tv_quantite)).getText());
+            ((TextView) findViewById(R.id.tv_quantite)).setText(String.valueOf(quantite+1));
+        });
+
+        Button moinsQte = findViewById(R.id.btn_moins);
+        moinsQte.setOnClickListener(v -> {
+            int quantite = Integer.parseInt((String) ((TextView)findViewById(R.id.tv_quantite)).getText());
+            ((TextView) findViewById(R.id.tv_quantite)).setText(String.valueOf(quantite-1));
         });
 
 

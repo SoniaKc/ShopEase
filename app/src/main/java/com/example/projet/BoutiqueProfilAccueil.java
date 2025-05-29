@@ -18,9 +18,8 @@ public class BoutiqueProfilAccueil extends Activity {
 
         identifiant = getIntent().getStringExtra("id");
 
-        BoutiqueTable shop = BoutiqueTable.getInstance();
         TextView titre = findViewById(R.id.titre);
-        titre.setText(shop.getNom(identifiant));
+        titre.setText(identifiant);
 
         LinearLayout informations = findViewById(R.id.infos);
         LinearLayout mesProduits = findViewById(R.id.btnMyProducts);
