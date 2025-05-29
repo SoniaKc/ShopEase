@@ -5,15 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.projet.bdd.DBHelper;
 
 public class MainActivity extends Activity {
-    Button btnInscClient;
-    Button btnInscBoutique;
-    Button btnConnexionClient;
-    Button btnConnexionBoutique;
+    TextView btnInscClient;
+    TextView btnInscBoutique;
+    TextView btnConnexionClient;
+    TextView btnConnexionBoutique;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

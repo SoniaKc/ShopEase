@@ -4,12 +4,14 @@
 
     <string name="accueil">Accueil</string>
     <string name="favoris">Favoris</string>
+    <string name="ventes">Ventes</string>
     <string name="compte">Compte</string>
     <string name="consultesRecemment">Consultés récemment</string>
     <string name="clientsAdorent">Nos clients les adorent</string>
     <string name="rechercher">Rechercher...</string>
     <string name="aProposTitre">À propos</string>
     <string name="connexion">Connexion</string>
+    <string name="avis">Avis</string>
 
     <string name="connexionEntrezID">Entrez votre identifiant</string>
     <string name="mdp">Mot de passe :</string>
@@ -23,10 +25,10 @@
     <string name="identifiant">Identifiant :</string>
     <string name="entrezIndentifiant">Entrez votre identifiant</string>
     <string name="nomBoutique">Nom de la Boutique :</string>
-    <string name="nomCommercial">Nom commercial</string>
-    <string name="numSiret">Numéro de Siret :</string>
+    <string name="nomCommercial">Nom commercial de la Boutique</string>
+    <string name="numSiret">Numéro de Siret</string>
     <string name="exempleNumSiret">123 456 789 00012</string>
-    <string name="formeJur">Forme juridique :</string>
+    <string name="formeJur">Forme juridique</string>
     <string name="SARL">SAS, SARL, etc</string>
     <string name="sInscrire">S\’inscrire</string>
 
@@ -75,6 +77,7 @@
     <string name="iban">IBAN : **********</string>
     <string name="modifIban">Modifier IBAN</string>
     <string name="supprBoutique">Supprimer la boutique</string>
+    <string name="modifPhoto">Modifier Photo</string>
 
 
 
@@ -177,7 +180,7 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
     <string name="validerAjoutProduit">✔ Valider les modifications de ce produit</string>
     <string name="AnnulerAjoutProduit">🗑 Supprimer ce produit</string>
     <string name="bienvenue">Bonjour, NOM Prénom :)</string>
-
+    
     <string name="payment_methods_title">Moyens de Paiement</string>
     <string name="add_address_button">+ Ajouter une adresse</string>
 
@@ -258,4 +261,7 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
     <string name="home">Accueil</string>
     <string name="favorites">Favoris</string>
     <string name="account">Compte</string>
+
+
+    <string name="commentairesClient">Commentaires Clients</string>
 </resources>

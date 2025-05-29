@@ -28,6 +28,7 @@
         android:id="@+id/titre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000000"
         android:text="@string/payment_methods_title"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -45,144 +46,33 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintTop_toBottomOf="@id/titre"
-        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintBottom_toTopOf="@+id/add_card_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
+            android:id="@+id/cards_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Carte 1 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/colorcartes2"
-                android:padding="16dp"
-                android:layout_marginBottom="8dp"
-                android:elevation="2dp">
+            <!-- Les cartes seront ajoutées dynamiquement ici -->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_1"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_1_number"
-                    android:layout_marginTop="4dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_1_holder"
-                    android:layout_marginTop="4dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_1_expiry"
-                    android:layout_marginTop="4dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
-
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/edit_button"
-                        android:backgroundTint="@android:color/transparent"
-                        android:textColor="@color/purple_500"/>
-
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/delete_button"
-                        android:backgroundTint="@android:color/transparent"
-                        android:textColor="#B00020"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Carte 2 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/colorcartes2"
-                android:padding="16dp"
-                android:layout_marginBottom="8dp"
-                android:elevation="2dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_2"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_2_number"
-                    android:layout_marginTop="4dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_2_holder"
-                    android:layout_marginTop="4dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/card_2_expiry"
-                    android:layout_marginTop="4dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
-
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/edit_button"
-                        android:backgroundTint="@android:color/transparent"
-                        android:textColor="@color/purple_500"/>
-
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/delete_button"
-                        android:backgroundTint="@android:color/transparent"
-                        android:textColor="#B00020"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Bouton Ajouter une carte -->
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_card_button"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/purple_500"
-                android:textColor="#FFFFFF"/>
         </LinearLayout>
     </ScrollView>
+
+    <!-- Bouton Ajouter une carte -->
+    <Button
+        android:id="@+id/add_card_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_card_button"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/include"/>
 
     <include
         android:id="@+id/include"

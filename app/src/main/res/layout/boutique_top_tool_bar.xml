@@ -23,7 +23,7 @@
         android:id="@+id/profilePhoto"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/picture_client"
+        android:src="@drawable/picture_boutique"
         android:layout_alignParentEnd="true"
         android:scaleType="centerCrop"
         android:background="@drawable/circle_background" />

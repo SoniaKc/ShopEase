@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import com.example.projet.bdd.ClientTable;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ClientInscription extends Activity {
     private EditText identifiant, mot_de_passe, nom, prenom, email, date_naissance;
     private Button btn_inscription;
@@ -19,9 +23,7 @@ public class ClientInscription extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_inscription);
 
-        ClientTable clientTable = ClientTable.getInstance();
-
-        identifiant = findViewById(R.id.identifiant);
+        identifiant = findViewById(R.id.inputID);
         mot_de_passe = findViewById(R.id.mot_de_passe);
         nom = findViewById(R.id.nom);
         prenom = findViewById(R.id.prenom);
@@ -43,12 +45,9 @@ public class ClientInscription extends Activity {
                 identifiant.setError("Le login doit commencer par une lettre et être ≤ 10 caractères");
                 temp = false;
             }
-            if (clientTable.getUserClientLogin(Stridentifiant)) {
-                identifiant.setError("identifiant déjà pris");
-                temp = false;
-            }
-            if (Strmot_de_passe.length() != 6) {
-                mot_de_passe.setError("Le mot de passe doit contenir exactement 6 caractères");
+
+            if (Strmot_de_passe.length() < 6) {
+                mot_de_passe.setError("Le mot de passe doit contenir au moins 6 caractères");
                 temp = false;
             }
             if (!Strnom.matches("^[A-Za-zÀ-ÖØ-öø-ÿ -]+$")) {
@@ -66,15 +65,60 @@ public class ClientInscription extends Activity {
             }
 
             if (temp) {
-                boolean inserted = clientTable.insertUser(Stridentifiant, Strmot_de_passe, Strnom, Strprenom, Strdate_naissance, Stremail);
-                if (inserted) {
-                    Toast.makeText(this, "Paramètres initilisés !", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(ClientInscription.this, Connexion.class);
-                    i.putExtra("type", "client");
-                    startActivity(i);
-                } else {
-                    Toast.makeText(this, "Erreur lors de l'inscription.", Toast.LENGTH_SHORT).show();
-                }
+                Client newClient = new Client();
+                newClient.login = Stridentifiant;
+                newClient.password = Strmot_de_passe;
+                newClient.nom = Strnom;
+                newClient.prenom = Strprenom;
+                newClient.email = Stremail;
+                newClient.date_naissance = Strdate_naissance;
+                newClient.telephone = ""; // facultatif
+
+                Parametre params = new Parametre();
+                params.login=Stridentifiant;
+                params.langue = "Français";
+                params.notifications="push, email";
+                params.cookies = "Accepter";
+                params.type = "client";
+
+
+                ApiService apiService = ApiClient.getClient().create(ApiService.class);
+                Call<Void> call2 = apiService.addParametre(params);
+                call2.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call2, Response<Void> response2) {
+                        if (response2.isSuccessful()) {
+                            Toast.makeText(ClientInscription.this, "paramètres initialisés !", Toast.LENGTH_SHORT).show();
+                            Call<Void> call = apiService.addClient(newClient);
+
+                            call.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    if (response.isSuccessful()) {
+                                        Toast.makeText(ClientInscription.this, "Inscription réussie !", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(ClientInscription.this, Connexion.class);
+                                        i.putExtra("type", "client");
+                                        startActivity(i);
+                                    } else {
+                                        Toast.makeText(ClientInscription.this, "Erreur: identifiant peut-être déjà utilisé", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    Toast.makeText(ClientInscription.this, "Échec de la connexion au serveur", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        } else {
+                            Toast.makeText(ClientInscription.this, "Erreur : paramètrenon initialisés veuillez réitérer votre inscription", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(ClientInscription.this, "Erreur de connexion au serveur", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
         });

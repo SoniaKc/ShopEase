@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -22,29 +26,71 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Connexion" />
+
+
+
+
+
+
         <activity
             android:name=".ClientInscription"
             android:exported="false">
         </activity>
+
+        <activity android:name=".ClientAccueil" />
+        <activity android:name=".ClientProfilAcceuil" />
+        <activity android:name=".ClientPageProduit" />
+
+        <activity android:name=".ClientFaq" />
+
+        <activity android:name=".ClientParametres" />
+        <activity android:name=".ClientApropos" />
+        <activity android:name=".ClientMentionsLegales" />
+        <activity android:name=".ClientAvis" />
+
+        <activity android:name=".ClientPanier" />
+        <activity android:name=".ClientFavoris" />
+        <activity android:name=".ClientProfilInfos" />
+        <activity android:name=".ClientHistoriqueAchats" />
+
+        <activity android:name=".ClientCB" />
+        <activity android:name=".ClientEditPayement" />
+        <activity android:name=".ClientAddPayment" />
+
+        <activity android:name=".ClientAdresse" />
+        <activity android:name=".ClientEditAdresse" />
+        <activity android:name=".ClientAddAdresse" />
+
+        <activity android:name=".ClientPaiementPanier" />
+        <activity android:name=".ClientPaiementValidation" />
+
+
+
+
 
         <activity
             android:name=".BoutiqueInscription"
             android:exported="false">
         </activity>
 
-        <activity android:name=".Connexion" />
-
-        <activity android:name=".ClientFaq" />
         <activity android:name=".BoutiqueFaq" />
 
-        <activity android:name=".ClientAccueil" />
 
         <activity android:name=".BoutiqueProfilInfos" />
         <activity android:name=".BoutiqueProfilAccueil" />
+        <activity android:name=".BoutiqueApropos" />
+        <activity android:name=".BoutiqueMentionsLegales"/>
+        <activity android:name=".BoutiqueParametres"/>
 
-        <activity android:name=".ClientParametres" />
-        <activity android:name=".ClientApropos" />
-        <activity android:name=".ClientMentionsLegales" />
+        <activity android:name=".BoutiqueMesProduits" />
+        <activity android:name=".BoutiqueAjouterProduit"/>
+        <activity android:name=".BoutiqueEditProduit" />
+
+        <activity android:name=".BoutiqueHistoriqueVentes"/>
+
+
+
 
 
 
