@@ -116,29 +116,45 @@ public interface ApiService {
     @GET("api/produit/getAll")
     Call<List<Produit>> getAllProduits(@Query("login_boutique") String loginBoutique);
 
-    @POST("/api/commentaire/add")
-    Call<Void> addCommentaire(@Body Commentaire commentaire); // Ajout d'un commentaire
 
-    @GET("/api/commentaire/getByProduit")
+
+    // === COMMENTAIRE ===
+    @POST("api/commentaire/add")
+    Call<Void> addCommentaire(@Body Commentaire commentaire);
+
+    @GET("api/commentaire/getByProduit")
     Call<List<Commentaire>> getCommentairesByProduit(
             @Query("login_boutique") String loginBoutique,
-            @Query("nom_produit") String nomProduit
-    ); // Récupération des commentaires d'un produit
+            @Query("nom") String nom
+    );
 
-    @GET("/api/commentaire/getByClient")
-    Call<List<Commentaire>> getCommentairesByClient(
-            @Query("idClient") String idClient
-    ); // Récupération des commentaires d'un client
+    @GET("api/commentaire/getByClient")
+    Call<List<Commentaire>> getCommentairesByClient(@Query("idClient") String idClient);
 
     @DELETE("/api/commentaire/delete")
     Call<Void> deleteCommentaire(
             @Query("login_boutique") String loginBoutique,
-            @Query("nom_produit") String nomProduit,
+            @Query("nom") String nom,
             @Query("idClient") String idClient
-    ); // Suppression d'un commentaire
+    );
 
     @PUT("/api/commentaire/update")
-    Call<Void> updateCommentaire(@Body Commentaire commentaire); // Mise à jour d'un commentaire
+    Call<Void> updateCommentaire(@Body Commentaire commentaire);
 
+    // === FAVORIS ===
+    // Ajouter un favori
+    @POST("/api/favoris/add")
+    Call<Void> addFavori(@Body Favoris favoris);
 
+    // Récupérer tous les favoris d'un client
+    @GET("/api/favoris/getAll")
+    Call<List<Favoris>> getAllFavoris(@Query("idClient") String idClient);
+
+    // Supprimer un favori (avec loginBoutique, nomProduit et idClient)
+    @DELETE("/api/favoris/delete")
+    Call<Void> deleteFavori(
+            @Query("login_boutique") String loginBoutique,
+            @Query("nom_produit") String nomProduit,
+            @Query("idClient") String idClient
+    );
 }

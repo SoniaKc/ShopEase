@@ -24,7 +24,7 @@ public class BoutiqueMesProduits extends Activity {
     private ProduitAdapter adapter;
     private List<Produit> produitList = new ArrayList<>();
     private ApiService apiService;
-    private String loginBoutique; // récupéré via Intent ou SharedPreferences
+    private String loginBoutique;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
