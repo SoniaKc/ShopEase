@@ -42,14 +42,10 @@ public class CommandeEntiereAdapter extends RecyclerView.Adapter<CommandeEntiere
             Gson gson = new Gson();
             String jsonCommande = gson.toJson(commande);
 
-            Intent intent = new Intent(context, ClientHistoriqueAchats.class);
+            Intent intent = new Intent(context, ClientCommandeDetail.class);
             intent.putExtra("commandeEntiereJson", jsonCommande);
             context.startActivity(intent);
 
-            /* Dans l'activité target
-            String jsonCommande = getIntent().getStringExtra("commandeEntiereJson");
-            CommandeEntiere commande = gson.fromJson(jsonCommande, CommandeEntiere.class);
-            */
         });
 
         // Image à gauche → celle du premier produit (si tu veux en charger une)

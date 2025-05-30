@@ -283,7 +283,7 @@ public class ClientProfilInfos extends Activity {
                 success[0] = false;
             }
         });
-        return success[0];
+        return true;
     }
 
     private void deleteClient(String login) {

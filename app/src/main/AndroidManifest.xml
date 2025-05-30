@@ -72,6 +72,9 @@
         <activity android:name=".ClientPaiementPanier" />
         <activity android:name=".ClientPaiementValidation" />
 
+        <activity android:name=".ClientCommandeDetail" />
+        <activity android:name=".ClientLaisserAvis" />
+
 
 
 

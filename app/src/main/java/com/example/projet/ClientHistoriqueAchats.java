@@ -97,6 +97,7 @@ public class ClientHistoriqueAchats extends Activity {
                         CommandeEntiere commande = new CommandeEntiere();
                         commande.idTransaction = entry.getKey();
                         commande.login_boutique = new ArrayList<>();
+                        commande.idClient = identifiant;
                         commande.nom_produit = new ArrayList<>();
                         commande.quantite = new ArrayList<>();
 
