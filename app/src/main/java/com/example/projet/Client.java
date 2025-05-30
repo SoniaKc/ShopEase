@@ -8,4 +8,5 @@ public class Client {
     public String email;
     public String date_naissance;
     public String telephone;
+    public String image;
 }

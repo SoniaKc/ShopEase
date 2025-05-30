@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -96,28 +99,33 @@ public class ClientProfilInfos extends Activity {
 
         btnModifNom.setOnClickListener(b -> modif("nom", (id, val) -> {
             currentClient.nom = val;
-            return updateClient(currentClient);
+            updateClient(currentClient, () -> recreate());
+            return true;
         }));
 
         btnModifPrenom.setOnClickListener(b -> modif("prenom", (id, val) -> {
             currentClient.prenom = val;
-            return updateClient(currentClient);
+            updateClient(currentClient, () -> recreate());
+            return true;
         }));
 
         btnModifEmail.setOnClickListener(b -> modif("email", (id, val) -> {
             currentClient.email = val;
-            return updateClient(currentClient);
+            updateClient(currentClient, () -> recreate());
+            return true;
         }));
 
         btnModifTel.setOnClickListener(b -> modif("téléphone", (id, val) -> {
             currentClient.telephone = val;
-            return updateClient(currentClient);
+            updateClient(currentClient, () -> recreate());
+            return true;
         }));
 
 
         btnModifMdp.setOnClickListener(b -> modif("mot de passe", (id, val) -> {
             currentClient.password = val;
-            return updateClient(currentClient);
+            updateClient(currentClient, () -> recreate());
+            return true;
         }));
 
         btnSupprimer.setOnClickListener(v -> {
@@ -144,19 +152,36 @@ public class ClientProfilInfos extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
             Uri selectedImageUri = data.getData();
+            if (selectedImageUri == null) {
+                Toast.makeText(this, "Erreur: URI d'image invalide", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                 Bitmap resizedBitmap = resizeBitmap(bitmap, 800, 800);
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
+                byte[] imageBytes = byteArrayOutputStream.toByteArray();
+
+                Log.e("IMAGE", imageBytes.toString());
+
+                currentClient.image = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+
                 profilePhoto.setImageBitmap(resizedBitmap);
                 saveProfileImage(resizedBitmap);
-                Toast.makeText(this, "Photo de profil mise à jour", Toast.LENGTH_SHORT).show();
+
+                updateClient(currentClient, null);
+
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(this, "Erreur lors du chargement de l'image", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Erreur: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
     private Bitmap resizeBitmap(Bitmap bitmap, int maxWidth, int maxHeight) {
@@ -182,7 +207,7 @@ public class ClientProfilInfos extends Activity {
         try {
             File file = new File(getFilesDir(), "profile_" + identifiant + ".png");
             try (FileOutputStream out = new FileOutputStream(file)) {
-                bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 70, out);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(PROFILE_IMAGE_KEY + identifiant, file.getAbsolutePath());
                 editor.apply();
@@ -270,20 +295,23 @@ public class ClientProfilInfos extends Activity {
         builder.create().show();
     }
 
-    private boolean updateClient(Client client) {
-        final boolean[] success = {false};
+    private void updateClient(Client client, Runnable onSuccess) {
         apiService.updateClient(client).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                success[0] = response.isSuccessful();
+                if (response.isSuccessful()) {
+                    Toast.makeText(ClientProfilInfos.this, "Modification réussie", Toast.LENGTH_SHORT).show();
+                    if (onSuccess != null) onSuccess.run();
+                } else {
+                    Toast.makeText(ClientProfilInfos.this, "Échec de la modification", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                success[0] = false;
+                Toast.makeText(ClientProfilInfos.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        return true;
     }
 
     private void deleteClient(String login) {

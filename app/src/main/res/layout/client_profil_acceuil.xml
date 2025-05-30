@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,13 +23,12 @@
 
     <!-- Image profil -->
     <ImageView
-        android:id="@+id/profilePhoto"
+        android:id="@+id/mainProfilePhoto"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/picture_client"
+        android:src="@drawable/account"
         android:layout_alignParentEnd="true"
         android:gravity="center"
-        android:background="@drawable/circle_background"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +43,7 @@
         android:textSize="20sp"
         android:textColor="#1E1E1E"
         android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toBottomOf="@id/profilePhoto"
+        app:layout_constraintTop_toBottomOf="@id/mainProfilePhoto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"

@@ -2,14 +2,16 @@ package com.example.projet;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Base64;
 
-import com.example.projet.bdd.ClientTable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,8 +34,18 @@ public class ClientProfilAcceuil extends Activity {
             public void onResponse(Call<Client> call, Response<Client> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Client currentClient = response.body();
+
                     TextView bienvenue = findViewById(R.id.bienvenue);
+                    ImageView photoProfil = findViewById(R.id.profilePhoto);
+                    ImageView maintPhotoProfil = findViewById(R.id.mainProfilePhoto);
+
                     bienvenue.setText("Bonjour, " + currentClient.prenom + " " + currentClient.nom+ " :)");
+                    if (currentClient.image != null) {
+                        byte[] decodedBytes = Base64.decode(currentClient.image, Base64.DEFAULT);
+                        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                        photoProfil.setImageBitmap(decodedBitmap);
+                        maintPhotoProfil.setImageBitmap(decodedBitmap);
+                    }
 
                 } else {
                     Toast.makeText(ClientProfilAcceuil.this, "Client introuvable.", Toast.LENGTH_SHORT).show();
