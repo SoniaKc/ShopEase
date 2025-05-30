@@ -122,6 +122,19 @@
     <string name="choisirAutreAdresse">Choisir une autre adresse</string>
     <string name="promoCode">Code :</string>
 
+
+    <!-- Adresse et Cartes -->
+    <string name="AjoutPaiement"> Ajouter une carte</string>
+    <string name="AjoutAdresse"> Ajouter une adresse</string>
+
+    <string name="nomCarte">Nom de la carte</string>
+    <string name="nomCarteEx">Ex: Ma Carte Bancaire</string>
+    <string name="numCarteEx">1234 5678 9012 3456</string>
+    <string name="titulaireCarteEx">Ex: Jean DUPONT</string>
+    <string name="DateExpiration">Date d\'expiration</string>
+    <string name="cvcEx">123</string>
+
+
     <!-- Produit -->
     <string name="AJouterFavoris">Ajouter aux favoris</string>
     <string name="AJouterPanier">Ajouter au Panier</string>
@@ -296,8 +309,7 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
     <string name="AnnulerAjoutProduit">🗑 Supprimer ce produit</string>
     <string name="bienvenue">Bonjour, NOM Prénom :)</string>
     
-    <string name="payment_methods_title">Moyens de Paiement</string>
-    <string name="add_address_button">+ Ajouter une adresse</string>
+
 
     <!-- Adresses -->
     <string name="address_1">Adresse 1</string>
