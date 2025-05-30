@@ -78,6 +78,33 @@
                 android:orientation="vertical"
                 android:layout_marginTop="16dp">
 
+                <!-- Identifiant -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/alterne2"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/id"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/username_label"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id = "@+id/BtnModifId"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/modifId"
+                        android:padding="2dp" />
+                </LinearLayout>
+
                 <!-- Nom boutique -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -93,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:text="@string/fleurCie"
+                        android:text="@string/nomBoutique"
                         android:textSize="16sp" />
 
                     <ImageButton
@@ -121,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:text="@string/mailBoutique"
+                        android:text="@string/email_label"
                         android:textSize="16sp" />
 
                     <ImageButton
@@ -149,7 +176,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:text="@string/telBoutique"
+                        android:text="@string/phone_label"
                         android:textSize="16sp" />
 
                     <ImageButton
@@ -162,41 +189,13 @@
                         android:padding="2dp" />
                 </LinearLayout>
 
-                <!-- Identifiant -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="@color/alterne2"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:id="@+id/id"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:text="@string/idBoutique"
-                        android:textSize="16sp" />
-
-                    <ImageButton
-                        android:id = "@+id/BtnModifId"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_edit"
-                        android:contentDescription="@string/modifId"
-                        android:padding="2dp" />
-                </LinearLayout>
-
                 <!-- Mot de Passe -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:background="@color/alterne1"
+                    android:background="@color/alterne2"
                     android:padding="12dp">
 
                     <TextView
@@ -240,7 +239,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:text="@string/formeJurBoutique"
+                        android:text="@string/formeJu_label"
                         android:textSize="16sp" />
 
                     <ImageButton
@@ -268,7 +267,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:text="@string/numSiretBoutique"
+                        android:text="@string/siret_label"
                         android:textSize="16sp" />
 
                     <ImageButton
@@ -296,7 +295,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:text="@string/siegeSocialBoutique"
+                        android:text="@string/siegeSociel_label"
                         android:textSize="16sp" />
 
                     <ImageButton
@@ -324,7 +323,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:text="@string/paysBoutique"
+                        android:text="@string/PaysEnre_label"
                         android:textSize="16sp" />
 
                     <ImageButton

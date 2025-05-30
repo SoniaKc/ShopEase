@@ -59,7 +59,7 @@ public class ClientFavoris extends Activity {
         apiService.getAllFavoris(identifiant).enqueue(new Callback<List<Favoris>>() {
             @Override
             public void onResponse(Call<List<Favoris>> call, Response<List<Favoris>> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful()) {
                     favorisList.clear();
                     favorisList.addAll(response.body());
                     adapter.notifyDataSetChanged();
@@ -76,7 +76,7 @@ public class ClientFavoris extends Activity {
     }
 
     private void deleteFavori(Favoris favori) {
-        apiService.deleteFavori(favori.idClient, favori.login_boutique, favori.nom_produit).enqueue(new Callback<Void>() {
+        apiService.deleteFavori(favori.login_boutique, favori.nom_produit, favori.idClient).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 favorisList.remove(favori);

@@ -22,14 +22,12 @@
             android:id="@+id/nomProduit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NomProduit"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/prixProduit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="100$"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <ImageView

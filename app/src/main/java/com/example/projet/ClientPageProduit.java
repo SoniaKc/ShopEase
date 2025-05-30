@@ -127,8 +127,8 @@ public class ClientPageProduit extends Activity {
             favoris.login_boutique = login_boutique;
             favoris.nom_produit = nomProduit;
 
-            Call<Void> callAllFavoris = apiService.addFavori(favoris);
-            callAllFavoris.enqueue(new Callback<Void>() {
+            Call<Void> callAddFavoris = apiService.addFavori(favoris);
+            callAddFavoris.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {

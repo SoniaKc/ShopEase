@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,8 @@ public class BoutiqueProfilAccueil extends Activity {
         LinearLayout faq = findViewById(R.id.btnFaq);
         LinearLayout aPropos = findViewById(R.id.btnAbout);
         LinearLayout mentionsLegales = findViewById(R.id.btnLegal);
+        Button deconnexion = findViewById(R.id.btnDeconnexion);
+
 
         informations.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +93,11 @@ public class BoutiqueProfilAccueil extends Activity {
                 intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
+        });
+
+        deconnexion.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         });
     }
 }

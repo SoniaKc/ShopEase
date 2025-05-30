@@ -61,12 +61,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/nom"
+                    android:text="@string/lastname_label"
                     android:layout_marginStart="16dp"
                     android:textSize="16sp"
                     android:textColor="#1E1E1E" />
-                <EditText
+                <TextView
                     android:id="@+id/nomProduit"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -182,7 +185,8 @@
                 <EditText
                     android:id="@+id/descriptionProduit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
             </LinearLayout>
             <!-- Buttons -->
             <Button

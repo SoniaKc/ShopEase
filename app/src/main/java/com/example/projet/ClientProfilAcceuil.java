@@ -3,6 +3,7 @@ package com.example.projet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class ClientProfilAcceuil extends Activity {
         LinearLayout faq = findViewById(R.id.btnFaq);
         LinearLayout aPropos = findViewById(R.id.btnAbout);
         LinearLayout mentions = findViewById(R.id.btnLegal);
+        Button deconnexion = findViewById(R.id.btnDeconnexion);
 
         // Gestion des clics
         informations.setOnClickListener(v -> {
@@ -111,6 +113,10 @@ public class ClientProfilAcceuil extends Activity {
             startActivity(intent);
         });
 
+        deconnexion.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
 
         // TOP NAVIGATION BAR
         ImageView navCart = findViewById(R.id.cartIcon);

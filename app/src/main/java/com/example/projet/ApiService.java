@@ -27,6 +27,9 @@ public interface ApiService {
     @PUT("/api/client/update")
     Call<Void> updateClient(@Body Client client);
 
+
+
+
     // === BOUTIQUE ===
     @POST("/api/boutique/add")
     Call<Void> addBoutique(@Body Boutique boutique);
@@ -39,6 +42,9 @@ public interface ApiService {
 
     @PUT("/api/boutique/update")
     Call<Void> updateBoutique(@Body Boutique boutique);
+
+
+
 
     // === PARAMETRE ===
     @POST("/api/parametre/add")
@@ -53,26 +59,27 @@ public interface ApiService {
     @PUT("/api/parametre/update")
     Call<Void> updateParametre(@Body Parametre parametre); // Equivalent à UpdateParametre handler
 
+
+
+
     // === PAIEMENT ===
-    // Ajouter une méthode de paiement
     @POST("api/paiement/add")
     Call<Void> addPaiement(@Body Paiement paiement);
 
-    // Récupérer une méthode de paiement
     @GET("api/paiement/get")
     Call<Paiement> getPaiement(@Query("login") String login, @Query("nom_carte") String nomCarte);
 
-    // Supprimer une méthode de paiement
     @DELETE("api/paiement/delete")
     Call<Void> deletePaiement(@Query("login") String login, @Query("nom_carte") String nomCarte);
 
-    // Mettre à jour une méthode de paiement
     @PUT("api/paiement/update")
     Call<Void> updatePaiement(@Body Paiement paiement);
 
-    // Récupérer toutes les méthodes de paiement
     @GET("api/paiement/getAll")
     Call<List<Paiement>> getAllPaiement(@Query("login") String login);
+
+
+
 
     // === ADRESSE ===
     @POST("api/adresse/add")
@@ -96,6 +103,9 @@ public interface ApiService {
     @PUT("api/adresse/update")
     Call<Void> updateAdresse(@Body Adresse adresse);
 
+
+
+
     // === PRODUIT ===
     @POST("api/produit/add")
     Call<Void> addProduit(@Body Produit produit);
@@ -116,6 +126,7 @@ public interface ApiService {
     // Récupérer tous les produits
     @GET("api/produit/getAll")
     Call<List<Produit>> getAllProduits(@Query("login_boutique") String loginBoutique);
+
 
 
 
@@ -143,6 +154,8 @@ public interface ApiService {
     Call<Void> updateCommentaire(@Body Commentaire commentaire);
 
 
+
+
     // === FAVORIS ===
     @POST("/api/favoris/add")
     Call<Void> addFavori(@Body Favoris favoris);
@@ -156,6 +169,8 @@ public interface ApiService {
             @Query("nom_produit") String nomProduit,
             @Query("idClient") String idClient
     );
+
+
 
 
     // === PANIER ===
@@ -183,6 +198,8 @@ public interface ApiService {
 
     @PUT("/api/panier/update")
     Call<Void> updateCartItemQuantity(@Body Panier panier);
+
+
 
 
     // === VENTES ===

@@ -215,6 +215,8 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
     <!-- Titres et en-têtes -->
     <string name="my_infos_title">Mes informations</string>
     <string name="delete_account_button">Supprimer mon compte</string>
+    <string name="deconnect_account_button">Se déconnecter</string>
+
 
     <!-- Labels des champs -->
     <string name="lastname_label">Nom :</string>
@@ -223,6 +225,10 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
     <string name="phone_label">Téléphone :</string>
     <string name="username_label">Identifiant :</string>
     <string name="password_label">Mot de Passe :</string>
+    <string name="formeJu_label">Forme Juridique :</string>
+    <string name="siret_label">SIRET :</string>
+    <string name="siegeSociel_label">Siège Social :</string>
+    <string name="PaysEnre_label">Pays d\'Enregistrement :</string>
 
 
     <!-- Content descriptions -->

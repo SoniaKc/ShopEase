@@ -3,17 +3,27 @@ package com.example.projet;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,15 +35,21 @@ public class BoutiqueProfilInfos extends Activity {
     String identifiant;
     ApiService apiService;
     Boutique currentBoutique;
+    ImageView profilePhoto;
+    private static final String PROFILE_IMAGE_KEY = "profile_image_";
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_profil_infos);
 
+        sharedPreferences = getSharedPreferences("profile_prefs", MODE_PRIVATE);
         apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
 
+        profilePhoto = findViewById(R.id.profilePhoto);
         TextView Nom = findViewById(R.id.nom);
         TextView Email = findViewById(R.id.email);
         TextView Tel = findViewById(R.id.tel);
@@ -44,6 +60,8 @@ public class BoutiqueProfilInfos extends Activity {
         TextView Siret = findViewById(R.id.siret);
         TextView SiegeSocial = findViewById(R.id.siegeSocial);
         TextView PaysEnregitrement = findViewById(R.id.paysEnregitrement);
+
+        loadProfileImage();
 
         apiService.getBoutique(identifiant).enqueue(new Callback<Boutique>() {
             @Override
@@ -83,9 +101,12 @@ public class BoutiqueProfilInfos extends Activity {
         ImageButton BtnModifSiegeSocial = findViewById(R.id.BtnModifSiegeSocial);
         ImageButton BtnModifPaysEnregistrement = findViewById(R.id.BtnModifPaysEnregistrement);
         ImageButton BtnModifIban = findViewById(R.id.BtnModifIban);
+        ImageButton btnModifPhoto = findViewById(R.id.BtnModifPhoto);
 
         Button btnSupprimer = findViewById(R.id.btnSupprimer);
 
+
+        btnModifPhoto.setOnClickListener(v -> openImageChooser());
 
         BtnModifNom.setOnClickListener(b -> modif("nom", (id, val) -> {
             currentBoutique.nom = val;
@@ -238,5 +259,76 @@ public class BoutiqueProfilInfos extends Activity {
         });
     }
 
+
+    private void openImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Sélectionnez une image"), PICK_IMAGE_REQUEST);
+    }
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri selectedImageUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                Bitmap resizedBitmap = resizeBitmap(bitmap, 800, 800);
+                profilePhoto.setImageBitmap(resizedBitmap);
+                saveProfileImage(resizedBitmap);
+                Toast.makeText(this, "Photo de profil mise à jour", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Erreur lors du chargement de l'image", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private Bitmap resizeBitmap(Bitmap bitmap, int maxWidth, int maxHeight) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+
+        float ratioBitmap = (float) width / (float) height;
+        float ratioMax = (float) maxWidth / (float) maxHeight;
+
+        int finalWidth = maxWidth;
+        int finalHeight = maxHeight;
+
+        if (ratioMax > ratioBitmap) {
+            finalWidth = (int) ((float) maxHeight * ratioBitmap);
+        } else {
+            finalHeight = (int) ((float) maxWidth / ratioBitmap);
+        }
+
+        return Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true);
+    }
+
+    private void saveProfileImage(Bitmap bitmap) {
+        try {
+            File file = new File(getFilesDir(), "profile_" + identifiant + ".png");
+            try (FileOutputStream out = new FileOutputStream(file)) {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(PROFILE_IMAGE_KEY + identifiant, file.getAbsolutePath());
+                editor.apply();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur lors de la sauvegarde", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void loadProfileImage() {
+        String imagePath = sharedPreferences.getString(PROFILE_IMAGE_KEY + identifiant, null);
+        if (imagePath != null) {
+            File imgFile = new File(imagePath);
+            if (imgFile.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                profilePhoto.setImageBitmap(bitmap);
+            }
+        }
+    }
 
 }

@@ -1,120 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
 
-    <LinearLayout
+    <!-- Status Bar -->
+    <View
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/purple_50"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Top bar -->
+    <include
+        android:id="@+id/topAppBar"
+        layout="@layout/client_top_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@id/topPanel" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ajouter une carte"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nom de la carte"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/card_name_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ex: Ma Carte Bancaire"
-            android:inputType="text"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Numéro de carte"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/card_number_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="1234 5678 9012 3456"
-            android:inputType="number"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Titulaire de la carte"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/card_holder_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ex: Jean DUPONT"
-            android:inputType="textCapWords"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajouter une carte"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nom de la carte"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/card_name_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ex: Ma Carte Bancaire"
+                android:inputType="text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Numéro de carte"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/card_number_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="1234 5678 9012 3456"
+                android:inputType="number"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Titulaire de la carte"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/card_holder_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ex: Jean DUPONT"
+                android:inputType="textCapWords"/>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginEnd="8dp">
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Date d'expiration"
-                    android:layout_marginBottom="4dp"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp">
 
-                <EditText
-                    android:id="@+id/card_expiry_input"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Date d'expiration"
+                        android:layout_marginBottom="4dp"/>
+
+                    <EditText
+                        android:id="@+id/card_expiry_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="MM/AA"
+                        android:inputType="number"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="MM/AA"
-                    android:inputType="number"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CVV"
+                        android:layout_marginBottom="4dp"/>
+
+                    <EditText
+                        android:id="@+id/card_cvv_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="123"
+                        android:inputType="numberPassword"/>
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="8dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="CVV"
-                    android:layout_marginBottom="4dp"/>
-
-                <EditText
-                    android:id="@+id/card_cvv_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="123"
-                    android:inputType="numberPassword"/>
-            </LinearLayout>
+                android:text="Enregistrer"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/purple_500"
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
+    </ScrollView>
+    <!-- Barre du bas -->
+    <include
+        android:id="@+id/include"
+        layout="@layout/client_bottom_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomPanel" />
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enregistrer"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/purple_500"
-            android:textColor="#FFFFFF"/>
-    </LinearLayout>
-</ScrollView>
+    <!-- Panel bas -->
+    <View
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/purple_50"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

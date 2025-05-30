@@ -36,8 +36,8 @@ import java.util.List;
 public class BoutiqueEditProduit extends Activity {
     private List<String> selectedItems = new ArrayList<>();
     private List<String> allItems = Arrays.asList("Informatique", "Electronique", "Livre","Animaux","Jeux enfant", "Jeux de sociétés", "Papetterie");
-    EditText nomProduit, reductionProduit, prixProduit, descriptionProduit;
-    TextView TVcategories;
+    EditText reductionProduit, prixProduit, descriptionProduit;
+    TextView TVcategories, nomProduit;
     String Categories ="";
     String identifiant, nom_Produit;
     ApiService apiService;
@@ -83,17 +83,17 @@ public class BoutiqueEditProduit extends Activity {
                     produit.description = description;
 
                     apiService = ApiClient.getClient().create(ApiService.class);
-                    Call<Void> call = apiService.addProduit(produit);
+                    Call<Void> call = apiService.updateProduit(produit);
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(BoutiqueEditProduit.this, "Produit ajouté avec succès", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BoutiqueEditProduit.this, "Produit modifié avec succès", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
                                 intent.putExtra("id", identifiant);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(BoutiqueEditProduit.this, "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BoutiqueEditProduit.this, "Erreur lors de la modification", Toast.LENGTH_SHORT).show();
                             }
                         }
 

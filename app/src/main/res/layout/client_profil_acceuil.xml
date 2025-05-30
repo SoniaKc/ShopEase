@@ -235,7 +235,7 @@
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9" />
 
-            <!-- Item: FAQ -->
+            <!-- FAQ -->
             <LinearLayout
                 android:id="@+id/btnFaq"
                 android:layout_width="match_parent"
@@ -264,8 +264,7 @@
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9" />
 
-            <!-- Item: À propos de -->
-
+            <!-- À propos de -->
             <LinearLayout
                 android:id="@+id/btnAbout"
                 android:layout_width="match_parent"
@@ -293,7 +292,7 @@
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9" />
 
-            <!-- Item: Mentions légales -->
+            <!-- Mentions légales -->
             <LinearLayout
                 android:id="@+id/btnLegal"
                 android:layout_width="match_parent"
@@ -318,6 +317,16 @@
                     android:textSize="16sp"
                     android:textColor="#1E1E1E" />
             </LinearLayout>
+
+            <!-- Bouton deconnexion -->
+            <Button
+                android:id="@+id/btnDeconnexion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/deconnect_account_button"
+                android:background="@color/teal_200"
+                android:textColor="#000000"
+                android:layout_marginTop="16dp" />
 
         </LinearLayout>
     </ScrollView>

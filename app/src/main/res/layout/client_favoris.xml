@@ -39,15 +39,15 @@
         android:id="@+id/titleSouhait1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Votre liste"
-        android:textStyle="bold"
-        android:textSize="25sp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/barreRecherche"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Votre liste"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barreRecherche" />
 
     <ImageView
         android:layout_marginTop="16dp"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/titleSouhait1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"/>
+        app:layout_constraintHorizontal_bias="0.5"/>
 
     <TextView
         android:id="@+id/titleSouhait2"
@@ -71,8 +71,7 @@
         app:layout_constraintTop_toBottomOf="@id/profilePhoto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        android:layout_marginTop="16dp"/>
 
     <View
         android:id="@+id/espace"
