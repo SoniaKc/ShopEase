@@ -39,12 +39,14 @@ public class ClientEditPayement extends Activity {
         deleteButton = findViewById(R.id.delete_button);
 
         loadPaymentCard();
+        setupTopBottomNavigation();
 
         saveButton.setOnClickListener(v -> updatePaymentCard());
         deleteButton.setOnClickListener(v -> deletePaymentCard());
+    }
 
-
-        // TOP NAVIGATION BAR
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -53,7 +55,7 @@ public class ClientEditPayement extends Activity {
             startActivity(i);
         });
 
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);

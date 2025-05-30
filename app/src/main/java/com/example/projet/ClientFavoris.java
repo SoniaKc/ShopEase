@@ -51,7 +51,6 @@ public class ClientFavoris extends Activity {
 
         apiService = ApiClient.getClient().create(ApiService.class);
         loadFavoris();
-
         setupNavigation();
     }
 
@@ -92,8 +91,24 @@ public class ClientFavoris extends Activity {
     }
 
     private void ajouterAuPanier(Favoris favori) {
-        // Ex. appeler apiService.ajouterAuPanier si tu as une méthode API
-        Toast.makeText(this, "Ajouté au panier : Produit ID " , Toast.LENGTH_SHORT).show();
+        Panier panier = new Panier();
+        panier.login_boutique = favori.login_boutique;
+        panier.nom_produit = favori.nom_produit;
+        panier.idClient = favori.idClient;
+        panier.quantite = "1";
+        apiService.addToCart(panier).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                deleteFavori(favori);
+                Toast.makeText(ClientFavoris.this, "Ajouté au panier : Produit ID " , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(ClientFavoris.this, "Erreur de suppression", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void setupNavigation() {

@@ -43,11 +43,12 @@ public class ClientEditAdresse extends Activity {
         saveButton.setOnClickListener(v -> updateAdresse());
         deleteButton.setOnClickListener(v -> deleteAdresse());
 
-        // Charger les infos existantes
         loadAdresseDetails();
+        setupTopBottomNavigation();
+    }
 
-
-        // TOP NAVIGATION BAR
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -56,7 +57,7 @@ public class ClientEditAdresse extends Activity {
             startActivity(i);
         });
 
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);

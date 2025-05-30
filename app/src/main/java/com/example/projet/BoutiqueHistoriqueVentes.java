@@ -41,10 +41,10 @@ public class BoutiqueHistoriqueVentes extends Activity {
         recyclerCommandes.setAdapter(adapter);
 
         chargerCommandesDepuisApi();
+        setupBottomNavigation();
+    }
 
-
-
-        // BOTTOM NAVIGATION BAR
+    private void setupBottomNavigation() {
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navVentes = findViewById(R.id.navVentes);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -79,10 +79,6 @@ public class BoutiqueHistoriqueVentes extends Activity {
             @Override
             public void onResponse(Call<Map<String, List<LigneVente>>> call, Response<Map<String, List<LigneVente>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-
-                    Log.d("API_BODY", new Gson().toJson(response.body()));
-
-
 
                     List<CommandeEntiere> commandes = new ArrayList<>();
                     for (Map.Entry<String, List<LigneVente>> entry : response.body().entrySet()) {

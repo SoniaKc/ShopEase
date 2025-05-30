@@ -93,9 +93,7 @@ public class BoutiqueAjouterProduit extends Activity {
                             } else {
                                 try {
                                     String errorBody = response.errorBody().string();
-                                    Log.e("API_ERROR", "Code: " + response.code() + " - " + errorBody);
-                                    Toast.makeText(BoutiqueAjouterProduit.this,
-                                            "Erreur: " + errorBody, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(BoutiqueAjouterProduit.this, "Erreur: " + errorBody, Toast.LENGTH_LONG).show();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -104,9 +102,7 @@ public class BoutiqueAjouterProduit extends Activity {
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Log.e("NETWORK_ERROR", t.getMessage());
-                            Toast.makeText(BoutiqueAjouterProduit.this,
-                                    "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(BoutiqueAjouterProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
@@ -124,30 +120,7 @@ public class BoutiqueAjouterProduit extends Activity {
             }
         });
 
-
-
-        // BOTTOM NAVIGATION BAR
-        LinearLayout navHome = findViewById(R.id.navHome);
-        LinearLayout navVentes = findViewById(R.id.navVentes);
-        LinearLayout navProfile2 = findViewById(R.id.navProfile);
-
-        navHome.setOnClickListener(v -> {
-            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
-            i.putExtra("id", identifiant);
-            startActivity(i);
-        });
-
-        navVentes.setOnClickListener(v -> {
-            Intent i = new Intent(this, BoutiqueHistoriqueVentes.class);
-            i.putExtra("id", identifiant);
-            startActivity(i);
-        });
-
-        navProfile2.setOnClickListener(v -> {
-            Intent i = new Intent(this, BoutiqueProfilInfos.class);
-            i.putExtra("id", identifiant);
-            startActivity(i);
-        });
+        setupBottomNavigation();
     }
 
     private void showCheckboxPopup() {
@@ -206,5 +179,30 @@ public class BoutiqueAjouterProduit extends Activity {
             TVcategorie.setText("Catégories : " + Categories);
         }
     }
+
+    private void setupBottomNavigation() {
+        LinearLayout navHome = findViewById(R.id.navHome);
+        LinearLayout navVentes = findViewById(R.id.navVentes);
+        LinearLayout navProfile2 = findViewById(R.id.navProfile);
+
+        navHome.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navVentes.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueHistoriqueVentes.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navProfile2.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueProfilInfos.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+    }
+
 
 }

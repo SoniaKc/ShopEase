@@ -30,17 +30,30 @@ public class ClientCB extends Activity {
 
         apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
-        this.cardsContainer = findViewById(R.id.cards_container); // Ajoutez cet ID dans votre layout
+        this.cardsContainer = findViewById(R.id.cards_container);
 
-        // TOP NAVIGATION BAR
+        setupTopBottomNavigation();
+        loadPaymentCards();
+
+        Button addCardButton = findViewById(R.id.add_card_button);
+        addCardButton.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientAddPayment.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+    }
+
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
+
         navCart.setOnClickListener(v -> {
             Intent i = new Intent(this, ClientPanier.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -62,18 +75,6 @@ public class ClientCB extends Activity {
             i.putExtra("id", identifiant);
             startActivity(i);
         });
-
-        // Charger les cartes
-        loadPaymentCards();
-
-        // Bouton Ajouter une carte
-        Button addCardButton = findViewById(R.id.add_card_button);
-        addCardButton.setOnClickListener(v -> {
-            // Ajoutez ici le code pour ajouter une nouvelle carte
-            Intent i = new Intent(this, ClientAddPayment.class); // Créez cette activité
-            i.putExtra("id", identifiant);
-            startActivity(i);
-        });
     }
 
     private void loadPaymentCards() {
@@ -91,19 +92,13 @@ public class ClientCB extends Activity {
                         Toast.makeText(ClientCB.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Log.e("API_ERROR", "Code: " + response.code() + " - " + response.message());
-                    Toast.makeText(ClientCB.this,
-                            "Erreur serveur: " + response.code(),
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClientCB.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Paiement>> call, Throwable t) {
-                Log.e("API_FAILURE", "Erreur réseau", t);
-                Toast.makeText(ClientCB.this,
-                        "Erreur réseau: " + t.getMessage(),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(ClientCB.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -128,15 +123,8 @@ public class ClientCB extends Activity {
                     TextView cardHolder = cardView.findViewById(R.id.card_holder);
                     TextView cardExpiry = cardView.findViewById(R.id.card_expiry);
 
-                    // Debug logging
-                    Log.d("CARD_DATA", "Nom: " + paiement.nom_carte);
-                    Log.d("CARD_DATA", "Numéro: " + paiement.numero);
-
                     cardName.setText(paiement.nom_carte != null ? paiement.nom_carte : "N/A");
-                    cardNumber.setText("•••• •••• •••• " +
-                            (paiement.numero != null && paiement.numero.length() > 12
-                                    ? paiement.numero.substring(12)
-                                    : "****"));
+                    cardNumber.setText("•••• •••• •••• " + (paiement.numero != null && paiement.numero.length() > 12 ? paiement.numero.substring(12) : "****"));
                     cardHolder.setText(paiement.nom_personne_carte != null ? paiement.nom_personne_carte : "N/A");
                     cardExpiry.setText(paiement.date_expiration != null ? paiement.date_expiration : "N/A");
 
@@ -172,7 +160,7 @@ public class ClientCB extends Activity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(ClientCB.this, "Carte supprimée", Toast.LENGTH_SHORT).show();
-                    loadPaymentCards(); // Recharger la liste
+                    loadPaymentCards();
                 } else {
                     Toast.makeText(ClientCB.this, "Erreur lors de la suppression", Toast.LENGTH_SHORT).show();
                 }
@@ -185,16 +173,4 @@ public class ClientCB extends Activity {
         });
     }
 
-    private void testAvecDonneesMock() {
-        List<Paiement> paiementsMock = new ArrayList<>();
-        Paiement mock1 = new Paiement();
-        mock1.nom_carte = "VISA";
-        mock1.numero = "1234567812345678";
-        mock1.nom_personne_carte = "Jean Dupont";
-        mock1.date_expiration = "12/25";
-
-        paiementsMock.add(mock1);
-
-        displayPaymentCards(paiementsMock);
-    }
 }

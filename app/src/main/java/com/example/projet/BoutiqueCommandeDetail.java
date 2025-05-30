@@ -39,12 +39,13 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
         identifiant = commande.idClient;
         idTransaction = commande.idTransaction;
         apiService = ApiClient.getClient().create(ApiService.class);
-        Log.d("DEBUG", "idTransaction reçu : " + idTransaction);
 
 
         fetchVenteDetails(idTransaction);
+        setupBottomNavigation();
+    }
 
-        // BOTTOM NAVIGATION BAR
+    private void setupBottomNavigation() {
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navVentes = findViewById(R.id.navVentes);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -73,8 +74,6 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
         call.enqueue(new Callback<List<Vente>>() {
             @Override
             public void onResponse(Call<List<Vente>> call, Response<List<Vente>> response) {
-                Log.d("DEBUG", "Code HTTP : " + response.code());
-                Log.d("DEBUG", "Body : " + new Gson().toJson(response.body()));
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     List<Vente> ventes = response.body();
 
@@ -97,7 +96,6 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Vente>> call, Throwable t) {
-                Log.e("DEBUG", "Erreur réseau : ", t);
                 Toast.makeText(BoutiqueCommandeDetail.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
             }
         });
@@ -110,9 +108,6 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
             public void onResponse(Call<Produit> call, Response<Produit> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Produit produit = response.body();
-
-                    Log.d("DEBUG", "Produit reçu : " + new Gson().toJson(produit));
-
                     double prixUnitaire = 0.0;
                     int quantite = 0;
                     double totalProduit = 0.0;
@@ -125,16 +120,13 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
                         quantite = Integer.parseInt(quantiteStr);
                         totalProduit = prixUnitaire * quantite;
 
-                        Log.d("DEBUG", "Produit: " + produit.nom + " | Qté: " + quantite + " | Prix: " + prixUnitaire + " | Total: " + totalProduit);
                     } catch (Exception e) {
-                        Log.e("DEBUG", "Erreur parsing quantité ou prix", e);
                         Toast.makeText(BoutiqueCommandeDetail.this, "Erreur lecture produit : " + produit.nom, Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     TextView produitView = new TextView(BoutiqueCommandeDetail.this);
-                    produitView.setText(produit.nom + " | Qté: " + quantite + " | Total: " +
-                            String.format("%.2f", totalProduit) + " €");
+                    produitView.setText(produit.nom + " | Qté: " + quantite + " | Total: " +  String.format("%.2f", totalProduit) + " €");
                     produitView.setTextSize(16);
                     produitView.setPadding(8, 16, 8, 16);
 
@@ -148,14 +140,12 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
 
                     produitsContainer.addView(produitView);
                 } else {
-                    Log.e("DEBUG", "Produit introuvable : " + vente.nom_produit);
                     Toast.makeText(BoutiqueCommandeDetail.this, "Produit introuvable : " + vente.nom_produit, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Produit> call, Throwable t) {
-                Log.e("DEBUG", "Erreur réseau fetch produit", t);
                 Toast.makeText(BoutiqueCommandeDetail.this, "Erreur lors du chargement des produits", Toast.LENGTH_SHORT).show();
             }
         });

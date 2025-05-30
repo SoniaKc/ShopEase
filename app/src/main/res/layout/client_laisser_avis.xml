@@ -1,51 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:orientation="vertical"
-    android:background="#FFFFFF">
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/noteEx"
-        android:textSize="16sp"
-        android:paddingBottom="8dp" />
+    <!-- Status Bar -->
+    <View
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/purple_50"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/note_input"
+    <!-- Top bar -->
+    <include
+        android:id="@+id/topAppBar"
+        layout="@layout/client_top_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/noteEntree"
-        android:inputType="numberDecimal"
-        android:padding="12dp"
-        android:background="@android:drawable/edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/topPanel" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/commentaire"
-        android:textSize="16sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp" />
-
-    <EditText
-        android:id="@+id/commentaire_input"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:hint="@string/partagerAvis"
-        android:gravity="top|start"
-        android:background="@android:drawable/edit_text"
-        android:padding="12dp"
-        android:inputType="textMultiLine" />
-
-    <Button
-        android:id="@+id/envoyer_avis"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Envoyer"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/purple_500"
-        android:textColor="#FFFFFF" />
-</LinearLayout>
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/noteEx"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <EditText
+            android:id="@+id/note_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/noteEntree"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/commentaire"
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <EditText
+            android:id="@+id/commentaire_input"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:hint="@string/partagerAvis"
+            android:gravity="top|start"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/envoyer_avis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Envoyer"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Barre du bas -->
+    <include
+        android:id="@+id/include"
+        layout="@layout/client_bottom_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomPanel" />
+
+    <!-- Panel bas -->
+    <View
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/purple_50"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

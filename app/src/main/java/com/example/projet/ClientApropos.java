@@ -7,15 +7,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class ClientApropos extends Activity {
+    String identifiant;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_a_propos);
 
-        String identifiant = getIntent().getStringExtra("id");
+        identifiant = getIntent().getStringExtra("id");
+        setupTopBottomNavigation();
+    }
 
-
-        // TOP NAVIGATION BAR
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -24,7 +28,7 @@ public class ClientApropos extends Activity {
             startActivity(i);
         });
 
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);

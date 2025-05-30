@@ -1,9 +1,12 @@
 package com.example.projet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +33,6 @@ public class ClientLaisserAvis extends AppCompatActivity {
         nomProduit = getIntent().getStringExtra("nom_produit");
         loginBoutique = getIntent().getStringExtra("login_boutique");
         identifiant = getIntent().getStringExtra("id");
-        Log.e("AVIS_ERROR1er", "Erreur body : " + identifiant);
 
         apiService = ApiClient.getClient().create(ApiService.class);
 
@@ -49,11 +51,6 @@ public class ClientLaisserAvis extends AppCompatActivity {
             avis.idClient = identifiant;
             avis.note = note;
             avis.commentaire = commentaire;
-            Log.e("AVIS_ERROR", "Erreur body : " + nomProduit);
-            Log.e("AVIS_ERROR", "Erreur body : " + loginBoutique);
-            Log.e("AVIS_ERROR", "Erreur body : " + identifiant);
-            Log.e("AVIS_ERROR", "Erreur body : " + note);
-            Log.e("AVIS_ERROR", "Erreur body : " + commentaire);
 
 
             Call<Void> call = apiService.addCommentaire(avis);
@@ -79,6 +76,41 @@ public class ClientLaisserAvis extends AppCompatActivity {
                     Toast.makeText(ClientLaisserAvis.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
                 }
             });
+        });
+        setupTopBottomNavigation();
+    }
+
+    private void setupTopBottomNavigation() {
+        // TOP
+        ImageView navCart = findViewById(R.id.cartIcon);
+
+        navCart.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientPanier.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        // BOTTOM
+        LinearLayout navHome = findViewById(R.id.navHome);
+        LinearLayout navFavorites = findViewById(R.id.navFavorites);
+        LinearLayout navProfile2 = findViewById(R.id.navProfile);
+
+        navHome.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientAccueil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navFavorites.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientFavoris.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navProfile2.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientProfilAcceuil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
         });
     }
 }

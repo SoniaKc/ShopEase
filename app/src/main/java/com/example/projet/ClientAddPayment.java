@@ -35,6 +35,41 @@ public class ClientAddPayment extends Activity {
         saveButton = findViewById(R.id.save_button);
 
         saveButton.setOnClickListener(v -> savePaymentCard());
+        setupTopBottomNavigation();
+    }
+
+    private void setupTopBottomNavigation() {
+        // TOP
+        ImageView navCart = findViewById(R.id.cartIcon);
+
+        navCart.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientPanier.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        // BOTTOM
+        LinearLayout navHome = findViewById(R.id.navHome);
+        LinearLayout navFavorites = findViewById(R.id.navFavorites);
+        LinearLayout navProfile2 = findViewById(R.id.navProfile);
+
+        navHome.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientAccueil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navFavorites.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientFavoris.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navProfile2.setOnClickListener(v -> {
+            Intent i = new Intent(this, ClientProfilAcceuil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
     }
 
     private void savePaymentCard() {
@@ -76,38 +111,6 @@ public class ClientAddPayment extends Activity {
             public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(ClientAddPayment.this, "Erreur de connexion", Toast.LENGTH_SHORT).show();
             }
-        });
-
-        // TOP NAVIGATION BAR
-        ImageView navCart = findViewById(R.id.cartIcon);
-
-        navCart.setOnClickListener(v -> {
-            Intent i = new Intent(this, ClientPanier.class);
-            i.putExtra("id", identifiant);
-            startActivity(i);
-        });
-
-        // BOTTOM NAVIGATION BAR
-        LinearLayout navHome = findViewById(R.id.navHome);
-        LinearLayout navFavorites = findViewById(R.id.navFavorites);
-        LinearLayout navProfile2 = findViewById(R.id.navProfile);
-
-        navHome.setOnClickListener(v -> {
-            Intent i = new Intent(this, ClientAccueil.class);
-            i.putExtra("id", identifiant);
-            startActivity(i);
-        });
-
-        navFavorites.setOnClickListener(v -> {
-            Intent i = new Intent(this, ClientFavoris.class);
-            i.putExtra("id", identifiant);
-            startActivity(i);
-        });
-
-        navProfile2.setOnClickListener(v -> {
-            Intent i = new Intent(this, ClientProfilAcceuil.class);
-            i.putExtra("id", identifiant);
-            startActivity(i);
         });
     }
 }

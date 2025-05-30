@@ -113,7 +113,10 @@ public class BoutiqueParametres extends Activity {
         Notifs = findViewById(R.id.rowNotifications);
         Notifs.setOnClickListener(v -> showCheckboxPopup());
 
-        // BOTTOM NAVIGATION BAR
+        setupBottomNavigation();
+    }
+
+    private void setupBottomNavigation() {
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navVentes = findViewById(R.id.navVentes);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);

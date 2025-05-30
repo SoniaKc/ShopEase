@@ -45,7 +45,7 @@ public class BoutiqueEditProduit extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.boutique_ajouter_produit);
+        setContentView(R.layout.boutique_edit_produit);
 
         identifiant = getIntent().getStringExtra("id");
         nom_Produit = getIntent().getStringExtra("nomProduit");
@@ -117,9 +117,10 @@ public class BoutiqueEditProduit extends Activity {
             }
         });
 
+        setupBottomNavigation();
+    }
 
-
-        // BOTTOM NAVIGATION BAR
+    private void setupBottomNavigation() {
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navVentes = findViewById(R.id.navVentes);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);

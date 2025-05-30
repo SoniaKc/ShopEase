@@ -37,7 +37,11 @@ public class ClientAddAdresse extends Activity {
 
         saveButton.setOnClickListener(v -> saveAdresse());
 
-        // TOP NAVIGATION BAR
+        setupTopBottomNavigation();
+    }
+
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -46,7 +50,7 @@ public class ClientAddAdresse extends Activity {
             startActivity(i);
         });
 
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);

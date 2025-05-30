@@ -41,10 +41,11 @@ public class ClientHistoriqueAchats extends Activity {
         recyclerCommandes.setAdapter(adapter);
 
         chargerCommandesDepuisApi();
+        setupTopBottomNavigation();
+    }
 
-
-
-        // TOP NAVIGATION BAR
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -52,7 +53,8 @@ public class ClientHistoriqueAchats extends Activity {
             i.putExtra("id", identifiant);
             startActivity(i);
         });
-        // BOTTOM NAVIGATION BAR
+
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -87,11 +89,6 @@ public class ClientHistoriqueAchats extends Activity {
             @Override
             public void onResponse(Call<Map<String, List<LigneVente>>> call, Response<Map<String, List<LigneVente>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-
-                    Log.d("API_BODY", new Gson().toJson(response.body()));
-
-
-
                     List<CommandeEntiere> commandes = new ArrayList<>();
                     for (Map.Entry<String, List<LigneVente>> entry : response.body().entrySet()) {
                         CommandeEntiere commande = new CommandeEntiere();

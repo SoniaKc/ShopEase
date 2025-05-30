@@ -42,9 +42,11 @@ public class ClientAccueil extends Activity {
 
         apiService = ApiClient.getClient().create(ApiService.class);
         loadProduitsPopulaires();
+        setupTopBottomNavigation();
+    }
 
-
-        // TOP NAVIGATION BAR
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -53,7 +55,7 @@ public class ClientAccueil extends Activity {
             startActivity(i);
         });
 
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -75,7 +77,6 @@ public class ClientAccueil extends Activity {
             i.putExtra("id", identifiant);
             startActivity(i);
         });
-
     }
 
 

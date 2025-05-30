@@ -99,22 +99,15 @@ public class ClientPageProduit extends Activity {
                             container.addView(view);
                         }
                     } else {
-                        Log.e("API_ERROR", "Réponse vide");
                         Toast.makeText(ClientPageProduit.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Log.e("API_ERROR", "Code: " + response.code() + " - " + response.message());
-                    Toast.makeText(ClientPageProduit.this,
-                            "Erreur serveur: " + response.code(),
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClientPageProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<Commentaire>> call, Throwable t) {
-                Log.e("API_FAILURE", "Erreur réseau", t);
-                Toast.makeText(ClientPageProduit.this,
-                        "Erreur réseau: " + t.getMessage(),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(ClientPageProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -134,18 +127,12 @@ public class ClientPageProduit extends Activity {
                     if (response.isSuccessful()) {
                         Toast.makeText(ClientPageProduit.this, "Ajouté aux favoris: ", Toast.LENGTH_SHORT).show();
                     } else {
-                        Log.e("API_ERROR", "Code: " + response.code() + " - " + response.message());
-                        Toast.makeText(ClientPageProduit.this,
-                                "Erreur serveur: " + response.code(),
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClientPageProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Log.e("API_FAILURE", "Erreur réseau", t);
-                    Toast.makeText(ClientPageProduit.this,
-                            "Erreur réseau: " + t.getMessage(),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClientPageProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         });
@@ -169,18 +156,12 @@ public class ClientPageProduit extends Activity {
                     if (response.isSuccessful()) {
                         Toast.makeText(ClientPageProduit.this, "Ajouté au panier: ", Toast.LENGTH_SHORT).show();
                     } else {
-                        Log.e("API_ERROR", "Code: " + response.code() + " - " + response.message());
-                        Toast.makeText(ClientPageProduit.this,
-                                "Erreur serveur: " + response.code(),
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClientPageProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Log.e("API_FAILURE", "Erreur réseau", t);
-                    Toast.makeText(ClientPageProduit.this,
-                            "Erreur réseau: " + t.getMessage(),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClientPageProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         });
@@ -198,32 +179,40 @@ public class ClientPageProduit extends Activity {
             ((TextView) findViewById(R.id.tv_quantite)).setText(String.valueOf(quantite-1));
         });
 
+        setupTopBottomNavigation();
+    }
 
-        // NAVIGATION
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
+
         navCart.setOnClickListener(v -> {
             Intent i = new Intent(this, ClientPanier.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
-        findViewById(R.id.navHome).setOnClickListener(v -> {
+        // BOTTOM
+        LinearLayout navHome = findViewById(R.id.navHome);
+        LinearLayout navFavorites = findViewById(R.id.navFavorites);
+        LinearLayout navProfile2 = findViewById(R.id.navProfile);
+
+        navHome.setOnClickListener(v -> {
             Intent i = new Intent(this, ClientAccueil.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
-        findViewById(R.id.navFavorites).setOnClickListener(v -> {
+        navFavorites.setOnClickListener(v -> {
             Intent i = new Intent(this, ClientFavoris.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
-        findViewById(R.id.navProfile).setOnClickListener(v -> {
+        navProfile2.setOnClickListener(v -> {
             Intent i = new Intent(this, ClientProfilAcceuil.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
-
     }
 }

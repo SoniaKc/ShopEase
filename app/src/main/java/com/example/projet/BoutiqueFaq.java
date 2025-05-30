@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 public class BoutiqueFaq extends Activity {
+    String identifiant;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_faq);
 
-        String identifiant = getIntent().getStringExtra("id");
+        identifiant = getIntent().getStringExtra("id");
+        setupBottomNavigation();
+    }
 
-        // BOTTOM NAVIGATION BAR
+    private void setupBottomNavigation() {
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navVentes = findViewById(R.id.navVentes);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);

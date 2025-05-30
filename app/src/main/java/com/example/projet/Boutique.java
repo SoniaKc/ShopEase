@@ -1,6 +1,5 @@
 package com.example.projet;
 
-// Boutique.java
 public class Boutique {
     public String login;
     public String password;

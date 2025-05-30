@@ -8,7 +8,7 @@ public class ApiClient {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://shopeaseserver.onrender.com/") // À modifier selon ton déploiement
+                    .baseUrl("https://shopeaseserver.onrender.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

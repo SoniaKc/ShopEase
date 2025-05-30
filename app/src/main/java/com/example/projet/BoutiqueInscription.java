@@ -45,11 +45,7 @@ public class BoutiqueInscription extends Activity {
                 identifiant.setError("Le login doit commencer par une lettre et être ≤ 10 caractères");
                 temp = false;
             }
-            /*
-            if (boutiqueTable.getUserClientLogin(Stridentifiant)) {
-                identifiant.setError("identifiant déjà pris");
-                temp = false;
-            }*/
+
             if (!Strnom.matches("^[A-Za-zÀ-ÖØ-öø-ÿ -]+$")) {
                 nom.setError("Le nom doit contenir uniquement des lettres");
                 temp = false;

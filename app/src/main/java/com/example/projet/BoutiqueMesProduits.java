@@ -49,7 +49,10 @@ public class BoutiqueMesProduits extends Activity {
             startActivity(intent);
         });
 
-        // BOTTOM NAVIGATION BAR
+        setupBottomNavigation();
+    }
+
+    private void setupBottomNavigation() {
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navVentes = findViewById(R.id.navVentes);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
