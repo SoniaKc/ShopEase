@@ -3,15 +3,11 @@ package com.example.projet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +21,10 @@ public class BoutiqueHistoriqueVentes extends Activity {
 
     String identifiant;
     RecyclerView recyclerCommandes;
-    CommandeEntiereAdapter adapter;
-    List<CommandeEntiere> listeCommandes = new ArrayList<>();
+    BoutiqueLigneVenteAdapter adapter;
+    List<LigneVente> listeLignes = new ArrayList<>();
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_historique_ventes);
@@ -37,7 +33,7 @@ public class BoutiqueHistoriqueVentes extends Activity {
 
         recyclerCommandes = findViewById(R.id.recyclerCommandes);
         recyclerCommandes.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CommandeEntiereAdapter(this, listeCommandes);
+        adapter = new BoutiqueLigneVenteAdapter(this, listeLignes);
         recyclerCommandes.setAdapter(adapter);
 
         chargerCommandesDepuisApi();
@@ -68,10 +64,7 @@ public class BoutiqueHistoriqueVentes extends Activity {
         });
     }
 
-
-
     private void chargerCommandesDepuisApi() {
-
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
 
         Call<Map<String, List<LigneVente>>> call = apiService.getByBoutique(identifiant);
@@ -79,31 +72,12 @@ public class BoutiqueHistoriqueVentes extends Activity {
             @Override
             public void onResponse(Call<Map<String, List<LigneVente>>> call, Response<Map<String, List<LigneVente>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-
-                    List<CommandeEntiere> commandes = new ArrayList<>();
+                    List<LigneVente> lignes = new ArrayList<>();
                     for (Map.Entry<String, List<LigneVente>> entry : response.body().entrySet()) {
-                        CommandeEntiere commande = new CommandeEntiere();
-                        commande.idTransaction = entry.getKey();
-                        commande.nom_produit = new ArrayList<>();
-                        commande.quantite = new ArrayList<>();
-
-                        List<LigneVente> lignes = entry.getValue();
-                        for (LigneVente ligne : lignes) {
-                            commande.nom_produit.add(ligne.nom_produit);
-                            commande.quantite.add(ligne.quantite);
-                        }
-
-                        commande.idClient = lignes.get(0).idClient;
-                        commande.nom_adresse = lignes.get(0).nom_adresse;
-                        commande.nom_paiement = lignes.get(0).nom_paiement;
-                        commande.total = lignes.get(0).total;
-                        commande.date_vente = lignes.get(0).date_vente;
-                        commande.statut = lignes.get(0).statut;
-                        commandes.add(commande);
+                        lignes.addAll(entry.getValue());
                     }
-
-                    listeCommandes.clear();
-                    listeCommandes.addAll(commandes);
+                    listeLignes.clear();
+                    listeLignes.addAll(lignes);
                     adapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(BoutiqueHistoriqueVentes.this, "Erreur: " + response.code() + " - " + response.message(), Toast.LENGTH_LONG).show();

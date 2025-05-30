@@ -15,11 +15,11 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class CommandeEntiereAdapter extends RecyclerView.Adapter<CommandeEntiereAdapter.ViewHolder> {
+public class BoutiqueCommandeEntiereAdapter extends RecyclerView.Adapter<BoutiqueCommandeEntiereAdapter.ViewHolder> {
     private List<CommandeEntiere> commandes;
     private Context context;
 
-    public CommandeEntiereAdapter(Context context, List<CommandeEntiere> commandes) {
+    public BoutiqueCommandeEntiereAdapter(Context context, List<CommandeEntiere> commandes) {
         this.context = context;
         this.commandes = commandes;
     }
@@ -42,7 +42,7 @@ public class CommandeEntiereAdapter extends RecyclerView.Adapter<CommandeEntiere
             Gson gson = new Gson();
             String jsonCommande = gson.toJson(commande);
 
-            Intent intent = new Intent(context, ClientCommandeDetail.class);
+            Intent intent = new Intent(context, BoutiqueCommandeDetail.class);
             intent.putExtra("commandeEntiereJson", jsonCommande);
             context.startActivity(intent);
 

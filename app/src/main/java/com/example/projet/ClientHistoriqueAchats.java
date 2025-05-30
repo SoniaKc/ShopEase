@@ -3,15 +3,12 @@ package com.example.projet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +22,7 @@ public class ClientHistoriqueAchats extends Activity {
 
     String identifiant;
     RecyclerView recyclerCommandes;
-    CommandeEntiereAdapter adapter;
+    ClientCommandeEntiereAdapter adapter;
     List<CommandeEntiere> listeCommandes = new ArrayList<>();
 
 
@@ -37,7 +34,7 @@ public class ClientHistoriqueAchats extends Activity {
 
         recyclerCommandes = findViewById(R.id.recyclerCommandes);
         recyclerCommandes.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CommandeEntiereAdapter(this, listeCommandes);
+        adapter = new ClientCommandeEntiereAdapter(this, listeCommandes);
         recyclerCommandes.setAdapter(adapter);
 
         chargerCommandesDepuisApi();

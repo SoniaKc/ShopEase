@@ -2,7 +2,6 @@ package com.example.projet;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,8 +13,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import com.google.gson.Gson;
 
 public class BoutiqueCommandeDetail extends AppCompatActivity {
 
@@ -32,14 +29,11 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
         totalCommandeView = findViewById(R.id.total_commande);
         produitsContainer = findViewById(R.id.produits_container);
 
-        Gson gson = new Gson();
-        String jsonCommande = getIntent().getStringExtra("commandeEntiereJson");
-        CommandeEntiere commande = gson.fromJson(jsonCommande, CommandeEntiere.class);
+        // 🆕 Récupérer directement depuis l'intent
+        idTransaction = getIntent().getStringExtra("idTransaction");
+        identifiant = getIntent().getStringExtra("id");
 
-        identifiant = commande.idClient;
-        idTransaction = commande.idTransaction;
         apiService = ApiClient.getClient().create(ApiService.class);
-
 
         fetchVenteDetails(idTransaction);
         setupBottomNavigation();
@@ -77,18 +71,20 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     List<Vente> ventes = response.body();
 
-                    double totalCommande = 0.0;
+                    // Total global
                     try {
-                        String totalStr = ventes.get(0).total.replace("€", "").trim();
-                        totalCommande = Double.parseDouble(totalStr);
+                        double totalCommande = Double.parseDouble(
+                                ventes.get(0).total.replace("€", "").replace(",", ".").trim()
+                        );
                         totalCommandeView.setText("Total commande : " + String.format("%.2f", totalCommande) + " €");
-                    } catch (Exception ignored) {
+                    } catch (Exception e) {
                         totalCommandeView.setText("Total commande : Erreur");
                     }
 
                     for (Vente vente : ventes) {
                         fetchProduitEtAfficher(vente);
                     }
+
                 } else {
                     Toast.makeText(BoutiqueCommandeDetail.this, "Commande introuvable.", Toast.LENGTH_SHORT).show();
                 }
@@ -108,25 +104,22 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
             public void onResponse(Call<Produit> call, Response<Produit> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Produit produit = response.body();
-                    double prixUnitaire = 0.0;
-                    int quantite = 0;
-                    double totalProduit = 0.0;
+
+                    double prixUnitaire;
+                    int quantite;
+                    double totalProduit;
 
                     try {
-                        String prixStr = produit.prix.replace("€", "").trim();
-                        String quantiteStr = vente.quantite.trim();
-
                         prixUnitaire = Double.parseDouble(produit.prix.replace(",", ".").replace("€", "").trim());
-                        quantite = Integer.parseInt(quantiteStr);
+                        quantite = Integer.parseInt(vente.quantite.trim());
                         totalProduit = prixUnitaire * quantite;
-
                     } catch (Exception e) {
                         Toast.makeText(BoutiqueCommandeDetail.this, "Erreur lecture produit : " + produit.nom, Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     TextView produitView = new TextView(BoutiqueCommandeDetail.this);
-                    produitView.setText(produit.nom + " | Qté: " + quantite + " | Total: " +  String.format("%.2f", totalProduit) + " €");
+                    produitView.setText(produit.nom + " | Qté: " + quantite + " | Total: " + String.format("%.2f", totalProduit) + " €");
                     produitView.setTextSize(16);
                     produitView.setPadding(8, 16, 8, 16);
 
