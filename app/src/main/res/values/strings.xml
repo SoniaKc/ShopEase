@@ -1,25 +1,29 @@
 <resources>
     <string name="app_name">ShopEase</string>
 
+    <!-- Global -->
+    <string name="Valider">Valider</string>
+    <string name="Supprimer">Supprimer</string>
+    <string name="Modifier">Modifier</string>
+    <string name="Enregistrer">Enregistrer</string>
 
-    <string name="accueil">Accueil</string>
-    <string name="favoris">Favoris</string>
-    <string name="ventes">Ventes</string>
-    <string name="compte">Compte</string>
-    <string name="consultesRecemment">Consultés récemment</string>
-    <string name="clientsAdorent">Nos clients les adorent</string>
-    <string name="rechercher">Rechercher...</string>
-    <string name="aProposTitre">À propos</string>
+    <!-- Dialog -->
+    <string name="nomProduit">Nom du produit</string>
+    <string name="Commentaire">Commentaire :</string>
+    <string name="VotreAvis">Votre avis...</string>
+
+    <!-- Items -->
+    <string name="Description">Description</string>
+    <string name="Prix">Prix : </string>
+    <string name="Quantite">Quantité : </string>
+
+
+    <!--Pages Connexion et Inscriptions -->
     <string name="connexion">Connexion</string>
-    <string name="avis">Avis</string>
-
     <string name="connexionEntrezID">Entrez votre identifiant</string>
     <string name="mdp">Mot de passe :</string>
     <string name="mdpSecu">Mot de passe sécurisé</string>
     <string name="seConnecter">Se connecter</string>
-    <string name="FAQBoutique">FAQ Boutique</string>
-    <string name="FAQClient">FAQ Client</string>
-    <string name="label">Label :</string>
 
     <string name="inscriptionBoutique">Inscription \nBoutique</string>
     <string name="identifiant">Identifiant :</string>
@@ -47,15 +51,15 @@
     <string name="boutique">Boutique</string>
     <string name="connBoutique">Connection\nBoutique</string>
 
-    <string name="mentionsLegales">Mentions Légales</string>
 
-    <string name="params">Paramètres</string>
-    <string name="paramLangue">Langue : Français</string>
-    <string name="paramCookie">Cookies : Acceptés</string>
-    <string name="paramNotifs">Notifications : Push, e-mail, SMS</string>
-    <string name="supprCompte">Supprimer le compte</string>
-
+    <!--Pages Mes Infos Client et Boutique -->
     <string name="mesInfos">Mes informations</string>
+    <string name="mesAdresses">Mes adresses</string>
+    <string name="HistoriqueAchat">Historique des achats</string>
+    <string name="HistoriqueVentes">Historique des ventes</string>
+    <string name="moyenPaiement">Moyens de paiement</string>
+    <string name="avis">Avis</string>
+
     <string name="fleurCie">Nom boutique : Fleur et Cie</string>
     <string name="modifNomBoutique">Modifier Nom boutique</string>
     <string name="mailBoutique">E-mail : FleurCie@gmail.com</string>
@@ -78,6 +82,104 @@
     <string name="modifIban">Modifier IBAN</string>
     <string name="supprBoutique">Supprimer la boutique</string>
     <string name="modifPhoto">Modifier Photo</string>
+
+
+
+    <!--Pages Paramètres Client et Boutique -->
+    <string name="params">Paramètres</string>
+    <string name="paramLangue">Langue : Français</string>
+    <string name="paramCookie">Cookies : Acceptés</string>
+    <string name="paramNotifs">Notifications : Push, e-mail, SMS</string>
+    <string name="supprCompte">Supprimer le compte</string>
+
+    <!-- Global Client -->
+
+    <!-- Client Panier (3 activités) -->
+    <string name="Payer">Payer</string>
+    <string name="votrePanier">Votre panier</string>
+    <string name="valeurPanier">Valeur totale : 0,00 $ </string>
+    <string name="panierVide">Votre panier est vide. </string>
+
+
+    <string name="nomClient">Prénom Nom</string>
+    <string name="felicitationAchat">Félicitation pour votre achat !</string>
+    <string name="preparationAchat">Il est en cours de préparation et ne tardera pas à arriver devant votre porte.</string>
+    <string name="remerciementAchat">Merci pour votre confiance. En espérant vous revoir rapidement, L\'équipe de ShopEase.</string>
+
+
+    <string name="methodePaiement">Votre moyen de règlement</string>
+    <string name="adressePaiement">Votre adresse de Livraison</string>
+    <string name="promoPaiement">Code promotion ou carte cadeau</string>
+    <string name="validerPaiement">Valider et Payer</string>
+    <string name="carteEx">Carte 1 : 4111 **** **** 1111</string>
+    <string name="adresseEx">Adresse 1 : 49 rue de l\'Olivette, 34089 St Jacques, France</string>
+
+    <string name="choisirAutreCarte">Choisir une autre carte</string>
+    <string name="choisirAutreAdresse">Choisir une autre adresse</string>
+    <string name="promoCode">Code :</string>
+
+    <!-- Produit -->
+    <string name="AJouterFavoris">Ajouter aux favoris</string>
+    <string name="AJouterPanier">Ajouter au Panier</string>
+
+
+    <!-- Avis et LaisserAvis -->
+    <string name="noteEx">Note (ex : 4/5)</string>
+    <string name="noteEntree">Entrez votre note</string>
+    <string name="commentaire">Commentaire :</string>
+    <string name="partagerAvis">Partagez votre avis ici...</string>
+    <string name="Envoyer">Envoyer</string>
+
+    <!-- Favoris -->
+    <string name="favoris1">Votre liste</string>
+    <string name="favoris2">de souhaits</string>
+
+    <!-- Edit carte et adresse -->
+    <string name="modifCarte">Modifier la carte</string>
+    <string name="modifAdresse2">Modifier l\'adresse</string>
+    <string name="numCarte">Numéro de carte</string>
+    <string name="titulaireCarte">Titulaire de la carte</string>
+    <string name="moisAnnee">MM/AA</string>
+    <string name="CVC">CVC</string>
+
+    <string name="Numero">Numéro</string>
+    <string name="Rue">Rue</string>
+    <string name="CodePostal">Code Postal</string>
+    <string name="Ville">Ville</string>
+    <string name="Pays">Pays</string>
+
+    <!--Historique achat et ventes client et boutique -->
+    <string name="totalCommande">Total commande : </string>
+
+    <!-- Global Boutique -->
+
+
+
+    <string name="accueil">Accueil</string>
+    <string name="favoris">Favoris</string>
+    <string name="ventes">Ventes</string>
+    <string name="compte">Compte</string>
+    <string name="consultesRecemment">Consultés récemment</string>
+    <string name="clientsAdorent">Nos clients les adorent</string>
+    <string name="rechercher">Rechercher...</string>
+    <string name="aProposTitre">À propos</string>
+
+
+
+
+    <string name="FAQBoutique">FAQ Boutique</string>
+    <string name="FAQClient">FAQ Client</string>
+    <string name="label">Label :</string>
+
+
+
+
+
+    <string name="mentionsLegales">Mentions Légales</string>
+
+
+
+
 
 
 
@@ -240,29 +342,14 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
 
 
     <!-- Titres et textes -->
-    <string name="purchase_confirmation_title">Page Validation Achat</string>
-    <string name="customer_name">Prénom Nom</string>
-    <string name="congratulations_message">Félicitation pour votre achat !</string>
-    <string name="preparation_message">Il est en cours de préparation et ne tardera pas à arriver devant votre porte.</string>
-    <string name="thank_you_message">Merci pour votre confiance. En espérant vous revoir rapidement, L\'équipe de ShopEase.</string>
 
 
 
     <!-- Titres et en-têtes -->
-    <string name="payment_page_title">Page de paiement</string>
-    <string name="payment_method_section">Votre moyen de règlement</string>
-    <string name="delivery_address_section">Votre adresse de Livraison</string>
-    <string name="promo_code_section">Code promotion ou carte cadeau</string>
-    <string name="validate_button">Valider et Payer</string>
+
 
     <!-- Textes des cartes et adresses -->
-    <string name="card_example">Carte 1 : 4111 **** **** 1111</string>
-    <string name="address_example">Adresse 1 : 49 rue de l\'Olivette, 34089 St Jacques, France</string>
 
-    <!-- Boutons -->
-    <string name="choose_another_card">Choisir une autre carte</string>
-    <string name="choose_another_address">Choisir une autre adresse</string>
-    <string name="promo_code_hint">Code :</string>
 
     <!-- Navigation -->
     <string name="home">Accueil</string>

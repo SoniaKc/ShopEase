@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/produitTitre"
-        android:text="Nom du produit"
+        android:text="@string/nomProduit"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -21,7 +21,7 @@
 
     <TextView
         android:layout_marginTop="10dp"
-        android:text="Commentaire :"
+        android:text="@string/Commentaire"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -31,5 +31,5 @@
         android:layout_height="wrap_content"
         android:minLines="3"
         android:gravity="top|start"
-        android:hint="Votre avis..." />
+        android:hint="@string/VotreAvis" />
 </LinearLayout>

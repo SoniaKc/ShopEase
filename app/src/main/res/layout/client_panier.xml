@@ -7,6 +7,8 @@
     android:background="#FFFFFF"
     tools:context=".ClientPanier">
 
+
+    <!-- Barre du haut -->
     <View
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
@@ -21,28 +23,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/topPanel" />
 
-    <!-- Barre de recherche -->
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/barreRecherche"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:iconifiedByDefault="false"
-        app:queryHint="@string/rechercher"
-        app:layout_constraintTop_toBottomOf="@id/topAppBar"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:background="@color/purple_51" />
-
     <!-- Titre Panier -->
     <TextView
         android:id="@+id/titlePanier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Votre panier"
+        android:text="@string/votrePanier"
         android:textStyle="bold"
         android:textSize="25sp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/barreRecherche"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
@@ -61,7 +51,7 @@
         android:id="@+id/totalPanier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valeur totale : 0,00 $"
+        android:text="@string/votrePanier"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/panierIcon"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,12 +62,13 @@
         android:id="@+id/panierVide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Votre panier est vide."
+        android:text="@string/panierVide"
         app:layout_constraintTop_toBottomOf="@id/totalPanier"
         android:textSize="16sp"
         android:gravity="center"
         android:visibility="gone"/>
 
+    <!-- Liste des éléments du panier -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -102,7 +93,7 @@
         android:id="@+id/btnPayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Payer"
+        android:text="@string/Payer"
         android:backgroundTint="#E5C5F0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +108,6 @@
         android:layout_height="60dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomPanel" />
 
-    <!-- Panel bas -->
     <View
         android:id="@+id/bottomPanel"
         android:layout_width="match_parent"

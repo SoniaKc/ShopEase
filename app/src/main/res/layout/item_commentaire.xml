@@ -56,7 +56,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="@color/alterne2"
-                android:text="Modifier" />
+                android:text="@string/Modifier" />
 
             <Button
                 android:id="@+id/btnSupprimer"
@@ -64,7 +64,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="@color/alterne2"
-                android:text="Supprimer"
+                android:text="@string/Supprimer"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
     </LinearLayout>

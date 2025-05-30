@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Note (ex : 4/5)"
+        android:text="@string/noteEx"
         android:textSize="16sp"
         android:paddingBottom="8dp" />
 
@@ -17,7 +17,7 @@
         android:id="@+id/note_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Entrez votre note"
+        android:hint="@string/noteEntree"
         android:inputType="numberDecimal"
         android:padding="12dp"
         android:background="@android:drawable/edit_text" />
@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Commentaire"
+        android:text="@string/commentaire"
         android:textSize="16sp"
         android:paddingTop="16dp"
         android:paddingBottom="8dp" />
@@ -34,7 +34,7 @@
         android:id="@+id/commentaire_input"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:hint="Partagez votre avis ici..."
+        android:hint="@string/partagerAvis"
         android:gravity="top|start"
         android:background="@android:drawable/edit_text"
         android:padding="12dp"
@@ -44,7 +44,7 @@
         android:id="@+id/envoyer_avis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Envoyer"
+        android:text="@string/Envoyer"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/purple_500"
         android:textColor="#FFFFFF" />

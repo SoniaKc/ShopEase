@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".ClientAccueil">
 
+
+    <!-- Barre du haut -->
     <View
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
@@ -42,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/topAppBar"
         app:layout_constraintEnd_toEndOf="@+id/barreRecherche"/>
 
-
+    <!-- Contenu de la page -->
     <TextView
         android:id="@+id/titreCommandes"
         android:layout_width="match_parent"
@@ -65,7 +67,7 @@
         android:clipToPadding="false"
         android:scrollbars="vertical"/>
 
-    <!-- Navigation en bas -->
+    <!-- Barre du bas -->
     <include
         android:id="@+id/include"
         android:layout_width="match_parent"
