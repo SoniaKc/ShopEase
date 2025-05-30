@@ -112,15 +112,20 @@ public class ClientParametres extends Activity {
 
         Notifs = findViewById(R.id.rowNotifications);
         Notifs.setOnClickListener(v -> showCheckboxPopup());
+        setupTopBottomNavigation();
+    }
 
-        // TOP NAV
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
+
         navCart.setOnClickListener(v -> {
             Intent i = new Intent(this, ClientPanier.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -164,7 +169,6 @@ public class ClientParametres extends Activity {
                 CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
                 checkBox.setChecked(selectedItems.contains(allItems.get(position)));
 
-                // Ajout d'un écouteur direct sur la CheckBox
                 checkBox.setOnClickListener(v -> {
                     String item = allItems.get(position);
                     if (checkBox.isChecked()) {
@@ -181,7 +185,7 @@ public class ClientParametres extends Activity {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             CheckBox checkBox = view.findViewById(R.id.checkBoxItem);
-            checkBox.toggle(); // Cela déclenchera le OnCheckedChangeListener
+            checkBox.toggle();
         });
 
         Button btnValider = popupView.findViewById(R.id.btnValider);
@@ -199,7 +203,6 @@ public class ClientParametres extends Activity {
         if (selectedItems.isEmpty()) {
             Notifs.setText(prefix + "Aucune sélection");
         } else {
-            // Affichage uniquement
             Notifs.setText("Notifs : " + TextUtils.join(", ", selectedItems));
         }
     }
@@ -208,7 +211,6 @@ public class ClientParametres extends Activity {
         Parametre param = new Parametre();
         param.login = identifiant;
 
-        // Nettoyer les préfixes "Langue :" et "Cookies :" si présents
         String langueText = ((TextView) findViewById(R.id.rowLangue)).getText().toString();
         param.langue = langueText.replace("Langue :", "").trim();
 
@@ -251,11 +253,9 @@ public class ClientParametres extends Activity {
                     TextView cookiesView = findViewById(R.id.rowCookies);
                     Notifs = findViewById(R.id.rowNotifications);
 
-                    // Ajout des préfixes seulement à l'affichage
                     langueView.setText("Langue :" + param.langue);
                     cookiesView.setText("Cookies :" + param.cookies);
 
-                    // Nettoyage des notifications avant traitement
                     String notifications = param.notifications;
                     if (notifications != null && notifications.startsWith("Notifs :")) {
                         notifications = notifications.replace("Notifs :", "").trim();

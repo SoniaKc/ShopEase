@@ -38,8 +38,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_panier, parent, false); // Assure-toi d’avoir ce layout
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_panier, parent, false);
         return new ViewHolder(view);
     }
 

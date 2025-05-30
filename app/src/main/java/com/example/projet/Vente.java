@@ -1,6 +1,5 @@
 package com.example.projet;
 
-// Vente.java
 public class Vente {
     public String idTransaction;
     public String login_boutique;

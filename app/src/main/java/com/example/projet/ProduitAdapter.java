@@ -34,18 +34,13 @@ public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Produit produit = produits.get(position);
         holder.titre.setText(produit.nom);
-        holder.date.setText("Updated today"); // remplacer par produit.date si dispo
+        holder.date.setText("Updated today");
         holder.image.setImageResource(R.drawable.img1);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, BoutiqueEditProduit.class);
             intent.putExtra("id", produit.login_boutique);
             intent.putExtra("nomProduit", produit.nom);
-
-            //intent.putExtra("categorie", produit.categories);
-            //intent.putExtra("reduction", produit.reduction);
-            //intent.putExtra("prix", produit.prix);
-            //intent.putExtra("description", produit.description);
             context.startActivity(intent);
         });
     }

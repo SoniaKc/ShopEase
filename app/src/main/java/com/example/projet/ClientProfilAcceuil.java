@@ -63,7 +63,6 @@ public class ClientProfilAcceuil extends Activity {
         LinearLayout mentions = findViewById(R.id.btnLegal);
         Button deconnexion = findViewById(R.id.btnDeconnexion);
 
-        // Gestion des clics
         informations.setOnClickListener(v -> {
             Intent intent = new Intent(this, ClientProfilInfos.class);
             intent.putExtra("id", identifiant);
@@ -123,7 +122,11 @@ public class ClientProfilAcceuil extends Activity {
             startActivity(intent);
         });
 
-        // TOP NAVIGATION BAR
+        setupTopBottomNavigation();
+    }
+
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -132,7 +135,7 @@ public class ClientProfilAcceuil extends Activity {
             startActivity(i);
         });
 
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);

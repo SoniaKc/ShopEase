@@ -38,12 +38,10 @@ public class ClientPaiementPanier extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_paiement_panier);
 
-        // Initialisation des données
         identifiant = getIntent().getStringExtra("id");
         total = getIntent().getDoubleExtra("total",0.0);
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
 
-        // Initialisation des vues
         Button carte = findViewById(R.id.carte);
         Button adresse = findViewById(R.id.adresse);
         Button validerPayer = findViewById(R.id.validerPayer);
@@ -52,12 +50,9 @@ public class ClientPaiementPanier extends Activity {
         loadDefaultCard();
         loadDefaultAddress();
 
-
-        // Gestion du clic sur "Choisir une autre carte"
         carte.setOnClickListener(b -> showCardSelectionDialog());
         adresse.setOnClickListener(v -> showAddressSelectionDialog());
 
-        // Gestion du clic sur "Valider et Payer"
         validerPayer.setOnClickListener(b -> {
             String textCode = code.getText().toString().trim();
             if (isValidPromoCode(textCode)) {
@@ -67,8 +62,11 @@ public class ClientPaiementPanier extends Activity {
             }
         });
 
+        setupTopBottomNavigation();
+    }
 
-        // TOP NAVIGATION BAR
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -77,8 +75,7 @@ public class ClientPaiementPanier extends Activity {
             startActivity(i);
         });
 
-
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -100,7 +97,6 @@ public class ClientPaiementPanier extends Activity {
             i.putExtra("id", identifiant);
             startActivity(i);
         });
-
     }
 
     private void loadDefaultCard() {
@@ -109,12 +105,11 @@ public class ClientPaiementPanier extends Activity {
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 List<String> cards = response.body();
                 if (cards != null && !cards.isEmpty()) {
-                    selectedCard = cards.get(0); // première carte
+                    selectedCard = cards.get(0);
                     TextView TVcarte = findViewById(R.id.TVcarte);
                     TVcarte.setText(selectedCard);
                 }
             }
-
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
                 Toast.makeText(ClientPaiementPanier.this, "Impossible de charger les cartes", Toast.LENGTH_SHORT).show();
@@ -128,7 +123,7 @@ public class ClientPaiementPanier extends Activity {
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 List<String> adresses = response.body();
                 if (adresses != null && !adresses.isEmpty()) {
-                    selectedAddress = adresses.get(0); // première adresse
+                    selectedAddress = adresses.get(0);
                     TextView TVadresse = findViewById(R.id.TVadresse);
                     TVadresse.setText(selectedAddress);
                 }
@@ -220,10 +215,7 @@ public class ClientPaiementPanier extends Activity {
     }
 
     private void processPayment() {
-        // Implémentez votre logique de paiement ici
         Toast.makeText(this, "Paiement effectué avec la carte : " + selectedCard, Toast.LENGTH_SHORT).show();
-
-        // Redirection vers l'activité de confirmation
         Intent intent = new Intent(this, ClientPaiementValidation.class);
         intent.putExtra("id", identifiant);
         startActivity(intent);

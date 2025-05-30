@@ -40,7 +40,7 @@ public class ClientPanier extends Activity {
 
         identifiant = getIntent().getStringExtra("id");
 
-        recyclerView = findViewById(R.id.recyclerPanier); // Assure-toi que tu as ce RecyclerView dans ton XML
+        recyclerView = findViewById(R.id.recyclerPanier);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new PanierAdapter(panierDisplayItems, this::onDeleteClicked, this::onQuantityChanged);
         recyclerView.setAdapter(adapter);
@@ -66,7 +66,11 @@ public class ClientPanier extends Activity {
             }
         });
 
-        // TOP NAVIGATION BAR
+        setupTopBottomNavigation();
+    }
+
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -75,8 +79,7 @@ public class ClientPanier extends Activity {
             startActivity(i);
         });
 
-
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -118,7 +121,7 @@ public class ClientPanier extends Activity {
 
                         List<Panier> panierList = response.body();
                         final int totalItems = panierList.size();
-                        final int[] loadedCount = {0};  // compteur mutable
+                        final int[] loadedCount = {0};
 
                         for (Panier item : panierList) {
                             apiService.getProduit(item.login_boutique, item.nom_produit)

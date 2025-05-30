@@ -31,7 +31,6 @@ public class ClientPaiementValidation extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_paiement_validation);
 
-
         identifiant = getIntent().getStringExtra("id");
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
 
@@ -42,7 +41,6 @@ public class ClientPaiementValidation extends Activity {
                     Client client = response.body();
                     TextView nomPrenom = findViewById(R.id.nomPrenom);
                     nomPrenom.setText(client.nom + " " + client.prenom);
-
                 } else {
                     Toast.makeText(ClientPaiementValidation.this, "Identifiant inconnu.", Toast.LENGTH_SHORT).show();
                 }
@@ -54,7 +52,14 @@ public class ClientPaiementValidation extends Activity {
             }
         });
 
-        // TOP NAVIGATION BAR
+        setupTopBottomNavigation();
+        Toast.makeText(ClientPaiementValidation.this, "achat effectué", Toast.LENGTH_SHORT).show();
+        showLocalNotification("achat effectué", "achat effectué");
+
+    }
+
+    private void setupTopBottomNavigation() {
+        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
@@ -63,8 +68,7 @@ public class ClientPaiementValidation extends Activity {
             startActivity(i);
         });
 
-
-        // BOTTOM NAVIGATION BAR
+        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -86,18 +90,12 @@ public class ClientPaiementValidation extends Activity {
             i.putExtra("id", identifiant);
             startActivity(i);
         });
-
-        Toast.makeText(ClientPaiementValidation.this, "achat effectué", Toast.LENGTH_SHORT).show();
-        showLocalNotification("achat effectué", "achat effectué");
-
-
     }
 
     public void showLocalNotification(String title, String message) {
         String channelId = "produit_channel";
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // Créer le canal (obligatoire pour Android 8+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     channelId,
@@ -107,7 +105,6 @@ public class ClientPaiementValidation extends Activity {
             notificationManager.createNotificationChannel(channel);
         }
 
-        // Intent pour ouvrir l’activité quand on clique sur la notif
         Intent intent = new Intent(this, BoutiqueMesProduits.class);
         intent.putExtra("log", identifiant);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);

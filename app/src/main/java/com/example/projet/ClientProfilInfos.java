@@ -54,7 +54,6 @@ public class ClientProfilInfos extends Activity {
         apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
 
-        // Initialisation des vues
         nom = findViewById(R.id.nom);
         prenom = findViewById(R.id.prenom);
         email = findViewById(R.id.email);
@@ -64,8 +63,6 @@ public class ClientProfilInfos extends Activity {
         photoProfil = findViewById(R.id.profilePhoto);
         profilePhoto = findViewById(R.id.photo);
 
-
-        // Appel API pour récupérer les données client
         apiService.getClient(identifiant).enqueue(new Callback<Client>() {
             @Override
             public void onResponse(Call<Client> call, Response<Client> response) {
@@ -84,7 +81,7 @@ public class ClientProfilInfos extends Activity {
             }
         });
 
-        // Boutons de modification
+
         ImageButton btnModifNom = findViewById(R.id.BtnModifNom);
         ImageButton btnModifPrenom = findViewById(R.id.BtnModifPrenom);
         ImageButton btnModifEmail = findViewById(R.id.BtnModifEmail);
@@ -135,7 +132,6 @@ public class ClientProfilInfos extends Activity {
                     .show();
         });
 
-        // Navigation
         setupNavigation();
     }
 

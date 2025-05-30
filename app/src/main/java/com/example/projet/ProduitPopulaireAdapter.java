@@ -36,7 +36,6 @@ public class ProduitPopulaireAdapter extends RecyclerView.Adapter<ProduitPopulai
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Produit produit = produits.get(position);
 
-        // possibilité de charger une image avec Glide si URL)
         holder.imageProduit.setImageResource(R.drawable.img1);
         holder.titreProduit.setText(produit.nom);
 
