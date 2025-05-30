@@ -23,23 +23,14 @@
         app:layout_constraintTop_toBottomOf="@+id/topPanel"/>
 
     <!-- Contenu de la page -->
-    <ScrollView
+    <ListView
+        android:id="@+id/listeCommentaires"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/bottomBar"
-        app:layout_constraintTop_toBottomOf="@id/topAppBar"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="35dp">
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBar"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <ListView
-            android:id="@+id/listeCommentaires"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/bottomBar"
-            app:layout_constraintTop_toBottomOf="@id/barreRecherche"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </ScrollView>
 
     <!-- Barre du bas -->
     <include

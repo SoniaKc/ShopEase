@@ -122,6 +122,8 @@
     <string name="choisirAutreAdresse">Choisir une autre adresse</string>
     <string name="promoCode">Code :</string>
 
+    <string name="modeLivraison">Mode de livraison</string>
+
 
     <!-- Adresse et Cartes -->
     <string name="AjoutPaiement"> Ajouter une carte</string>
