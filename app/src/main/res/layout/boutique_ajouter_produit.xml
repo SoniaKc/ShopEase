@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Status Bar -->
+    <!-- Barre du haut -->
     <View
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
@@ -13,7 +13,6 @@
         android:background="@color/purple_50"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Top bar -->
     <include
         android:id="@+id/topAppBar"
         layout="@layout/boutique_top_tool_bar"
@@ -21,7 +20,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/topPanel" />
 
-
+    <!-- Contenu de la page -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -39,7 +38,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Product image -->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +59,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lastname_label"
+                    android:text="@string/nomAddP"
                     android:layout_marginStart="16dp"
                     android:textSize="16sp"
                     android:textColor="#1E1E1E" />
@@ -188,7 +186,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"/>
             </LinearLayout>
-            <!-- Buttons -->
+
+
             <Button
                 android:id="@+id/btnValider"
                 android:layout_width="match_parent"
@@ -217,7 +216,6 @@
         android:layout_height="60dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomPanel" />
 
-    <!-- Panel bas -->
     <View
         android:id="@+id/bottomPanel"
         android:layout_width="match_parent"

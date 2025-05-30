@@ -8,7 +8,6 @@
     android:orientation="horizontal"
     android:gravity="center_vertical">
 
-    <!-- Nom de l’app au centre -->
     <TextView
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
@@ -18,7 +17,6 @@
         android:textColor="@color/black"
         android:layout_centerInParent="true" />
 
-    <!-- Image profil -->
     <ImageView
         android:id="@+id/profilePhoto"
         android:layout_width="40dp"

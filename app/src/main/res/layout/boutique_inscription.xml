@@ -24,7 +24,7 @@
             android:textColor="#000000" />
     </LinearLayout>
 
-    <!-- Form -->
+    <!-- Formulaire -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -148,7 +148,7 @@
                     android:gravity="start|center_vertical"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Bouton -->
+            <!-- Inscription -->
             <Button
                 android:id="@+id/inscription"
                 android:layout_width="wrap_content"
