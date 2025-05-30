@@ -5,6 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -32,34 +39,31 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ClientProfilInfos extends Activity {
-    private static final String PROFILE_IMAGE_KEY = "profile_image_";
     String identifiant;
     ApiService apiService;
     Client currentClient;
-    ImageView profilePhoto;
+    private TextView nom, prenom, email, tel, identifiantView, mdp;
+    private ImageView photoProfil, profilePhoto;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_profil_infos);
 
-        sharedPreferences = getSharedPreferences("profile_prefs", MODE_PRIVATE);
         apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
 
         // Initialisation des vues
-        TextView nom = findViewById(R.id.nom);
-        TextView prenom = findViewById(R.id.prenom);
-        TextView email = findViewById(R.id.email);
-        TextView tel = findViewById(R.id.tel);
-        TextView identifiantView = findViewById(R.id.identifiant);
-        TextView mdp = findViewById(R.id.mdp);
+        nom = findViewById(R.id.nom);
+        prenom = findViewById(R.id.prenom);
+        email = findViewById(R.id.email);
+        tel = findViewById(R.id.tel);
+        identifiantView = findViewById(R.id.identifiant);
+        mdp = findViewById(R.id.mdp);
+        photoProfil = findViewById(R.id.profilePhoto);
         profilePhoto = findViewById(R.id.photo);
 
-        // Charger la photo de profil si elle existe
-        loadProfileImage();
 
         // Appel API pour récupérer les données client
         apiService.getClient(identifiant).enqueue(new Callback<Client>() {
@@ -67,13 +71,7 @@ public class ClientProfilInfos extends Activity {
             public void onResponse(Call<Client> call, Response<Client> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     currentClient = response.body();
-
-                    nom.setText("Nom : " + currentClient.nom);
-                    prenom.setText("Prénom : " + currentClient.prenom);
-                    email.setText("E-mail : " + currentClient.email);
-                    tel.setText("Téléphone : " + currentClient.telephone);
-                    identifiantView.setText("Identifiant : " + currentClient.login);
-                    mdp.setText("Mot de Passe : ********");
+                    updateUIFromClient(currentClient);
 
                 } else {
                     Toast.makeText(ClientProfilInfos.this, "Client introuvable.", Toast.LENGTH_SHORT).show();
@@ -99,32 +97,32 @@ public class ClientProfilInfos extends Activity {
 
         btnModifNom.setOnClickListener(b -> modif("nom", (id, val) -> {
             currentClient.nom = val;
-            updateClient(currentClient, () -> recreate());
+            updateClient(currentClient, () -> updateUIFromClient(currentClient));
             return true;
         }));
 
         btnModifPrenom.setOnClickListener(b -> modif("prenom", (id, val) -> {
             currentClient.prenom = val;
-            updateClient(currentClient, () -> recreate());
+            updateClient(currentClient, () -> updateUIFromClient(currentClient));
             return true;
         }));
 
         btnModifEmail.setOnClickListener(b -> modif("email", (id, val) -> {
             currentClient.email = val;
-            updateClient(currentClient, () -> recreate());
+            updateClient(currentClient, () -> updateUIFromClient(currentClient));
             return true;
         }));
 
         btnModifTel.setOnClickListener(b -> modif("téléphone", (id, val) -> {
             currentClient.telephone = val;
-            updateClient(currentClient, () -> recreate());
+            updateClient(currentClient, () -> updateUIFromClient(currentClient));
             return true;
         }));
 
 
         btnModifMdp.setOnClickListener(b -> modif("mot de passe", (id, val) -> {
             currentClient.password = val;
-            updateClient(currentClient, () -> recreate());
+            updateClient(currentClient, () -> updateUIFromClient(currentClient));
             return true;
         }));
 
@@ -162,19 +160,15 @@ public class ClientProfilInfos extends Activity {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                 Bitmap resizedBitmap = resizeBitmap(bitmap, 800, 800);
+                Bitmap circularBitmap = getCircularBitmap(resizedBitmap);
+
 
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
-                byte[] imageBytes = byteArrayOutputStream.toByteArray();
+                circularBitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
+                //byte[] imageBytes = byteArrayOutputStream.toByteArray();
 
-                Log.e("IMAGE", imageBytes.toString());
-
-                currentClient.image = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
-
-                profilePhoto.setImageBitmap(resizedBitmap);
-                saveProfileImage(resizedBitmap);
-
-                updateClient(currentClient, null);
+                currentClient.image = Base64.encodeToString(bitmapToByteArray(circularBitmap), Base64.NO_WRAP);
+                updateClient(currentClient, () -> updateUIFromClient(currentClient));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -202,32 +196,46 @@ public class ClientProfilInfos extends Activity {
 
         return Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true);
     }
+    private Bitmap getCircularBitmap(Bitmap bitmap) {
+        int size = Math.min(bitmap.getWidth(), bitmap.getHeight());
+        Bitmap output = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
 
-    private void saveProfileImage(Bitmap bitmap) {
-        try {
-            File file = new File(getFilesDir(), "profile_" + identifiant + ".png");
-            try (FileOutputStream out = new FileOutputStream(file)) {
-                bitmap.compress(Bitmap.CompressFormat.PNG, 70, out);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(PROFILE_IMAGE_KEY + identifiant, file.getAbsolutePath());
-                editor.apply();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Erreur lors de la sauvegarde", Toast.LENGTH_SHORT).show();
-        }
+        Canvas canvas = new Canvas(output);
+
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, size, size);
+        final RectF rectF = new RectF(rect);
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+
+        paint.setColor(Color.WHITE);
+        canvas.drawOval(rectF, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, null, rect, paint);
+
+        return output;
     }
 
-    private void loadProfileImage() {
-        String imagePath = sharedPreferences.getString(PROFILE_IMAGE_KEY + identifiant, null);
-        if (imagePath != null) {
-            File imgFile = new File(imagePath);
-            if (imgFile.exists()) {
-                Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                profilePhoto.setImageBitmap(bitmap);
-            }
-        }
+    private byte[] bitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
     }
+
+
+    private void updateUIFromClient(Client client) {
+        nom.setText("Nom : " + client.nom);
+        prenom.setText("Prénom : " + client.prenom);
+        email.setText("E-mail : " + client.email);
+        tel.setText("Téléphone : " + client.telephone);
+        identifiantView.setText("Identifiant : " + client.login);
+        mdp.setText("Mot de Passe : ********");
+
+        ImageHandler.handleAllImages(client.image, photoProfil, profilePhoto);
+    }
+
 
     private void setupNavigation() {
         ImageView navCart = findViewById(R.id.cartIcon);
@@ -281,8 +289,10 @@ public class ClientProfilInfos extends Activity {
             if (!nouvelleValeur.isEmpty()) {
                 boolean success = fonction.appliquer(identifiant, nouvelleValeur);
                 if (success) {
-                    Toast.makeText(this, param + " modifié avec succès", Toast.LENGTH_SHORT).show();
-                    recreate();
+                    updateClient(currentClient, () -> {
+                        updateUIFromClient(currentClient);
+                        Toast.makeText(this, param + " modifié avec succès", Toast.LENGTH_SHORT).show();
+                    });
                 } else {
                     Toast.makeText(this, "Échec de la modification", Toast.LENGTH_SHORT).show();
                 }
@@ -294,6 +304,7 @@ public class ClientProfilInfos extends Activity {
         builder.setNegativeButton(R.string.Retour, null);
         builder.create().show();
     }
+
 
     private void updateClient(Client client, Runnable onSuccess) {
         apiService.updateClient(client).enqueue(new Callback<Void>() {
