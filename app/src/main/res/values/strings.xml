@@ -217,7 +217,8 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
     <string name="delete_account_button">Supprimer mon compte</string>
 
     <!-- Labels des champs -->
-    <string name="name_label">Prénom Nom :</string>
+    <string name="lastname_label">Nom :</string>
+    <string name="firstname_label">Prénom :</string>
     <string name="email_label">E-mail :</string>
     <string name="phone_label">Téléphone :</string>
     <string name="username_label">Identifiant :</string>

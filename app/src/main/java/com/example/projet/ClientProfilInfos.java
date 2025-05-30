@@ -48,6 +48,7 @@ public class ClientProfilInfos extends Activity {
 
         // Initialisation des vues
         TextView nom = findViewById(R.id.nom);
+        TextView prenom = findViewById(R.id.prenom);
         TextView email = findViewById(R.id.email);
         TextView tel = findViewById(R.id.tel);
         TextView identifiantView = findViewById(R.id.identifiant);
@@ -57,8 +58,6 @@ public class ClientProfilInfos extends Activity {
         // Charger la photo de profil si elle existe
         loadProfileImage();
 
-        profilePhoto.setOnClickListener(v -> openImageChooser());
-
         // Appel API pour récupérer les données client
         apiService.getClient(identifiant).enqueue(new Callback<Client>() {
             @Override
@@ -66,11 +65,12 @@ public class ClientProfilInfos extends Activity {
                 if (response.isSuccessful() && response.body() != null) {
                     currentClient = response.body();
 
-                    nom.setText("Prénom Nom : " + currentClient.prenom + " " + currentClient.nom);
+                    nom.setText("Nom : " + currentClient.nom);
+                    prenom.setText("Prénom : " + currentClient.prenom);
                     email.setText("E-mail : " + currentClient.email);
                     tel.setText("Téléphone : " + currentClient.telephone);
                     identifiantView.setText("Identifiant : " + currentClient.login);
-                    mdp.setText("Mot de Passe : ********"); // Masqué
+                    mdp.setText("Mot de Passe : ********");
 
                 } else {
                     Toast.makeText(ClientProfilInfos.this, "Client introuvable.", Toast.LENGTH_SHORT).show();
@@ -85,16 +85,22 @@ public class ClientProfilInfos extends Activity {
 
         // Boutons de modification
         ImageButton btnModifNom = findViewById(R.id.BtnModifNom);
+        ImageButton btnModifPrenom = findViewById(R.id.BtnModifPrenom);
         ImageButton btnModifEmail = findViewById(R.id.BtnModifEmail);
         ImageButton btnModifTel = findViewById(R.id.BtnModifTel);
-        ImageButton btnModifId = findViewById(R.id.BtnModifId);
         ImageButton btnModifMdp = findViewById(R.id.BtnModifMdp);
         Button btnSupprimer = findViewById(R.id.btnSupprimer);
+        ImageButton btnModifPhoto = findViewById(R.id.BtnModifPhoto);
 
-        btnModifNom.setOnClickListener(b -> modif("nom complet", (id, val) -> {
-            String[] parts = val.split(" ", 2);
-            currentClient.prenom = parts.length > 1 ? parts[0] : "";
-            currentClient.nom = parts.length > 1 ? parts[1] : parts[0];
+        btnModifPhoto.setOnClickListener(v -> openImageChooser());
+
+        btnModifNom.setOnClickListener(b -> modif("nom", (id, val) -> {
+            currentClient.nom = val;
+            return updateClient(currentClient);
+        }));
+
+        btnModifPrenom.setOnClickListener(b -> modif("prenom", (id, val) -> {
+            currentClient.prenom = val;
             return updateClient(currentClient);
         }));
 
@@ -108,11 +114,6 @@ public class ClientProfilInfos extends Activity {
             return updateClient(currentClient);
         }));
 
-        btnModifId.setOnClickListener(b -> modif("identifiant", (id, val) -> {
-            currentClient.login = val;
-            identifiant = val;
-            return updateClient(currentClient);
-        }));
 
         btnModifMdp.setOnClickListener(b -> modif("mot de passe", (id, val) -> {
             currentClient.password = val;
