@@ -52,7 +52,7 @@ public class BoutiqueHistoriqueVentes extends Activity {
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
 
         navHome.setOnClickListener(v -> {
-            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
+            Intent i = new Intent(this, BoutiqueMesProduits.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
@@ -64,7 +64,7 @@ public class BoutiqueHistoriqueVentes extends Activity {
         });
 
         navProfile2.setOnClickListener(v -> {
-            Intent i = new Intent(this, BoutiqueProfilInfos.class);
+            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
