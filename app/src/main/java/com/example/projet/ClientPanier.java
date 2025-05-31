@@ -40,6 +40,7 @@ public class ClientPanier extends Activity {
 
         identifiant = getIntent().getStringExtra("id");
 
+
         recyclerView = findViewById(R.id.recyclerPanier);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new PanierAdapter(panierDisplayItems, this::onDeleteClicked, this::onQuantityChanged);
@@ -50,6 +51,8 @@ public class ClientPanier extends Activity {
         idClient = getIntent().getStringExtra("id");
         apiService = ApiClient.getClient().create(ApiService.class);
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
 
         loadPanier();
 

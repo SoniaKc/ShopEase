@@ -13,7 +13,12 @@ public class BoutiqueMentionsLegales extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_mentions_legales);
 
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getBoutiqueAndHandleAllImages(apiService, identifiant, photoProfil);
+
         setupBottomNavigation();
     }
 

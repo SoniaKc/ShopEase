@@ -2,8 +2,12 @@ package com.example.projet;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -29,30 +34,37 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class BoutiqueAjouterProduit extends Activity {
+    private static final int PICK_IMAGE_REQUEST = 1;
     private List<String> selectedItems = new ArrayList<>();
     private List<String> allItems = Arrays.asList("Informatique", "Electronique", "Livre","Animaux","Jeux enfant", "Jeux de sociétés", "Papetterie");
     LinearLayout categorie;
     TextView TVcategorie;
     String Categories ="";
     String identifiant;
+    ApiService apiService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_ajouter_produit);
 
-        identifiant = getIntent().getStringExtra("id");
-        Log.e("id", identifiant);
+        apiService = ApiClient.getClient().create(ApiService.class);
 
+        identifiant = getIntent().getStringExtra("id");
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getBoutiqueAndHandleAllImages(apiService, identifiant, photoProfil);
 
         Button valider = findViewById(R.id.btnValider);
         Button supprimer = findViewById(R.id.btnSupprimer);
+        ImageButton btnModifPhoto = findViewById(R.id.BtnModifPhoto);
 
         EditText nomProduit = findViewById(R.id.nomProduit);
         categorie = findViewById(R.id.categorie);
@@ -60,8 +72,11 @@ public class BoutiqueAjouterProduit extends Activity {
         EditText reductionProduit = findViewById(R.id.reductionProduit);
         EditText prixProduit = findViewById(R.id.prixProduit);
         EditText descriptionProduit = findViewById(R.id.descriptionProduit);
+        ImageView imageProduit = findViewById(R.id.imageProduit);
 
         categorie.setOnClickListener(v -> showCheckboxPopup());
+
+        btnModifPhoto.setOnClickListener(v -> openImageChooser());
 
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +85,12 @@ public class BoutiqueAjouterProduit extends Activity {
                 String reduction = reductionProduit.getText().toString().trim();
                 String prix = prixProduit.getText().toString().trim();
                 String description = descriptionProduit.getText().toString().trim();
+                Drawable drawable = imageProduit.getDrawable();
+
+                Bitmap bitmapImage = ((BitmapDrawable) drawable).getBitmap();
+                Bitmap resizedBitmap = resizeBitmap(bitmapImage, 800, 800);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
 
                 if (!nom.isEmpty()) {
                     Produit produit = new Produit();
@@ -79,8 +100,9 @@ public class BoutiqueAjouterProduit extends Activity {
                     produit.reduction = reduction;
                     produit.prix = prix;
                     produit.description = description;
+                    produit.image = Base64.encodeToString(bitmapToByteArray(resizedBitmap), Base64.NO_WRAP);
 
-                    ApiService apiService = ApiClient.getClient().create(ApiService.class);
+
                     Call<Void> call = apiService.addProduit(produit);
                     call.enqueue(new Callback<Void>() {
                         @Override
@@ -122,6 +144,24 @@ public class BoutiqueAjouterProduit extends Activity {
 
         setupBottomNavigation();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            try {
+                ImageView imageProduit = findViewById(R.id.imageProduit);
+                Bitmap bitmap = android.provider.MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+                imageProduit.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Erreur lors du chargement de l'image", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     private void showCheckboxPopup() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -204,5 +244,36 @@ public class BoutiqueAjouterProduit extends Activity {
         });
     }
 
+    private Bitmap resizeBitmap(Bitmap bitmap, int maxWidth, int maxHeight) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+
+        float ratioBitmap = (float) width / (float) height;
+        float ratioMax = (float) maxWidth / (float) maxHeight;
+
+        int finalWidth = maxWidth;
+        int finalHeight = maxHeight;
+
+        if (ratioMax > ratioBitmap) {
+            finalWidth = (int) ((float) maxHeight * ratioBitmap);
+        } else {
+            finalHeight = (int) ((float) maxWidth / ratioBitmap);
+        }
+
+        return Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true);
+    }
+
+    private byte[] bitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    private void openImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Sélectionnez une image"), PICK_IMAGE_REQUEST);
+    }
 
 }

@@ -43,6 +43,9 @@ public class ClientEditAdresse extends Activity {
         saveButton.setOnClickListener(v -> updateAdresse());
         deleteButton.setOnClickListener(v -> deleteAdresse());
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         loadAdresseDetails();
         setupTopBottomNavigation();
     }

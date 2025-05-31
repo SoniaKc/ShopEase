@@ -8,4 +8,5 @@ public class Produit {
     public String reduction;
     public String prix;
     public String description;
+    public String image;
 }

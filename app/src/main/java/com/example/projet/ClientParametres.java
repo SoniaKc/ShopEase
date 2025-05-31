@@ -43,6 +43,9 @@ public class ClientParametres extends Activity {
         apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         chargerParametres();
 
         TextView Langue = findViewById(R.id.rowLangue);

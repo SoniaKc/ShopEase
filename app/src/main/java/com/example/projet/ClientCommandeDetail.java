@@ -42,6 +42,9 @@ public class ClientCommandeDetail extends AppCompatActivity {
         idTransaction = commande.idTransaction;
         apiService = ApiClient.getClient().create(ApiService.class);
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         fetchVenteDetails(idTransaction);
         setupTopBottomNavigation();
 

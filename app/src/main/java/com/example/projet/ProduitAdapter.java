@@ -34,8 +34,8 @@ public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Produit produit = produits.get(position);
         holder.titre.setText(produit.nom);
-        holder.date.setText("Updated today");
-        holder.image.setImageResource(R.drawable.img1);
+
+        ImageHandler.handleProduitImages(produit.image, holder.image);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, BoutiqueEditProduit.class);

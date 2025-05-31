@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -40,6 +41,10 @@ public class BoutiqueMesProduits extends Activity {
         recyclerView.setAdapter(adapter);
 
         apiService = ApiClient.getClient().create(ApiService.class);
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getBoutiqueAndHandleAllImages(apiService, loginBoutique, photoProfil);
+
         loadProduits();
 
         FloatingActionButton ajouterProduit = findViewById(R.id.btnAddProduit);

@@ -23,13 +23,18 @@ public class BoutiqueHistoriqueVentes extends Activity {
     RecyclerView recyclerCommandes;
     BoutiqueLigneVenteAdapter adapter;
     List<LigneVente> listeLignes = new ArrayList<>();
+    ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_historique_ventes);
 
+        apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getBoutiqueAndHandleAllImages(apiService, identifiant, photoProfil);
 
         recyclerCommandes = findViewById(R.id.recyclerCommandes);
         recyclerCommandes.setLayoutManager(new LinearLayoutManager(this));
@@ -65,8 +70,6 @@ public class BoutiqueHistoriqueVentes extends Activity {
     }
 
     private void chargerCommandesDepuisApi() {
-        ApiService apiService = ApiClient.getClient().create(ApiService.class);
-
         Call<Map<String, List<LigneVente>>> call = apiService.getByBoutique(identifiant);
         call.enqueue(new Callback<Map<String, List<LigneVente>>>() {
             @Override

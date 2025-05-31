@@ -161,7 +161,6 @@ public class ClientProfilInfos extends Activity {
 
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 circularBitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
-                //byte[] imageBytes = byteArrayOutputStream.toByteArray();
 
                 currentClient.image = Base64.encodeToString(bitmapToByteArray(circularBitmap), Base64.NO_WRAP);
                 updateClient(currentClient, () -> updateUIFromClient(currentClient));

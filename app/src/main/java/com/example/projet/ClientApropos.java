@@ -15,6 +15,11 @@ public class ClientApropos extends Activity {
         setContentView(R.layout.client_a_propos);
 
         identifiant = getIntent().getStringExtra("id");
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         setupTopBottomNavigation();
     }
 

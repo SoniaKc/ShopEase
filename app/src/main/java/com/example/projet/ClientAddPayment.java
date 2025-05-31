@@ -35,6 +35,10 @@ public class ClientAddPayment extends Activity {
         saveButton = findViewById(R.id.save_button);
 
         saveButton.setOnClickListener(v -> savePaymentCard());
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         setupTopBottomNavigation();
     }
 

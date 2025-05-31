@@ -32,6 +32,11 @@ public class ClientHistoriqueAchats extends Activity {
 
         identifiant = getIntent().getStringExtra("id");
 
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         recyclerCommandes = findViewById(R.id.recyclerCommandes);
         recyclerCommandes.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ClientCommandeEntiereAdapter(this, listeCommandes);

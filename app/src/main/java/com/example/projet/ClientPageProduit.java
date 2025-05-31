@@ -53,6 +53,9 @@ public class ClientPageProduit extends Activity {
         TextView description = findViewById(R.id.description);
         TextView categories = findViewById(R.id.categories);
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         apiService.getProduit(login_boutique,nomProduit).enqueue(new Callback<Produit>() {
             @Override
             public void onResponse(Call<Produit> call, Response<Produit> response) {

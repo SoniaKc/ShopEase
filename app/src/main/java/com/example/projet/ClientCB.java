@@ -32,6 +32,9 @@ public class ClientCB extends Activity {
         identifiant = getIntent().getStringExtra("id");
         this.cardsContainer = findViewById(R.id.cards_container);
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         setupTopBottomNavigation();
         loadPaymentCards();
 

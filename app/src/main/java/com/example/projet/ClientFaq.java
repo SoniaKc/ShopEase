@@ -5,6 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ClientFaq extends Activity {
     String identifiant;
@@ -14,6 +19,12 @@ public class ClientFaq extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_faq);
         identifiant = getIntent().getStringExtra("id");
+
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         setupTopBottomNavigation();
     }
 

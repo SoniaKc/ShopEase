@@ -11,4 +11,5 @@ public class Boutique {
     public String siege_social;
     public String pays_enregistrement;
     public String iban;
+    public String image;
 }

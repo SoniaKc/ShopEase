@@ -37,6 +37,9 @@ public class ClientAddAdresse extends Activity {
 
         saveButton.setOnClickListener(v -> saveAdresse());
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         setupTopBottomNavigation();
     }
 

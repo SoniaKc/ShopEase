@@ -50,6 +50,10 @@ public class ClientFavoris extends Activity {
         recyclerView.setAdapter(adapter);
 
         apiService = ApiClient.getClient().create(ApiService.class);
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         loadFavoris();
         setupNavigation();
     }

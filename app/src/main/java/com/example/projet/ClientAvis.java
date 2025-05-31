@@ -29,6 +29,9 @@ public class ClientAvis extends Activity {
         identifiant = getIntent().getStringExtra("id");
         setupTopBottomNavigation();
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
 
         Call<List<Commentaire>> call = apiService.getCommentairesByClient(identifiant);
         call.enqueue(new Callback<List<Commentaire>>() {

@@ -27,6 +27,7 @@ public class ClientEditPayement extends Activity {
         setContentView(R.layout.client_edit_payement);
 
         apiService = ApiClient.getClient().create(ApiService.class);
+
         identifiant = getIntent().getStringExtra("id");
         originalCardName = getIntent().getStringExtra("carte_nom");
 
@@ -37,6 +38,9 @@ public class ClientEditPayement extends Activity {
         cardCvv = findViewById(R.id.cvv_input);
         saveButton = findViewById(R.id.save_button);
         deleteButton = findViewById(R.id.delete_button);
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
 
         loadPaymentCard();
         setupTopBottomNavigation();

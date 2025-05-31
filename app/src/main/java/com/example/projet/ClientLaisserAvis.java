@@ -36,6 +36,9 @@ public class ClientLaisserAvis extends AppCompatActivity {
 
         apiService = ApiClient.getClient().create(ApiService.class);
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         envoyerBtn.setOnClickListener(v -> {
             String note = noteInput.getText().toString().trim();
             String commentaire = commentaireInput.getText().toString().trim();

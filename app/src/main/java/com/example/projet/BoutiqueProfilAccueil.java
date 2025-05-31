@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,10 +18,15 @@ public class BoutiqueProfilAccueil extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_profil_acceuil);
 
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
 
         TextView titre = findViewById(R.id.titre);
         titre.setText(identifiant);
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageView mainProfilePhoto = findViewById(R.id.mainProfilePhoto);
+        ImageHandler.getBoutiqueAndHandleAllImages(apiService, identifiant, photoProfil, mainProfilePhoto);
 
         LinearLayout informations = findViewById(R.id.infos);
         LinearLayout mesProduits = findViewById(R.id.btnMyProducts);
@@ -62,7 +68,7 @@ public class BoutiqueProfilAccueil extends Activity {
         params.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ClientParametres.class);
+                Intent intent = new Intent(getApplicationContext(), BoutiqueParametres.class);
                 intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
@@ -80,7 +86,7 @@ public class BoutiqueProfilAccueil extends Activity {
         aPropos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ClientApropos.class);
+                Intent intent = new Intent(getApplicationContext(), BoutiqueApropos.class);
                 intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
@@ -89,7 +95,7 @@ public class BoutiqueProfilAccueil extends Activity {
         mentionsLegales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ClientMentionsLegales.class);
+                Intent intent = new Intent(getApplicationContext(), BoutiqueMentionsLegales.class);
                 intent.putExtra("id", identifiant);
                 startActivity(intent);
             }
@@ -98,6 +104,32 @@ public class BoutiqueProfilAccueil extends Activity {
         deconnexion.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+        });
+
+        setupBottomNavigation();
+    }
+
+    private void setupBottomNavigation() {
+        LinearLayout navHome = findViewById(R.id.navHome);
+        LinearLayout navVentes = findViewById(R.id.navVentes);
+        LinearLayout navProfile2 = findViewById(R.id.navProfile);
+
+        navHome.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navVentes.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueHistoriqueVentes.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navProfile2.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueProfilInfos.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
         });
     }
 }

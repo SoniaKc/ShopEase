@@ -2,6 +2,7 @@ package com.example.projet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,11 +30,13 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
         totalCommandeView = findViewById(R.id.total_commande);
         produitsContainer = findViewById(R.id.produits_container);
 
-        // 🆕 Récupérer directement depuis l'intent
         idTransaction = getIntent().getStringExtra("idTransaction");
         identifiant = getIntent().getStringExtra("id");
 
         apiService = ApiClient.getClient().create(ApiService.class);
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getBoutiqueAndHandleAllImages(apiService, identifiant, photoProfil);
 
         fetchVenteDetails(idTransaction);
         setupBottomNavigation();
@@ -70,8 +73,6 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
             public void onResponse(Call<List<Vente>> call, Response<List<Vente>> response) {
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     List<Vente> ventes = response.body();
-
-                    // Total global
                     try {
                         double totalCommande = Double.parseDouble(
                                 ventes.get(0).total.replace("€", "").replace(",", ".").trim()
@@ -84,7 +85,6 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
                     for (Vente vente : ventes) {
                         fetchProduitEtAfficher(vente);
                     }
-
                 } else {
                     Toast.makeText(BoutiqueCommandeDetail.this, "Commande introuvable.", Toast.LENGTH_SHORT).show();
                 }

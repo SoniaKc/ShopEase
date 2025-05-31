@@ -43,6 +43,9 @@ public class BoutiqueParametres extends Activity {
         apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getBoutiqueAndHandleAllImages(apiService, identifiant, photoProfil);
+
         chargerParametres();
 
         TextView Langue = findViewById(R.id.rowLangue);

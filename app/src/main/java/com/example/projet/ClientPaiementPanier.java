@@ -38,6 +38,9 @@ public class ClientPaiementPanier extends Activity {
         Button validerPayer = findViewById(R.id.validerPayer);
         EditText code = findViewById(R.id.code);
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         loadDefaultCard();
         loadDefaultAddress();
 

@@ -41,6 +41,10 @@ public class ClientAccueil extends Activity {
         produitRecyclerView.setAdapter(adapter);
 
         apiService = ApiClient.getClient().create(ApiService.class);
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
+
         loadProduitsPopulaires();
         setupTopBottomNavigation();
     }

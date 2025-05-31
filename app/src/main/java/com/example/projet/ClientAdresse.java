@@ -39,6 +39,8 @@ public class ClientAdresse extends Activity {
         Log.d("TESTBIDON4", "Reçu " + " cartes");
 
 
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
 
 
         ImageView navCart = findViewById(R.id.cartIcon);

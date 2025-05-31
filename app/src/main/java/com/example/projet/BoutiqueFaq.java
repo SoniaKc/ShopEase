@@ -3,6 +3,7 @@ package com.example.projet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class BoutiqueFaq extends Activity {
@@ -13,7 +14,12 @@ public class BoutiqueFaq extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_faq);
 
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
         identifiant = getIntent().getStringExtra("id");
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getBoutiqueAndHandleAllImages(apiService, identifiant, photoProfil);
+
         setupBottomNavigation();
     }
 
