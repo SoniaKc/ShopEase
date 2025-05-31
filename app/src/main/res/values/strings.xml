@@ -91,8 +91,8 @@
 
     <!--Pages Paramètres Client et Boutique -->
     <string name="params">Paramètres</string>
-    <string name="paramLangue">Langue : Français</string>
-    <string name="paramCookie">Cookies : Acceptés</string>
+    <string name="paramLangue">Langue :</string>
+    <string name="paramCookie">Cookies: </string>
     <string name="paramNotifs">Notifications : Push, e-mail, SMS</string>
     <string name="supprCompte">Supprimer le compte</string>
 

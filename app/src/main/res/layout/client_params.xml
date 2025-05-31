@@ -54,40 +54,61 @@
 
         <!-- Option 1: Langue -->
 
-        <TextView
-            android:id="@+id/rowLangue"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:background="@color/alterne1"
-            android:text="@string/paramLangue"
-            android:textSize="22sp"
-            android:paddingStart="24dp"
+            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:textColor="@color/black"/>
+            android:paddingStart="24dp">
 
-        <Spinner
-            android:id="@+id/spinnerLangue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+            <TextView
+                android:id="@+id/rowLangue"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/paramLangue"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <Spinner
+                android:id="@+id/spinnerLangue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="visible" />
+
+        </LinearLayout>
             
         <!-- Option 2: Cookies -->
-        <TextView
-            android:id="@+id/rowCookies"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:background="@color/alterne2"
-            android:text="@string/paramCookie"
-            android:textSize="22sp"
-            android:paddingStart="24dp"
+            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:textColor="@color/black" />
-            
-        <Spinner
-            android:id="@+id/spinnerCookies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:paddingStart="24dp"
+            android:layout_marginTop="0dp">
+
+            <TextView
+                android:id="@+id/rowCookies"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/paramCookie"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical" />
+
+            <Spinner
+                android:id="@+id/spinnerCookies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+
 
         <!-- Option 3: Notifications -->
         <TextView

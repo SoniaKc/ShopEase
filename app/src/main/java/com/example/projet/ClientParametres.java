@@ -35,6 +35,9 @@ public class ClientParametres extends Activity {
     String identifiant;
     ApiService apiService;
 
+    Spinner spinnerLangue;
+    Spinner spinnerCookies;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,89 +49,66 @@ public class ClientParametres extends Activity {
         ImageView photoProfil = findViewById(R.id.profilePhoto);
         ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
 
-        chargerParametres();
-
-        TextView Langue = findViewById(R.id.rowLangue);
-        Spinner spinnerLangue = findViewById(R.id.spinnerLangue);
-        List<String> optionsLangue = Arrays.asList("Français", "Anglais");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, optionsLangue);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLangue.setAdapter(adapter);
-
-        Langue.setOnClickListener(v -> {
-            if(spinnerLangue.getVisibility() == View.VISIBLE) {
-                spinnerLangue.setVisibility(View.GONE);
-            } else {
-                spinnerLangue.setVisibility(View.VISIBLE);
-                spinnerLangue.performClick();
-            }
-        });
-
-        spinnerLangue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
-                Langue.setText(selection);
-                spinnerLangue.setVisibility(View.GONE);
-                enregistrerParametres();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                spinnerLangue.setVisibility(View.GONE);
-            }
-        });
-
-        TextView Cookies = findViewById(R.id.rowCookies);
-        Spinner spinnerCookies = findViewById(R.id.spinnerCookies);
-
-        List<String> optionsCookies = Arrays.asList("Accepter", "Refuser");
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, optionsCookies);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCookies.setAdapter(adapter2);
-
-        Cookies.setOnClickListener(v -> {
-            if(spinnerCookies.getVisibility() == View.VISIBLE) {
-                spinnerCookies.setVisibility(View.GONE);
-            } else {
-                spinnerCookies.setVisibility(View.VISIBLE);
-                spinnerCookies.performClick();
-            }
-        });
-
-        spinnerCookies.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
-                Cookies.setText(selection);
-                spinnerCookies.setVisibility(View.GONE);
-                enregistrerParametres();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                spinnerCookies.setVisibility(View.GONE);
-            }
-        });
-
         Notifs = findViewById(R.id.rowNotifications);
         Notifs.setOnClickListener(v -> showCheckboxPopup());
+
+        spinnerLangue = findViewById(R.id.spinnerLangue);
+        ArrayAdapter<String> adapterLangue = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item,
+                new String[]{"Français", "Anglais"});
+        adapterLangue.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLangue.setAdapter(adapterLangue);
+
+        spinnerLangue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            boolean isFirst = true;
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (isFirst) {
+                    isFirst = false; // Ignore le premier appel automatique
+                    return;
+                }
+                enregistrerParametres();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        spinnerCookies = findViewById(R.id.spinnerCookies);
+        ArrayAdapter<String> adapterCookies = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item,
+                new String[]{"Accepter", "Refuser"});
+        adapterCookies.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCookies.setAdapter(adapterCookies);
+
+        spinnerCookies.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            boolean isFirst = true;
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (isFirst) {
+                    isFirst = false;
+                    return;
+                }
+                enregistrerParametres();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        chargerParametres();
+
         setupTopBottomNavigation();
     }
 
     private void setupTopBottomNavigation() {
-        // TOP
         ImageView navCart = findViewById(R.id.cartIcon);
-
         navCart.setOnClickListener(v -> {
             Intent i = new Intent(this, ClientPanier.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
-        // BOTTOM
         LinearLayout navHome = findViewById(R.id.navHome);
         LinearLayout navFavorites = findViewById(R.id.navFavorites);
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
@@ -151,7 +131,6 @@ public class ClientParametres extends Activity {
             startActivity(i);
         });
     }
-
 
     private void showCheckboxPopup() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -206,7 +185,7 @@ public class ClientParametres extends Activity {
         if (selectedItems.isEmpty()) {
             Notifs.setText(prefix + "Aucune sélection");
         } else {
-            Notifs.setText("Notifs : " + TextUtils.join(", ", selectedItems));
+            Notifs.setText(prefix + TextUtils.join(", ", selectedItems));
         }
     }
 
@@ -214,16 +193,10 @@ public class ClientParametres extends Activity {
         Parametre param = new Parametre();
         param.login = identifiant;
 
-        String langueText = ((TextView) findViewById(R.id.rowLangue)).getText().toString();
-        param.langue = langueText.replace("Langue :", "").trim();
-
-        String cookiesText = ((TextView) findViewById(R.id.rowCookies)).getText().toString();
-        param.cookies = cookiesText.replace("Cookies :", "").trim();
-
+        param.langue = spinnerLangue.getSelectedItem().toString();
+        param.cookies = spinnerCookies.getSelectedItem().toString();
         param.notifications = TextUtils.join(", ", selectedItems);
         param.type = "client";
-
-        Log.d("PARAMS_SAVE", "Saving params: " + param.langue + " | " + param.cookies + " | " + param.notifications);
 
         Call<Void> call = apiService.updateParametre(param);
         call.enqueue(new Callback<Void>() {
@@ -252,12 +225,15 @@ public class ClientParametres extends Activity {
                     Parametre param = response.body();
                     Log.d("PARAMS_LOAD", "Loaded params: " + param.langue + " | " + param.cookies + " | " + param.notifications);
 
-                    TextView langueView = findViewById(R.id.rowLangue);
-                    TextView cookiesView = findViewById(R.id.rowCookies);
-                    Notifs = findViewById(R.id.rowNotifications);
+                    if (param.langue != null) {
+                        int posLangue = ((ArrayAdapter<String>)spinnerLangue.getAdapter()).getPosition(param.langue);
+                        if (posLangue >= 0) spinnerLangue.setSelection(posLangue);
+                    }
 
-                    langueView.setText("Langue :" + param.langue);
-                    cookiesView.setText("Cookies :" + param.cookies);
+                    if (param.cookies != null) {
+                        int posCookies = ((ArrayAdapter<String>)spinnerCookies.getAdapter()).getPosition(param.cookies);
+                        if (posCookies >= 0) spinnerCookies.setSelection(posCookies);
+                    }
 
                     String notifications = param.notifications;
                     if (notifications != null && notifications.startsWith("Notifs :")) {
