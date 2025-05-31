@@ -23,7 +23,7 @@ public class ClientHistoriqueAchats extends Activity {
     String identifiant;
     RecyclerView recyclerCommandes;
     ClientCommandeEntiereAdapter adapter;
-    List<CommandeEntiere> listeCommandes = new ArrayList<>();
+    List<ClientCommandeEntiere> listeCommandes = new ArrayList<>();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,9 +91,9 @@ public class ClientHistoriqueAchats extends Activity {
             @Override
             public void onResponse(Call<Map<String, List<Vente>>> call, Response<Map<String, List<Vente>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<CommandeEntiere> commandes = new ArrayList<>();
+                    List<ClientCommandeEntiere> commandes = new ArrayList<>();
                     for (Map.Entry<String, List<Vente>> entry : response.body().entrySet()) {
-                        CommandeEntiere commande = new CommandeEntiere();
+                        ClientCommandeEntiere commande = new ClientCommandeEntiere();
                         commande.idTransaction = entry.getKey();
                         commande.login_boutique = new ArrayList<>();
                         commande.idClient = identifiant;

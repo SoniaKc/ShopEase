@@ -27,7 +27,7 @@
         android:id="@+id/titreCommandes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/vosCommandes"
+        android:text="@string/vosVentes"
         app:layout_constraintTop_toBottomOf="@+id/topAppBar"
         android:textSize="20sp"
         android:textStyle="bold"

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <!-- Status Bar -->
@@ -26,30 +25,58 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/topPanel" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/titleAvis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:gravity="center"
+        android:text="@string/laisserAvis"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:padding="24dp"
         android:orientation="vertical"
-        android:background="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/include"
-        app:layout_constraintTop_toBottomOf="@+id/topAppBar">
+        app:layout_constraintTop_toBottomOf="@+id/titleAvis">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/article"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/nom_produit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/noteEx"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:paddingBottom="8dp" />
 
-        <EditText
+        <RatingBar
             android:id="@+id/note_input"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/noteEntree"
-            android:inputType="numberDecimal"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text" />
+            android:numStars="5"
+            android:stepSize="1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,6 +84,7 @@
             android:text="@string/commentaire"
             android:textSize="16sp"
             android:paddingTop="16dp"
+            android:textColor="@color/black"
             android:paddingBottom="8dp" />
 
         <EditText

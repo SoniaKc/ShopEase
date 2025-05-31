@@ -1,24 +1,34 @@
 package com.example.projet;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BoutiqueCommandeDetail extends AppCompatActivity {
+public class BoutiqueCommandeDetail extends Activity {
 
-    private TextView totalCommandeView;
-    private LinearLayout produitsContainer;
+    private TextView totalCommande, nomCommande, dateCommande, statutCommande, clientCommande;
+    private Button boutonValider, boutonRefuser;
     private ApiService apiService;
     private String idTransaction, identifiant;
 
@@ -27,10 +37,14 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.boutique_commande_detail);
 
-        totalCommandeView = findViewById(R.id.total_commande);
-        produitsContainer = findViewById(R.id.produits_container);
+        nomCommande = findViewById(R.id.idTransaction);
+        totalCommande = findViewById(R.id.total);
+        dateCommande = findViewById(R.id.dateVente);
+        statutCommande = findViewById(R.id.statut);
+        clientCommande = findViewById(R.id.idClient);
+        boutonValider = findViewById(R.id.save_button);
+        boutonRefuser = findViewById(R.id.delete_button);
 
-        idTransaction = getIntent().getStringExtra("idTransaction");
         identifiant = getIntent().getStringExtra("id");
 
         apiService = ApiClient.getClient().create(ApiService.class);
@@ -38,7 +52,94 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
         ImageView photoProfil = findViewById(R.id.profilePhoto);
         ImageHandler.getBoutiqueAndHandleAllImages(apiService, identifiant, photoProfil);
 
-        fetchVenteDetails(idTransaction);
+        Gson gson = new Gson();
+        String jsonCommande = getIntent().getStringExtra("commandeEntiereJson");
+        BoutiqueCommandeEntiere commande = gson.fromJson(jsonCommande, BoutiqueCommandeEntiere.class);
+
+        idTransaction = commande.idTransaction;
+
+        nomCommande.append(idTransaction);
+        totalCommande.append(commande.total);
+        dateCommande.append(commande.date_vente);
+        statutCommande.append(commande.statut);
+        clientCommande.append(commande.idClient);
+
+
+        List<BoutiqueCommandeDetail.LigneCommande> lignes = new ArrayList<>();
+        for (int i = 0; i < commande.nom_produit.size(); i++) {
+            lignes.add(new BoutiqueCommandeDetail.LigneCommande(
+                    commande.nom_produit.get(i),
+                    commande.quantite.get(i)
+            ));
+        }
+        RecyclerView recyclerView = findViewById(R.id.recyclerCommandes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        BoutiqueDetailVenteAdapter adapter = new BoutiqueDetailVenteAdapter(this, lignes);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setAdapter(adapter);
+
+
+        boutonValider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call<Void> call = apiService.updateStatut(commande.idTransaction, "Commande Acceptée");
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(BoutiqueCommandeDetail.this, "Commande Acceptée", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), BoutiqueHistoriqueVentes.class);
+                            intent.putExtra("id", identifiant);
+                            startActivity(intent);
+                        } else {
+                            //Toast.makeText(BoutiqueCommandeDetail.this, "Erreur lors de la modification", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(BoutiqueCommandeDetail.this, "Échec réseau: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        boutonRefuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(BoutiqueCommandeDetail.this)
+                        .setTitle("Confirmation")
+                        .setMessage("Êtes-vous sûr de vouloir refuser cette commande ?")
+                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Call<Void> call = apiService.updateStatut(commande.idTransaction, "Commande Refusée");
+                                call.enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        if (response.isSuccessful()) {
+                                            Toast.makeText(BoutiqueCommandeDetail.this, "Commande Refusée", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getApplicationContext(), BoutiqueHistoriqueVentes.class);
+                                            intent.putExtra("id", identifiant);
+                                            startActivity(intent);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(BoutiqueCommandeDetail.this, "Erreur lors de la modification", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        Toast.makeText(BoutiqueCommandeDetail.this, "Échec réseau: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("Non", null)
+                        .show();
+            }
+        });
+
         setupBottomNavigation();
     }
 
@@ -66,6 +167,19 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
         });
     }
 
+    public class LigneCommande {
+        public String loginBoutique;
+        public String nomProduit;
+        public String quantite;
+
+        public LigneCommande(String nomProduit, String quantite) {
+            this.loginBoutique = identifiant;
+            this.nomProduit = nomProduit;
+            this.quantite = quantite;
+        }
+    }
+
+    /*
     private void fetchVenteDetails(String idTransaction) {
         Call<List<Vente>> call = apiService.getByIdTransaction(idTransaction);
         call.enqueue(new Callback<List<Vente>>() {
@@ -142,5 +256,5 @@ public class BoutiqueCommandeDetail extends AppCompatActivity {
                 Toast.makeText(BoutiqueCommandeDetail.this, "Erreur lors du chargement des produits", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 }

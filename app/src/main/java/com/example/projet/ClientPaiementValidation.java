@@ -43,7 +43,8 @@ public class ClientPaiementValidation extends Activity {
                     nomPrenom.setText(client.nom + " " + client.prenom);
 
                     ImageView photoProfil = findViewById(R.id.profilePhoto);
-                    ImageHandler.handleAllImages(client.image, photoProfil);
+                    ImageView mainPhoto = findViewById(R.id.photo);
+                    ImageHandler.handleAllImages(client.image, photoProfil, mainPhoto);
                 } else {
                     Toast.makeText(ClientPaiementValidation.this, "Identifiant inconnu.", Toast.LENGTH_SHORT).show();
                 }

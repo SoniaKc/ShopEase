@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <!-- Barre du haut -->
@@ -23,6 +22,7 @@
         app:layout_constraintTop_toBottomOf="@id/topPanel" />
 
     <!-- Contenu de la page -->
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -36,18 +36,88 @@
             android:id="@+id/produits_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/total_commande"
+                android:id="@+id/idTransaction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/totalCommande"
+                android:text="Commande numéro : "
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:paddingBottom="16dp" />
 
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total : "
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/dateVente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date : "
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/idClient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Client : "
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/statut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Statut : "
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCommandes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:scrollbars="none"/>
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/valider"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/teal_700"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/refuser"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#B00020"
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
     </ScrollView>
 
@@ -59,7 +129,6 @@
         android:layout_height="60dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomPanel" />
 
-    <!-- Panel bas -->
     <View
         android:id="@+id/bottomPanel"
         android:layout_width="match_parent"

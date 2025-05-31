@@ -16,12 +16,14 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class BoutiqueCommandeEntiereAdapter extends RecyclerView.Adapter<BoutiqueCommandeEntiereAdapter.ViewHolder> {
-    private List<CommandeEntiere> commandes;
+    private List<BoutiqueCommandeEntiere> commandes;
     private Context context;
+    private String identifiant;
 
-    public BoutiqueCommandeEntiereAdapter(Context context, List<CommandeEntiere> commandes) {
+    public BoutiqueCommandeEntiereAdapter(Context context, List<BoutiqueCommandeEntiere> commandes, String identifiant) {
         this.context = context;
         this.commandes = commandes;
+        this.identifiant = identifiant;
     }
 
     @NonNull
@@ -33,24 +35,36 @@ public class BoutiqueCommandeEntiereAdapter extends RecyclerView.Adapter<Boutiqu
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CommandeEntiere commande = commandes.get(position);
+        BoutiqueCommandeEntiere commande = commandes.get(position);
 
         holder.statutCommande.setText(commande.statut);
         holder.dateCommande.setText(commande.date_vente);
+
+        String statut = commande.statut.trim();
+
+        if (statut.equalsIgnoreCase("Commande en cours de livraison")) {
+            holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.holo_orange_dark));
+        } else if (statut.equalsIgnoreCase("Commande Acceptée") || statut.equalsIgnoreCase("Commande Livrée")) {
+            holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
+        } else if (statut.equalsIgnoreCase("Commande Refusée")) {
+            holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+        } else {
+            holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.black));
+        }
+
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        ImageHandler.getProduitAndHandleAllImages(apiService, identifiant, commande.nom_produit.get(0), holder.imageProduit);
 
         holder.itemView.setOnClickListener(v -> {
             Gson gson = new Gson();
             String jsonCommande = gson.toJson(commande);
 
             Intent intent = new Intent(context, BoutiqueCommandeDetail.class);
+            intent.putExtra("id",identifiant);
             intent.putExtra("commandeEntiereJson", jsonCommande);
             context.startActivity(intent);
 
         });
-
-        // Image à gauche → celle du premier produit (si tu veux en charger une)
-        // Par exemple :
-        // Glide.with(context).load(...).into(holder.imageProduit);
     }
 
     @Override

@@ -37,18 +37,81 @@
             android:id="@+id/produits_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/total_commande"
+                android:id="@+id/idTransaction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="totalCommande"
+                android:text="Commande numéro : "
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:paddingBottom="16dp" />
 
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total : "
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/dateVente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date : "
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/statut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Statut : "
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp"/>
+
+
+            <TextView
+                android:id="@+id/adresse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Adresse : "
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/paiement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Carte : "
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCommandes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:scrollbars="none"/>
         </LinearLayout>
     </ScrollView>
 

@@ -22,8 +22,8 @@ public class BoutiqueHistoriqueVentes extends Activity {
 
     String identifiant;
     RecyclerView recyclerCommandes;
-    BoutiqueLigneVenteAdapter adapter;
-    List<Vente> listeLignes = new ArrayList<>();
+    BoutiqueCommandeEntiereAdapter adapter;
+    List<BoutiqueCommandeEntiere> listeCommandes = new ArrayList<>();
     ApiService apiService;
 
     @Override
@@ -39,7 +39,7 @@ public class BoutiqueHistoriqueVentes extends Activity {
 
         recyclerCommandes = findViewById(R.id.recyclerCommandes);
         recyclerCommandes.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BoutiqueLigneVenteAdapter(this, listeLignes);
+        adapter = new BoutiqueCommandeEntiereAdapter(this, listeCommandes, identifiant);
         recyclerCommandes.setAdapter(adapter);
 
         chargerCommandesDepuisApi();
@@ -76,12 +76,28 @@ public class BoutiqueHistoriqueVentes extends Activity {
             @Override
             public void onResponse(Call<Map<String, List<Vente>>> call, Response<Map<String, List<Vente>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Vente> lignes = new ArrayList<>();
+                    List<BoutiqueCommandeEntiere> commandes = new ArrayList<>();
                     for (Map.Entry<String, List<Vente>> entry : response.body().entrySet()) {
-                        lignes.addAll(entry.getValue());
+                        BoutiqueCommandeEntiere commande = new BoutiqueCommandeEntiere();
+                        commande.idTransaction = entry.getKey();
+                        commande.nom_produit = new ArrayList<>();
+                        commande.quantite = new ArrayList<>();
+
+                        List<Vente> lignes = entry.getValue();
+                        for (Vente ligne : lignes) {
+                            commande.nom_produit.add(ligne.nom_produit);
+                            commande.quantite.add(ligne.quantite);
+                        }
+
+                        commande.idClient = lignes.get(0).idClient;
+                        commande.total = lignes.get(0).total;
+                        commande.date_vente = lignes.get(0).date_vente;
+                        commande.statut = lignes.get(0).statut;
+                        commandes.add(commande);
                     }
-                    listeLignes.clear();
-                    listeLignes.addAll(lignes);
+
+                    listeCommandes.clear();
+                    listeCommandes.addAll(commandes);
                     adapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(BoutiqueHistoriqueVentes.this, "Erreur: " + response.code() + " - " + response.message(), Toast.LENGTH_LONG).show();

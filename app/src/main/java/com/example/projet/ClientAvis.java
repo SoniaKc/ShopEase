@@ -1,6 +1,7 @@
 package com.example.projet;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,12 +10,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class ClientAvis extends Activity {
     String identifiant;
@@ -32,7 +37,6 @@ public class ClientAvis extends Activity {
         ImageView photoProfil = findViewById(R.id.profilePhoto);
         ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
 
-
         Call<List<Commentaire>> call = apiService.getCommentairesByClient(identifiant);
         call.enqueue(new Callback<List<Commentaire>>() {
             @Override
@@ -40,9 +44,12 @@ public class ClientAvis extends Activity {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         List<Commentaire> commentaires = response.body();
-                        CommentaireAdapter adapter = new CommentaireAdapter(ClientAvis.this, commentaires);
-                        ListView listView = findViewById(R.id.listeCommentaires);
-                        listView.setAdapter(adapter);
+                        RecyclerView recyclerView = findViewById(R.id.recyclerCommentaires);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(ClientAvis.this));
+                        CommentaireAdapter adapter = new CommentaireAdapter(ClientAvis.this, commentaires, commentaire -> {
+                        });
+                        recyclerView.setAdapter(adapter);
+
                     } else {
                         Toast.makeText(ClientAvis.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
                     }

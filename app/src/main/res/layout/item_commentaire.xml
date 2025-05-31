@@ -4,15 +4,11 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp">
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/colorcartes"></LinearLayout>
+
     <ImageView
         android:id="@+id/imageProduit"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/img1"
         android:contentDescription="Image produit" />
 
     <LinearLayout

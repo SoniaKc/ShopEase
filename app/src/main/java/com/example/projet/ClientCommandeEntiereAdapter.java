@@ -16,10 +16,10 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class ClientCommandeEntiereAdapter extends RecyclerView.Adapter<ClientCommandeEntiereAdapter.ViewHolder> {
-    private List<CommandeEntiere> commandes;
+    private List<ClientCommandeEntiere> commandes;
     private Context context;
 
-    public ClientCommandeEntiereAdapter(Context context, List<CommandeEntiere> commandes) {
+    public ClientCommandeEntiereAdapter(Context context, List<ClientCommandeEntiere> commandes) {
         this.context = context;
         this.commandes = commandes;
     }
@@ -33,7 +33,7 @@ public class ClientCommandeEntiereAdapter extends RecyclerView.Adapter<ClientCom
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CommandeEntiere commande = commandes.get(position);
+        ClientCommandeEntiere commande = commandes.get(position);
 
         holder.statutCommande.setText(commande.statut);
         holder.dateCommande.setText(commande.date_vente);

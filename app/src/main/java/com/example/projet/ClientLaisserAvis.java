@@ -1,23 +1,24 @@
 package com.example.projet;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ClientLaisserAvis extends AppCompatActivity {
+public class ClientLaisserAvis extends Activity {
 
-    private EditText noteInput, commentaireInput;
+    RatingBar noteInput;
+    private EditText commentaireInput;
     private String nomProduit, loginBoutique, identifiant;
     private ApiService apiService;
 
@@ -39,8 +40,11 @@ public class ClientLaisserAvis extends AppCompatActivity {
         ImageView photoProfil = findViewById(R.id.profilePhoto);
         ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
 
+        TextView tvNomProduit = findViewById(R.id.nom_produit);
+        tvNomProduit.setText(nomProduit);
+
         envoyerBtn.setOnClickListener(v -> {
-            String note = noteInput.getText().toString().trim();
+            String note = String.valueOf(noteInput.getRating());
             String commentaire = commentaireInput.getText().toString().trim();
 
             if (note.isEmpty() || commentaire.isEmpty()) {

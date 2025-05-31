@@ -40,6 +40,13 @@
                 android:textSize="16sp"
                 android:textColor="@color/black"/>
 
+            <LinearLayout
+                android:id="@+id/loginBoutique"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="8dp" />
+
             <TextView
                 android:id="@+id/quantite"
                 android:layout_width="wrap_content"
@@ -48,45 +55,12 @@
                 android:textSize="14sp"
                 android:textColor="@color/black"/>
 
-            <TextView
-                android:id="@+id/dateVente"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/buttonAjouterAvis"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date : 2024-01-01"
-                android:textSize="14sp"
-                android:textColor="@color/black"/>
-
-            <TextView
-                android:id="@+id/statut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Statut : Livré"
-                android:textSize="14sp"
-                android:textColor="@color/black"/>
-
-            <TextView
-                android:id="@+id/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total : 59.99€"
-                android:textSize="14sp"
-                android:textColor="@color/black"/>
-
-            <TextView
-                android:id="@+id/adresse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Adresse : 123 rue Exemple"
-                android:textSize="14sp"
-                android:textColor="@color/black"/>
-
-            <TextView
-                android:id="@+id/paiement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Paiement : Carte"
-                android:textSize="14sp"
-                android:textColor="@color/black"/>
+                android:orientation="vertical"
+                android:paddingTop="8dp" />
 
         </LinearLayout>
     </LinearLayout>
