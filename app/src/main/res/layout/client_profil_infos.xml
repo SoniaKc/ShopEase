@@ -91,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/identifiant"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageButton
@@ -117,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/lastname_label"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageButton
@@ -143,6 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/firstname_label"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageButton
@@ -170,6 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/email"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageButton
@@ -197,6 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/telephone"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageButton
@@ -224,6 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/mdp"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageButton

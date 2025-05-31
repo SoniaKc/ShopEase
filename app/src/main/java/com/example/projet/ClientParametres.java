@@ -64,7 +64,7 @@ public class ClientParametres extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (isFirst) {
-                    isFirst = false; // Ignore le premier appel automatique
+                    isFirst = false;
                     return;
                 }
                 enregistrerParametres();
@@ -203,7 +203,7 @@ public class ClientParametres extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ClientParametres.this, "Paramètres mis à jour", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ClientParametres.this, "Paramètres mis à jour", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(ClientParametres.this, "Paramètres non mis à jour", Toast.LENGTH_SHORT).show();
                 }
@@ -223,7 +223,6 @@ public class ClientParametres extends Activity {
             public void onResponse(Call<Parametre> call, Response<Parametre> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Parametre param = response.body();
-                    Log.d("PARAMS_LOAD", "Loaded params: " + param.langue + " | " + param.cookies + " | " + param.notifications);
 
                     if (param.langue != null) {
                         int posLangue = ((ArrayAdapter<String>)spinnerLangue.getAdapter()).getPosition(param.langue);

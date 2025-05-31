@@ -52,7 +52,7 @@ public class ClientDetailVenteAdapter extends RecyclerView.Adapter<ClientDetailV
         boutiqueName.setText("Boutique : "+ligne.loginBoutique);
         boutiqueName.setTextSize(16);
         boutiqueName.setTextColor(ContextCompat.getColor(context, R.color.black));
-        boutiqueName.setPadding(8, 8, 8, 8);
+        boutiqueName.setPadding(0, 8, 0, 8);
         holder.loginBoutique.addView(boutiqueName);
 
 

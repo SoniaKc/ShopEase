@@ -52,6 +52,7 @@ public class ClientPageProduit extends Activity {
         TextView reduction = findViewById(R.id.reduction);
         TextView description = findViewById(R.id.description);
         TextView categories = findViewById(R.id.categories);
+        ImageView imageProduit = findViewById(R.id.imageProduit);
 
         ImageView photoProfil = findViewById(R.id.profilePhoto);
         ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
@@ -67,6 +68,7 @@ public class ClientPageProduit extends Activity {
                     reduction.setText(produit.reduction);
                     description.setText(produit.description);
                     categories.setText(produit.categories);
+                    ImageHandler.handleAllImages(produit.image, imageProduit);
                 }
             }
 

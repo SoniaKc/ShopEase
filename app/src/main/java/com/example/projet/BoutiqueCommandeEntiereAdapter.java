@@ -42,7 +42,7 @@ public class BoutiqueCommandeEntiereAdapter extends RecyclerView.Adapter<Boutiqu
 
         String statut = commande.statut.trim();
 
-        if (statut.equalsIgnoreCase("Commande en cours de livraison")) {
+        if (statut.equalsIgnoreCase("En cours")) {
             holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.holo_orange_dark));
         } else if (statut.equalsIgnoreCase("Commande Acceptée") || statut.equalsIgnoreCase("Commande Livrée")) {
             holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));

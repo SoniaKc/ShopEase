@@ -68,7 +68,7 @@ public class ClientLaisserAvis extends Activity {
                         Toast.makeText(ClientLaisserAvis.this, "Avis envoyé avec succès !", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(ClientLaisserAvis.this, "Échec de l'envoi. Code : " + response.code(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(ClientLaisserAvis.this, "Vous avez déjà laissé un avis sur cet article", Toast.LENGTH_LONG).show();
                         try {
                             String errorBody = response.errorBody() != null ? response.errorBody().string() : "null";
                             android.util.Log.e("AVIS_ERROR", "Erreur body : " + errorBody);
