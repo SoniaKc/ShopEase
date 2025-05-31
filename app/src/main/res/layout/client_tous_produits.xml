@@ -35,38 +35,12 @@
         android:background="@color/purple_51" />
 
 
-    <!-- Section "Tous les produits" -->
-    <TextView
-        android:id="@+id/tousLesProduits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tousLesProduits"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/barreRecherche"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Section "Nos clients les adorent" -->
-    <TextView
-        android:id="@+id/articlesPopulaires"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/clientsAdorent"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/tousLesProduits"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"/>
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerArticlesPopulaires"
+        android:id="@+id/recyclerTousProduits"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/articlesPopulaires"
+        app:layout_constraintTop_toBottomOf="@id/barreRecherche"
         app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

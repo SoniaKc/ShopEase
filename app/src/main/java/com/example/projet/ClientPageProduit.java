@@ -104,7 +104,7 @@ public class ClientPageProduit extends Activity {
                             container.addView(view);
                         }
                     } else {
-                        Toast.makeText(ClientPageProduit.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ClientPageProduit.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     //Toast.makeText(ClientPageProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();

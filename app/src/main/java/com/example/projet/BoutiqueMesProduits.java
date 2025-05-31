@@ -3,7 +3,6 @@ package com.example.projet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -82,7 +81,7 @@ public class BoutiqueMesProduits extends Activity {
     }
 
     private void loadProduits() {
-        Call<List<Produit>> call = apiService.getAllProduits(loginBoutique);
+        Call<List<Produit>> call = apiService.getAllProduitsByBoutique(loginBoutique);
         call.enqueue(new Callback<List<Produit>>() {
             @Override
             public void onResponse(Call<List<Produit>> call, Response<List<Produit>> response) {

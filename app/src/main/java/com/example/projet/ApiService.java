@@ -122,10 +122,14 @@ public interface ApiService {
     @PUT("/api/produit/update")
     Call<Void> updateProduit(@Body Produit produit);
 
+    @GET("api/produit/getAllByBoutique")
+    Call<List<Produit>> getAllProduitsByBoutique(@Query("login_boutique") String loginBoutique);
 
-    // Récupérer tous les produits
-    @GET("api/produit/getAll")
-    Call<List<Produit>> getAllProduits(@Query("login_boutique") String loginBoutique);
+    @GET("api/produit/getPopulaires")
+    Call<List<Produit>> getPopulaires();
+
+    @GET("api/produit/getAllProduits")
+    Call<List<Produit>> getAllProduits();
 
 
 

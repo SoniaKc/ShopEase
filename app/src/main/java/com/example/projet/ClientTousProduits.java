@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ClientAccueil extends Activity {
+public class ClientTousProduits extends Activity {
 
     private String identifiant;
     private RecyclerView produitRecyclerView;
@@ -32,11 +31,11 @@ public class ClientAccueil extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.client_layout_accueil);
+        setContentView(R.layout.client_tous_produits);
 
         identifiant = getIntent().getStringExtra("id");
 
-        produitRecyclerView = findViewById(R.id.recyclerArticlesPopulaires);
+        produitRecyclerView = findViewById(R.id.recyclerTousProduits);
         produitRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         adapter = new ProduitPopulaireAdapter(this, produitList, identifiant);
@@ -47,13 +46,6 @@ public class ClientAccueil extends Activity {
         ImageView photoProfil = findViewById(R.id.profilePhoto);
         ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
 
-        TextView tousProduits = findViewById(R.id.tousLesProduits);
-        tousProduits.setOnClickListener(v -> {
-            Intent i = new Intent(ClientAccueil.this, ClientTousProduits.class);
-            i.putExtra("id", identifiant);
-            startActivity(i);
-        });
-
         loadProduitsPopulaires();
         setupTopBottomNavigation();
     }
@@ -63,7 +55,7 @@ public class ClientAccueil extends Activity {
         ImageView navCart = findViewById(R.id.cartIcon);
 
         navCart.setOnClickListener(v -> {
-            Intent i = new Intent(ClientAccueil.this, ClientPanier.class);
+            Intent i = new Intent(ClientTousProduits.this, ClientPanier.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
@@ -74,19 +66,19 @@ public class ClientAccueil extends Activity {
         LinearLayout navProfile2 = findViewById(R.id.navProfile);
 
         navHome.setOnClickListener(v -> {
-            Intent i = new Intent(ClientAccueil.this, ClientAccueil.class);
+            Intent i = new Intent(ClientTousProduits.this, ClientAccueil.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
         navFavorites.setOnClickListener(v -> {
-            Intent i = new Intent(ClientAccueil.this, ClientFavoris.class);
+            Intent i = new Intent(ClientTousProduits.this, ClientFavoris.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
         navProfile2.setOnClickListener(v -> {
-            Intent i = new Intent(ClientAccueil.this, ClientProfilAcceuil.class);
+            Intent i = new Intent(ClientTousProduits.this, ClientProfilAcceuil.class);
             i.putExtra("id", identifiant);
             startActivity(i);
         });
@@ -94,7 +86,7 @@ public class ClientAccueil extends Activity {
 
 
     private void loadProduitsPopulaires() {
-        Call<List<Produit>> call = apiService.getPopulaires();
+        Call<List<Produit>> call = apiService.getAllProduits();
         call.enqueue(new Callback<List<Produit>>() {
             @Override
             public void onResponse(Call<List<Produit>> call, Response<List<Produit>> response) {
@@ -103,13 +95,13 @@ public class ClientAccueil extends Activity {
                     produitList.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(ClientAccueil.this, "Erreur de chargement", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClientTousProduits.this, "Erreur de chargement", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Produit>> call, Throwable t) {
-                Toast.makeText(ClientAccueil.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClientTousProduits.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
             }
         });
     }
