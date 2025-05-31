@@ -81,17 +81,14 @@ public class ClientCB extends Activity {
     }
 
     private void loadPaymentCards() {
-        Log.d("API_DEBUG", "Tentative de récupération des cartes pour: " + identifiant);
         Call<List<Paiement>> call = apiService.getAllPaiement(identifiant);
         call.enqueue(new Callback<List<Paiement>>() {
             @Override
             public void onResponse(Call<List<Paiement>> call, Response<List<Paiement>> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        Log.d("API_DEBUG", "Reçu " + response.body().size() + " cartes");
                         displayPaymentCards(response.body());
                     } else {
-                        Log.e("API_ERROR", "Réponse vide");
                         Toast.makeText(ClientCB.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -101,7 +98,7 @@ public class ClientCB extends Activity {
 
             @Override
             public void onFailure(Call<List<Paiement>> call, Throwable t) {
-                Toast.makeText(ClientCB.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(ClientCB.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -162,8 +159,9 @@ public class ClientCB extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ClientCB.this, "Carte supprimée", Toast.LENGTH_SHORT).show();
-                    loadPaymentCards();
+                    Intent intent2 = new Intent(ClientCB.this,ClientCB.class);
+                    intent2.putExtra("id", identifiant);
+                    startActivity(intent2);
                 } else {
                     Toast.makeText(ClientCB.this, "Erreur lors de la suppression", Toast.LENGTH_SHORT).show();
                 }

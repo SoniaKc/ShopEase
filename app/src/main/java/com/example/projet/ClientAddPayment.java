@@ -101,7 +101,6 @@ public class ClientAddPayment extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ClientAddPayment.this, "Carte ajoutée avec succès", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     Intent i = new Intent(getBaseContext(), ClientCB.class);
                     i.putExtra("id", identifiant);

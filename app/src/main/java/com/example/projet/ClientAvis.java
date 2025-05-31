@@ -1,19 +1,15 @@
 package com.example.projet;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -51,7 +47,7 @@ public class ClientAvis extends Activity {
                         recyclerView.setAdapter(adapter);
 
                     } else {
-                        Toast.makeText(ClientAvis.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ClientAvis.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(ClientAvis.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
@@ -59,7 +55,7 @@ public class ClientAvis extends Activity {
             }
             @Override
             public void onFailure(Call<List<Commentaire>> call, Throwable t) {
-                Toast.makeText(ClientAvis.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(ClientAvis.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

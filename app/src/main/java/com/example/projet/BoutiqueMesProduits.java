@@ -97,7 +97,6 @@ public class BoutiqueMesProduits extends Activity {
 
             @Override
             public void onFailure(Call<List<Produit>> call, Throwable t) {
-                Toast.makeText(BoutiqueMesProduits.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
             }
         });
     }

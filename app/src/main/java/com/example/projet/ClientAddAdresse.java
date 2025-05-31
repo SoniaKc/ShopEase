@@ -104,7 +104,6 @@ public class ClientAddAdresse extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ClientAddAdresse.this, "Adresse ajoutée avec succès", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     Intent intent = new Intent(ClientAddAdresse.this, ClientAdresse.class);
                     intent.putExtra("id", identifiant);

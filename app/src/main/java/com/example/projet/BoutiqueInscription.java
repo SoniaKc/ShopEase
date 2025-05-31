@@ -63,8 +63,8 @@ public class BoutiqueInscription extends Activity {
                 boutique.nom = Strnom;
                 boutique.siret = Strsiret;
                 boutique.forme_juridique = Strforme_juridique;
-                boutique.email = Stremail;        // Champ requis par l’API
-                boutique.telephone = "";    // Champ requis par l’API
+                boutique.email = Stremail;
+                boutique.telephone = "";
                 boutique.siege_social = "";
                 boutique.pays_enregistrement = "";
                 boutique.iban = "";
@@ -83,7 +83,6 @@ public class BoutiqueInscription extends Activity {
                     @Override
                     public void onResponse(Call<Void> call2, Response<Void> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(BoutiqueInscription.this, "paramètres initialisés !", Toast.LENGTH_SHORT).show();
                             Call<Void> call = apiService.addBoutique(boutique);
                             call.enqueue(new Callback<Void>() {
                                 @Override
@@ -104,7 +103,7 @@ public class BoutiqueInscription extends Activity {
                                 }
                             });
                         } else {
-                            Toast.makeText(BoutiqueInscription.this, "Erreur : paramètrenon initialisés veuillez réitérer votre inscription", Toast.LENGTH_LONG).show();
+                            Toast.makeText(BoutiqueInscription.this, "Erreur : paramètres non initialisés, veuillez réitérer votre inscription", Toast.LENGTH_LONG).show();
                         }
                     }
 

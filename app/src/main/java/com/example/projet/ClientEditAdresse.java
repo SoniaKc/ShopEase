@@ -135,7 +135,6 @@ public class ClientEditAdresse extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ClientEditAdresse.this, "Adresse mise à jour", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ClientEditAdresse.this, ClientAdresse.class);
                     intent.putExtra("id", identifiant);
                     startActivity(intent);
@@ -157,7 +156,6 @@ public class ClientEditAdresse extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ClientEditAdresse.this, "Adresse supprimée", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     Intent i = new Intent(getBaseContext(), ClientCB.class);
                     i.putExtra("id", identifiant);

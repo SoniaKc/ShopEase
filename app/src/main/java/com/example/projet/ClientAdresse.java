@@ -30,14 +30,9 @@ public class ClientAdresse extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_adresses);
 
-        Log.d("TESTBIDON", "Reçu " + " cartes");
         identifiant = getIntent().getStringExtra("id");
-        Log.d("TESTBIDON2", "Reçu " + " cartes");
         apiService = ApiClient.getClient().create(ApiService.class);
-        Log.d("TESTBIDON3", "Reçu " + " cartes");
         this.addressContainer = findViewById(R.id.address_container);
-        Log.d("TESTBIDON4", "Reçu " + " cartes");
-
 
         ImageView photoProfil = findViewById(R.id.profilePhoto);
         ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
@@ -80,23 +75,17 @@ public class ClientAdresse extends Activity {
     }
 
     private void loadAdresses() {
-        Log.d("TESTBIDON5", "Reçu " + " cartes");
         Call<List<Adresse>> call = apiService.getAllAdresse(identifiant);
-        Log.d("TESTBIDON6", "Reçu " + " cartes");
         call.enqueue(new Callback<List<Adresse>>() {
             @Override
             public void onResponse(Call<List<Adresse>> call, Response<List<Adresse>> response) {
-                Log.d("TESTBIDON7", "Reçu " + " cartes");
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        Log.d("API_DEBUG", "Reçu " + response.body().size() + " cartes");
                         displayAdresses(response.body());
                     } else {
-                        Log.e("API_ERROR", "Réponse vide");
-                        Toast.makeText(ClientAdresse.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ClientAdresse.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Log.e("API_ERROR", "Code: " + response.code() + " - " + response.message());
                     Toast.makeText(ClientAdresse.this,
                             "Erreur serveur: " + response.code(),
                             Toast.LENGTH_SHORT).show();
@@ -106,10 +95,7 @@ public class ClientAdresse extends Activity {
 
             @Override
             public void onFailure(Call<List<Adresse>> call, Throwable t) {
-                Log.e("API_FAILURE", "Erreur réseau", t);
-                Toast.makeText(ClientAdresse.this,
-                        "Erreur réseau: " + t.getMessage(),
-                        Toast.LENGTH_LONG).show();
+
             }
         });
     }
@@ -127,8 +113,6 @@ public class ClientAdresse extends Activity {
 
             for (Adresse adresse : adresses) {
                 try {
-                    Log.d("ADRESSE_DEBUG", "Affichage adresse: " + new Gson().toJson(adresse));
-
                     View adresseView = getLayoutInflater().inflate(R.layout.adresse_item, addressContainer, false);
 
                     TextView nom = adresseView.findViewById(R.id.nom_adresse);
@@ -163,7 +147,6 @@ public class ClientAdresse extends Activity {
 
                     addressContainer.addView(adresseView);
                 } catch (Exception e) {
-                    Log.e("ADRESSE_ERROR", "Erreur affichage", e);
                     Toast.makeText(this, "Erreur affichage adresse", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -177,18 +160,17 @@ public class ClientAdresse extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ClientAdresse.this, "Adresse supprimée", Toast.LENGTH_SHORT).show();
-                    loadAdresses(); // Recharger la liste
+                    Intent intent2 = new Intent(ClientAdresse.this,ClientAdresse.class);
+                    intent2.putExtra("id", identifiant);
+                    startActivity(intent2);
                 } else {
-                    Toast.makeText(ClientAdresse.this,
-                            "Erreur: " + response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClientAdresse.this, "Erreur: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(ClientAdresse.this,
-                        "Échec: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClientAdresse.this, "Échec: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

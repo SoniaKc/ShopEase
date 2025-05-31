@@ -208,7 +208,6 @@ public class BoutiqueProfilInfos extends Activity {
                 if (success) {
                     updateBoutique(currentBoutique, () -> {
                         updateUIFromBoutique(currentBoutique);
-                        Toast.makeText(this, param + " modifié avec succès", Toast.LENGTH_SHORT).show();
                     });
                 } else {
                     Toast.makeText(this, "Échec de la modification", Toast.LENGTH_SHORT).show();
@@ -227,7 +226,6 @@ public class BoutiqueProfilInfos extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(BoutiqueProfilInfos.this, "Modification réussie", Toast.LENGTH_SHORT).show();
                     if (onSuccess != null) onSuccess.run();
                 } else {
                     Toast.makeText(BoutiqueProfilInfos.this, "Échec de la modification", Toast.LENGTH_SHORT).show();
@@ -246,7 +244,6 @@ public class BoutiqueProfilInfos extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(BoutiqueProfilInfos.this, "Compte supprimé.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(BoutiqueProfilInfos.this, Connexion.class); // ou MainActivity
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

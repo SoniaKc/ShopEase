@@ -194,7 +194,6 @@ public class BoutiqueParametres extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(BoutiqueParametres.this, "Paramètres mis à jour", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(BoutiqueParametres.this, "Paramètres non mis à jour", Toast.LENGTH_SHORT).show();
                 }
@@ -213,7 +212,6 @@ public class BoutiqueParametres extends Activity {
             public void onResponse(Call<Parametre> call, Response<Parametre> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Parametre param = response.body();
-                    Log.d("PARAMS_LOAD", "Loaded params: " + param.langue + " | " + param.cookies + " | " + param.notifications);
 
                     if (param.langue != null) {
                         int posLangue = ((ArrayAdapter<String>)spinnerLangue.getAdapter()).getPosition(param.langue);
@@ -236,8 +234,6 @@ public class BoutiqueParametres extends Activity {
                     }
 
                     updateSelectionText();
-                } else {
-                    Toast.makeText(BoutiqueParametres.this, "Impossible de charger les paramètres", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

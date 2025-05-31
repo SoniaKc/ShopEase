@@ -70,7 +70,7 @@ public class ClientInscription extends Activity {
                 newClient.prenom = Strprenom;
                 newClient.email = Stremail;
                 newClient.date_naissance = Strdate_naissance;
-                newClient.telephone = ""; // facultatif
+                newClient.telephone = "";
 
                 Parametre params = new Parametre();
                 params.login=Stridentifiant;
@@ -86,7 +86,6 @@ public class ClientInscription extends Activity {
                     @Override
                     public void onResponse(Call<Void> call2, Response<Void> response2) {
                         if (response2.isSuccessful()) {
-                            Toast.makeText(ClientInscription.this, "paramètres initialisés !", Toast.LENGTH_SHORT).show();
                             Call<Void> call = apiService.addClient(newClient);
 
                             call.enqueue(new Callback<Void>() {
@@ -108,7 +107,7 @@ public class ClientInscription extends Activity {
                                 }
                             });
                         } else {
-                            Toast.makeText(ClientInscription.this, "Erreur : paramètrenon initialisés veuillez réitérer votre inscription", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ClientInscription.this, "Erreur : paramètres non initialisés, veuillez réitérer votre inscription", Toast.LENGTH_LONG).show();
                         }
                     }
 

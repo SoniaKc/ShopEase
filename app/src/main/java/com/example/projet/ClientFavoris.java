@@ -67,13 +67,11 @@ public class ClientFavoris extends Activity {
                     favorisList.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(ClientFavoris.this, "Aucun favori trouvé", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Favoris>> call, Throwable t) {
-                Toast.makeText(ClientFavoris.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -84,7 +82,6 @@ public class ClientFavoris extends Activity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 favorisList.remove(favori);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(ClientFavoris.this, "Favori supprimé", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -104,7 +101,7 @@ public class ClientFavoris extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 deleteFavori(favori);
-                Toast.makeText(ClientFavoris.this, "Ajouté au panier : Produit ID " , Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClientFavoris.this, "Ajouté au panier" , Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -133,7 +130,7 @@ public class ClientFavoris extends Activity {
             startActivity(i);
         });
 
-        navFavorites.setOnClickListener(v -> recreate()); // éviter nouvelle instance
+        navFavorites.setOnClickListener(v -> recreate());
         navProfile2.setOnClickListener(v -> {
             Intent i = new Intent(this, ClientProfilAcceuil.class);
             i.putExtra("id", identifiant);

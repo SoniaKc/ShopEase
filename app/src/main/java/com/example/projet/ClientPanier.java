@@ -59,10 +59,10 @@ public class ClientPanier extends Activity {
         Button btnPayer = findViewById(R.id.btnPayer);
         btnPayer.setOnClickListener(v -> {
             if (total > 0.0){
-            Intent i = new Intent(this, ClientPaiementPanier.class);
-            i.putExtra("id", identifiant);
-            i.putExtra("total",total);
-            startActivity(i);
+                Intent i = new Intent(this, ClientPaiementPanier.class);
+                i.putExtra("id", identifiant);
+                i.putExtra("total",total);
+                startActivity(i);
             }
             else {
                 Toast.makeText(ClientPanier.this, "Il n'y a rien dans le panier", Toast.LENGTH_SHORT).show();
@@ -157,7 +157,6 @@ public class ClientPanier extends Activity {
 
             @Override
             public void onFailure(Call<List<Panier>> call, Throwable t) {
-                Toast.makeText(ClientPanier.this, "Erreur chargement panier", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -203,7 +202,6 @@ public class ClientPanier extends Activity {
         apiService.updateCartItemQuantity(item.getPanier()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.d("Panier", "Réponse update quantité code: " + response.code());
                 if (response.isSuccessful()) {
                     adapter.notifyDataSetChanged();
                     updateTotal();

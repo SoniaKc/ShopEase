@@ -2,6 +2,7 @@ package com.example.projet;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -130,7 +131,19 @@ public class ClientPaiementPanier extends Activity {
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-                Toast.makeText(ClientPaiementPanier.this, "Impossible de charger les cartes", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(ClientPaiementPanier.this)
+                        .setTitle("Aucune carte")
+                        .setMessage("Vous devez ajouter une carte pour continuer.")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(ClientPaiementPanier.this, ClientCB.class);
+                                intent.putExtra("id",identifiant);
+                                startActivity(intent);
+                            }
+                        })
+                        .setCancelable(false)
+                        .show();
             }
         });
     }
@@ -148,7 +161,19 @@ public class ClientPaiementPanier extends Activity {
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-                Toast.makeText(ClientPaiementPanier.this, "Impossible de charger les adresses", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(ClientPaiementPanier.this)
+                        .setTitle("Aucune adresse")
+                        .setMessage("Vous devez ajouter une adresse pour continuer.")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(ClientPaiementPanier.this, ClientAdresse.class);
+                                intent.putExtra("id",identifiant);
+                                startActivity(intent);
+                            }
+                        })
+                        .setCancelable(false)
+                        .show();
             }
         });
     }
@@ -188,7 +213,7 @@ public class ClientPaiementPanier extends Activity {
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-                Toast.makeText(ClientPaiementPanier.this, "Erreur de chargement des cartes", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ClientPaiementPanier.this, "Erreur de chargement des cartes", Toast.LENGTH_SHORT).show();
             }
         });
     }

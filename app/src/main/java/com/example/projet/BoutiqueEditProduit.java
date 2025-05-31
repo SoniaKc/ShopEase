@@ -112,7 +112,6 @@ public class BoutiqueEditProduit extends Activity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(BoutiqueEditProduit.this, "Produit modifié avec succès", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
                                 intent.putExtra("id", identifiant);
                                 startActivity(intent);
@@ -135,9 +134,27 @@ public class BoutiqueEditProduit extends Activity {
         supprimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
-                intent.putExtra("id", identifiant);
-                startActivity(intent);
+                String nom = nomProduit.getText().toString().trim();
+
+                apiService = ApiClient.getClient().create(ApiService.class);
+                Call<Void> call = apiService.deleteProduit(identifiant,nom);
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
+                            intent.putExtra("id", identifiant);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(BoutiqueEditProduit.this, "Erreur lors de la supression", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(BoutiqueEditProduit.this, "Échec réseau: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -258,7 +275,6 @@ public class BoutiqueEditProduit extends Activity {
                 true
         );
 
-        // Configuration de la ListView
         ListView listView = popupView.findViewById(R.id.checkBoxListView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_checkbox, R.id.textViewItem, allItems) {
             @Override

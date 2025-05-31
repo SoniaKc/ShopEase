@@ -203,7 +203,6 @@ public class ClientParametres extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    //Toast.makeText(ClientParametres.this, "Paramètres mis à jour", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(ClientParametres.this, "Paramètres non mis à jour", Toast.LENGTH_SHORT).show();
                 }
@@ -211,7 +210,6 @@ public class ClientParametres extends Activity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(ClientParametres.this, "Erreur serveur", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -246,13 +244,11 @@ public class ClientParametres extends Activity {
 
                     updateSelectionText();
                 } else {
-                    Toast.makeText(ClientParametres.this, "Impossible de charger les paramètres", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Parametre> call, Throwable t) {
-                Toast.makeText(ClientParametres.this, "Erreur de chargement : " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

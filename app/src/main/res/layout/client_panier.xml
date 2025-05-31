@@ -51,7 +51,7 @@
         android:id="@+id/totalPanier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/votrePanier"
+        android:text="@string/valeurPanier"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/panierIcon"
         app:layout_constraintStart_toStartOf="parent"

@@ -108,7 +108,6 @@ public class BoutiqueAjouterProduit extends Activity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(BoutiqueAjouterProduit.this, "Produit ajouté", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), BoutiqueMesProduits.class);
                                 intent.putExtra("id", identifiant);
                                 startActivity(intent);

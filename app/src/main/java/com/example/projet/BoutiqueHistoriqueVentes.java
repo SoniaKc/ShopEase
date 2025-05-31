@@ -106,7 +106,6 @@ public class BoutiqueHistoriqueVentes extends Activity {
 
             @Override
             public void onFailure(Call<Map<String, List<Vente>>> call, Throwable t) {
-                Toast.makeText(BoutiqueHistoriqueVentes.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

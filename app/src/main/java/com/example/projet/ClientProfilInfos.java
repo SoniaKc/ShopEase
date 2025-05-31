@@ -286,7 +286,7 @@ public class ClientProfilInfos extends Activity {
                 if (success) {
                     updateClient(currentClient, () -> {
                         updateUIFromClient(currentClient);
-                        Toast.makeText(this, param + " modifié avec succès", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, param + " modifié avec succès", Toast.LENGTH_SHORT).show();
                     });
                 } else {
                     Toast.makeText(this, "Échec de la modification", Toast.LENGTH_SHORT).show();
@@ -306,7 +306,7 @@ public class ClientProfilInfos extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ClientProfilInfos.this, "Modification réussie", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ClientProfilInfos.this, "Modification réussie", Toast.LENGTH_SHORT).show();
                     if (onSuccess != null) onSuccess.run();
                 } else {
                     Toast.makeText(ClientProfilInfos.this, "Échec de la modification", Toast.LENGTH_SHORT).show();

@@ -57,7 +57,6 @@ public class ClientPaiementValidation extends Activity {
         });
 
         setupTopBottomNavigation();
-        Toast.makeText(ClientPaiementValidation.this, "achat effectué", Toast.LENGTH_SHORT).show();
         showLocalNotification("achat effectué", "achat effectué");
 
     }
@@ -110,11 +109,11 @@ public class ClientPaiementValidation extends Activity {
         }
 
         Intent intent = new Intent(this, BoutiqueMesProduits.class);
-        intent.putExtra("log", identifiant);
+        intent.putExtra("id", identifiant);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.validation_achats) // Ton icône dans drawable
+                .setSmallIcon(R.drawable.validation_achats)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)

@@ -118,14 +118,11 @@ public class ClientHistoriqueAchats extends Activity {
                     listeCommandes.clear();
                     listeCommandes.addAll(commandes);
                     adapter.notifyDataSetChanged();
-                } else {
-                    Toast.makeText(ClientHistoriqueAchats.this, "Erreur: " + response.code() + " - " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Map<String, List<Vente>>> call, Throwable t) {
-                Toast.makeText(ClientHistoriqueAchats.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

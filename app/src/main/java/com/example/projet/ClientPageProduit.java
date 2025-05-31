@@ -107,12 +107,12 @@ public class ClientPageProduit extends Activity {
                         Toast.makeText(ClientPageProduit.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(ClientPageProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ClientPageProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<Commentaire>> call, Throwable t) {
-                Toast.makeText(ClientPageProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(ClientPageProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -130,14 +130,11 @@ public class ClientPageProduit extends Activity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(ClientPageProduit.this, "Ajouté aux favoris: ", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(ClientPageProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClientPageProduit.this, "Ajouté aux favoris ", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(ClientPageProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         });
@@ -159,14 +156,14 @@ public class ClientPageProduit extends Activity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(ClientPageProduit.this, "Ajouté au panier: ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClientPageProduit.this, "Ajouté au panier", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(ClientPageProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ClientPageProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(ClientPageProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(ClientPageProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         });
