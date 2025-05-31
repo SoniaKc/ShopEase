@@ -204,17 +204,17 @@ public interface ApiService {
 
     // === VENTES ===
     @POST("/api/vente/add")
-    Call<Void> addVente(@Body LigneVente vente);
+    Call<Void> addVente(@Body Vente vente);
 
 
     @GET("/api/vente/getByIdTransaction")
     Call<List<Vente>> getByIdTransaction(@Query("idTransaction") String idTransaction);
 
     @GET("/api/vente/getByClient")
-    Call<Map<String, List<LigneVente>>> getByClient(@Query("idClient") String idClient);
+    Call<Map<String, List<Vente>>> getByClient(@Query("idClient") String idClient);
 
     @GET("/api/vente/getByBoutique")
-    Call<Map<String, List<LigneVente>>> getByBoutique(@Query("login_boutique") String loginBoutique);
+    Call<Map<String, List<Vente>>> getByBoutique(@Query("login_boutique") String loginBoutique);
 
     @DELETE("/api/vente/deleteByIdTransaction")
     Call<Void> deleteByIdTransaction(@Query("idTransaction") String idTransaction);

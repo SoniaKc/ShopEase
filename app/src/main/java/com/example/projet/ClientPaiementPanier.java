@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import java.security.SecureRandom;
+
 
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class ClientPaiementPanier extends Activity {
 
     private List<String> cardNameList = new ArrayList<>();
     private List<String> addressNameList = new ArrayList<>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -290,7 +293,8 @@ public class ClientPaiementPanier extends Activity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Panier> panierList = response.body();
                     for (Panier item : panierList) {
-                        LigneVente vente = new LigneVente();
+                        Vente vente = new Vente();
+                        vente.idTransaction=generateRandomAlphanumeric(10);
                         vente.login_boutique = item.login_boutique;
                         vente.idClient = item.idClient;
                         vente.nom_produit = item.nom_produit;
@@ -341,4 +345,18 @@ public class ClientPaiementPanier extends Activity {
             }
         });
     }
+
+    public String generateRandomAlphanumeric(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            sb.append(characters.charAt(index));
+        }
+
+        return sb.toString();
+    }
+
 }

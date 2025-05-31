@@ -86,13 +86,13 @@ public class ClientHistoriqueAchats extends Activity {
 
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
 
-        Call<Map<String, List<LigneVente>>> call = apiService.getByClient(identifiant);
-        call.enqueue(new Callback<Map<String, List<LigneVente>>>() {
+        Call<Map<String, List<Vente>>> call = apiService.getByClient(identifiant);
+        call.enqueue(new Callback<Map<String, List<Vente>>>() {
             @Override
-            public void onResponse(Call<Map<String, List<LigneVente>>> call, Response<Map<String, List<LigneVente>>> response) {
+            public void onResponse(Call<Map<String, List<Vente>>> call, Response<Map<String, List<Vente>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<CommandeEntiere> commandes = new ArrayList<>();
-                    for (Map.Entry<String, List<LigneVente>> entry : response.body().entrySet()) {
+                    for (Map.Entry<String, List<Vente>> entry : response.body().entrySet()) {
                         CommandeEntiere commande = new CommandeEntiere();
                         commande.idTransaction = entry.getKey();
                         commande.login_boutique = new ArrayList<>();
@@ -100,8 +100,8 @@ public class ClientHistoriqueAchats extends Activity {
                         commande.nom_produit = new ArrayList<>();
                         commande.quantite = new ArrayList<>();
 
-                        List<LigneVente> lignes = entry.getValue();
-                        for (LigneVente ligne : lignes) {
+                        List<Vente> lignes = entry.getValue();
+                        for (Vente ligne : lignes) {
                             commande.login_boutique.add(ligne.login_boutique);
                             commande.nom_produit.add(ligne.nom_produit);
                             commande.quantite.add(ligne.quantite);
@@ -124,7 +124,7 @@ public class ClientHistoriqueAchats extends Activity {
             }
 
             @Override
-            public void onFailure(Call<Map<String, List<LigneVente>>> call, Throwable t) {
+            public void onFailure(Call<Map<String, List<Vente>>> call, Throwable t) {
                 Toast.makeText(ClientHistoriqueAchats.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

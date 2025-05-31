@@ -38,6 +38,19 @@ public class ClientCommandeEntiereAdapter extends RecyclerView.Adapter<ClientCom
         holder.statutCommande.setText(commande.statut);
         holder.dateCommande.setText(commande.date_vente);
 
+        String statut = commande.statut.trim();
+
+        if (statut.equalsIgnoreCase("Commande en cours de livraison")) {
+            holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.holo_orange_dark));
+        } else if (statut.equalsIgnoreCase("Commande Acceptée") || statut.equalsIgnoreCase("Commande Livrée")) {
+            holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
+        } else if (statut.equalsIgnoreCase("Commande Refusée")) {
+            holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+        } else {
+            holder.statutCommande.setTextColor(context.getResources().getColor(android.R.color.black));
+        }
+
+
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         ImageHandler.getProduitAndHandleAllImages(apiService, commande.login_boutique.get(0), commande.nom_produit.get(0), holder.image);
 
@@ -48,9 +61,9 @@ public class ClientCommandeEntiereAdapter extends RecyclerView.Adapter<ClientCom
             Intent intent = new Intent(context, ClientCommandeDetail.class);
             intent.putExtra("commandeEntiereJson", jsonCommande);
             context.startActivity(intent);
-
         });
     }
+
 
     @Override
     public int getItemCount() {

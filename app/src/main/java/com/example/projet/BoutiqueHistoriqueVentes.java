@@ -23,7 +23,7 @@ public class BoutiqueHistoriqueVentes extends Activity {
     String identifiant;
     RecyclerView recyclerCommandes;
     BoutiqueLigneVenteAdapter adapter;
-    List<LigneVente> listeLignes = new ArrayList<>();
+    List<Vente> listeLignes = new ArrayList<>();
     ApiService apiService;
 
     @Override
@@ -71,13 +71,13 @@ public class BoutiqueHistoriqueVentes extends Activity {
     }
 
     private void chargerCommandesDepuisApi() {
-        Call<Map<String, List<LigneVente>>> call = apiService.getByBoutique(identifiant);
-        call.enqueue(new Callback<Map<String, List<LigneVente>>>() {
+        Call<Map<String, List<Vente>>> call = apiService.getByBoutique(identifiant);
+        call.enqueue(new Callback<Map<String, List<Vente>>>() {
             @Override
-            public void onResponse(Call<Map<String, List<LigneVente>>> call, Response<Map<String, List<LigneVente>>> response) {
+            public void onResponse(Call<Map<String, List<Vente>>> call, Response<Map<String, List<Vente>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<LigneVente> lignes = new ArrayList<>();
-                    for (Map.Entry<String, List<LigneVente>> entry : response.body().entrySet()) {
+                    List<Vente> lignes = new ArrayList<>();
+                    for (Map.Entry<String, List<Vente>> entry : response.body().entrySet()) {
                         lignes.addAll(entry.getValue());
                     }
                     listeLignes.clear();
@@ -89,7 +89,7 @@ public class BoutiqueHistoriqueVentes extends Activity {
             }
 
             @Override
-            public void onFailure(Call<Map<String, List<LigneVente>>> call, Throwable t) {
+            public void onFailure(Call<Map<String, List<Vente>>> call, Throwable t) {
                 Toast.makeText(BoutiqueHistoriqueVentes.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

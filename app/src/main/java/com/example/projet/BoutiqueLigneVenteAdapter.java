@@ -13,10 +13,10 @@ import java.util.List;
 
 public class BoutiqueLigneVenteAdapter extends RecyclerView.Adapter<BoutiqueLigneVenteAdapter.ViewHolder> {
 
-    private List<LigneVente> ligneVenteList;
+    private List<Vente> ligneVenteList;
     private Context context;
 
-    public BoutiqueLigneVenteAdapter(Context context, List<LigneVente> ligneVenteList) {
+    public BoutiqueLigneVenteAdapter(Context context, List<Vente> ligneVenteList) {
         this.context = context;
         this.ligneVenteList = ligneVenteList;
     }
@@ -30,7 +30,7 @@ public class BoutiqueLigneVenteAdapter extends RecyclerView.Adapter<BoutiqueLign
 
     @Override
     public void onBindViewHolder(@NonNull BoutiqueLigneVenteAdapter.ViewHolder holder, int position) {
-        LigneVente ligne = ligneVenteList.get(position);
+        Vente ligne = ligneVenteList.get(position);
 
         holder.nomProduit.setText(ligne.nom_produit);
         holder.quantite.setText("Quantité : " + ligne.quantite);
