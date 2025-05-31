@@ -52,6 +52,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
         holder.description.setText(produit.description);
         holder.prixUnitaire.setText("Prix : " + produit.prix + " $");
         holder.quantite.setText("Quantité : " + panier.quantite);
+        ImageHandler.handleProduitImages(produit.image, holder.image);
 
         try {
             String prixStr = produit.prix.replace(",", ".").trim();
@@ -96,7 +97,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nomProduit, description, prixUnitaire, quantite, totalProduit;
-        ImageView btnSupprimer;
+        ImageView btnSupprimer, image;
         Button btnDecrease, btnIncrease;
 
         public ViewHolder(@NonNull View itemView) {
@@ -105,6 +106,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
             description = itemView.findViewById(R.id.descriptionProduit);
             prixUnitaire = itemView.findViewById(R.id.prixUnitaire);
             quantite = itemView.findViewById(R.id.quantiteProduit);
+            image = itemView.findViewById(R.id.imageProduit);
             totalProduit = itemView.findViewById(R.id.prixTotal);
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
             btnIncrease =itemView.findViewById(R.id.btnIncrease);

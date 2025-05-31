@@ -7,9 +7,9 @@
     android:layout_marginBottom="8dp">
 
     <ImageView
+        android:id="@+id/imageProduit"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/img1"
         android:layout_marginEnd="10dp"/>
 
     <LinearLayout
@@ -42,4 +42,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/trash"/>
+
+
 </LinearLayout>

@@ -38,6 +38,9 @@ public class ClientCommandeEntiereAdapter extends RecyclerView.Adapter<ClientCom
         holder.statutCommande.setText(commande.statut);
         holder.dateCommande.setText(commande.date_vente);
 
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        ImageHandler.getProduitAndHandleAllImages(apiService, commande.login_boutique.get(0), commande.nom_produit.get(0), holder.image);
+
         holder.itemView.setOnClickListener(v -> {
             Gson gson = new Gson();
             String jsonCommande = gson.toJson(commande);
@@ -47,10 +50,6 @@ public class ClientCommandeEntiereAdapter extends RecyclerView.Adapter<ClientCom
             context.startActivity(intent);
 
         });
-
-        // Image à gauche → celle du premier produit (si tu veux en charger une)
-        // Par exemple :
-        // Glide.with(context).load(...).into(holder.imageProduit);
     }
 
     @Override
@@ -59,13 +58,13 @@ public class ClientCommandeEntiereAdapter extends RecyclerView.Adapter<ClientCom
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageProduit;
+        ImageView image;
         TextView statutCommande;
 
         TextView dateCommande;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageProduit = itemView.findViewById(R.id.imageProduit);
+            image = itemView.findViewById(R.id.imageProduit);
             statutCommande = itemView.findViewById(R.id.statutCommande);
             dateCommande = itemView.findViewById(R.id.dateCommande);
         }

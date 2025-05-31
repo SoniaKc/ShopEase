@@ -36,7 +36,7 @@ public class ProduitPopulaireAdapter extends RecyclerView.Adapter<ProduitPopulai
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Produit produit = produits.get(position);
 
-        holder.imageProduit.setImageResource(R.drawable.img1);
+        ImageHandler.handleProduitImages(produit.image, holder.imageProduit);
         holder.titreProduit.setText(produit.nom);
 
         holder.itemView.setOnClickListener(v -> {

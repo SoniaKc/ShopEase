@@ -91,6 +91,46 @@ public class ImageHandler {
     }
 
 
+    public static void getProduitAndHandleAllImages(ApiService apiService, String identifiant, String nomProduit, ImageView... imageViews) {
+        apiService.getProduit(identifiant,nomProduit).enqueue(new Callback<Produit>() {
+            @Override
+            public void onResponse(Call<Produit> call, Response<Produit> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Produit produit = response.body();
+
+                    if (produit.image == null || produit.image.isEmpty()) {
+                        for (ImageView imageView : imageViews) {
+                            imageView.setImageResource(R.drawable.vente);
+                        }
+                        return;
+                    }
+
+                    try {
+                        byte[] decodedBytes = Base64.decode(produit.image, Base64.DEFAULT);
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+
+                        for (ImageView imageView : imageViews) {
+                            if (imageView != null) {
+                                imageView.setImageBitmap(bitmap);
+                            }
+                        }
+                    } catch (IllegalArgumentException e) {
+                        e.printStackTrace();
+                        for (ImageView imageView : imageViews) {
+                            imageView.setImageResource(R.drawable.vente);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<Produit> call, Throwable t) {
+                //Toast.makeText(ClientMentionsLegales.this, "Erreur serveur", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
 
     public static void handleAllImages(String base64Image, ImageView... imageViews) {
         if (base64Image == null || base64Image.isEmpty()) {

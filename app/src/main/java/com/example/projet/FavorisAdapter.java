@@ -55,9 +55,11 @@ public class FavorisAdapter extends RecyclerView.Adapter<FavorisAdapter.ViewHold
                     Produit produit = response.body();
                     holder.nom.setText(produit.nom);
                     holder.prix.setText(produit.prix + " $");
+                    ImageHandler.handleProduitImages(produit.image, holder.image);
                 } else {
                     holder.nom.setText("Produit inconnu");
                     holder.prix.setText("-");
+                    ImageHandler.handleProduitImages(null, holder.image);
                 }
             }
 
@@ -80,7 +82,7 @@ public class FavorisAdapter extends RecyclerView.Adapter<FavorisAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nom, prix;
-        ImageView delete, cart;
+        ImageView delete, cart, image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +90,7 @@ public class FavorisAdapter extends RecyclerView.Adapter<FavorisAdapter.ViewHold
             prix = itemView.findViewById(R.id.prixProduit);
             delete = itemView.findViewById(R.id.deleteBtn);
             cart = itemView.findViewById(R.id.cartBtn);
+            image = itemView.findViewById(R.id.imageProduit);
         }
     }
 }
