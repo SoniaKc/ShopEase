@@ -138,10 +138,7 @@ public class ClientPanier extends Activity {
                                                 adapter.notifyDataSetChanged();
 
                                                 loadedCount[0]++;
-                                                Log.d("DEBUG", "Produit chargé : " + produit.nom + ", loadedCount = " + loadedCount[0]);
-
                                                 if (loadedCount[0] == totalItems) {
-                                                    Log.d("DEBUG", "Tous produits chargés, updateTotal appelé");
                                                     updateTotal();
                                                 }
                                             }
@@ -175,15 +172,11 @@ public class ClientPanier extends Activity {
                 double prix = Double.parseDouble(prixStr.trim());
                 double sousTotal = prix * qte;
                 total += sousTotal;
-                Toast.makeText(ClientPanier.this, "ite " + total, Toast.LENGTH_SHORT).show();
-                Log.e("test","Produit: " + item.getProduit().nom + " Prix: " + prixStr + " Qté: " + qte + " Sous-total: " + sousTotal);
-            } catch (NumberFormatException e) {
+             } catch (NumberFormatException e) {
                 System.err.println("Erreur conversion prix ou quantité pour " + item.getProduit().nom);
             }
         }
-        totalPanier.setText("Valeur totale : " + total + " $");
-        Toast.makeText(ClientPanier.this, "total chargement panier = " + total, Toast.LENGTH_SHORT).show();
-    }
+        totalPanier.setText("Valeur totale : " + total + " $");}
 
 
     private void onDeleteClicked(PanierDisplayItem item) {
@@ -204,13 +197,8 @@ public class ClientPanier extends Activity {
     }
 
     private void onQuantityChanged(PanierDisplayItem item, int newQuantity) {
-        Log.d("Panier", "Modifier quantité pour produit " + item.getProduit().nom + " : " + newQuantity);
         item.getPanier().quantite = String.valueOf(newQuantity);
         item.getPanier().idClient = idClient;
-        Log.d("Panier", "updateCartItemQuantity envoi: boutique=" + item.getPanier().login_boutique
-                + ", produit=" + item.getPanier().nom_produit
-                + ", client=" + item.getPanier().idClient
-                + ", quantite=" + item.getPanier().quantite);
 
         apiService.updateCartItemQuantity(item.getPanier()).enqueue(new Callback<Void>() {
             @Override
@@ -220,14 +208,12 @@ public class ClientPanier extends Activity {
                     adapter.notifyDataSetChanged();
                     updateTotal();
                 } else {
-                    Log.e("Panier", "Erreur update quantité, body: " + response.errorBody());
                     Toast.makeText(ClientPanier.this, "Erreur mise à jour quantité", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.e("Panier", "Erreur réseau update quantité", t);
                 Toast.makeText(ClientPanier.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
             }
         });

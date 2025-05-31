@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import java.util.*;
@@ -26,6 +27,8 @@ public class ClientPaiementPanier extends Activity {
 
     private List<String> cardNameList = new ArrayList<>();
     private List<String> addressNameList = new ArrayList<>();
+    private String selectedLivraison = "Standard - 3 à 5 jours";
+
 
 
     @Override
@@ -57,6 +60,18 @@ public class ClientPaiementPanier extends Activity {
                 new String[]{"Standard - 3 à 5 jours", "Express - 24h", "Retrait en magasin"});
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLivraison.setAdapter(adapter);
+        spinnerLivraison.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedLivraison = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedLivraison = "Standard - 3 à 5 jours";
+            }
+        });
+
 
         validerPayer.setOnClickListener(b -> {
             String textCode = code.getText().toString().trim();
@@ -287,16 +302,54 @@ public class ClientPaiementPanier extends Activity {
     private void processPayment() {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
 
+        switch (selectedLivraison) {
+            case "Express - 24h":
+                total += 9.99;
+                break;
+            case "Retrait en magasin":
+                total += 0.0;
+                break;
+            case "Standard - 3 à 5 jours":
+            default:
+                total += 4.99;
+                break;
+        }
+
         apiService.getFullCart(identifiant).enqueue(new Callback<List<Panier>>() {
             @Override
             public void onResponse(Call<List<Panier>> call, Response<List<Panier>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Panier> panierList = response.body();
+                    generateUniqueIdAndContinue(apiService, panierList);
+                } else {
+                    Toast.makeText(ClientPaiementPanier.this, "Erreur récupération panier", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Panier>> call, Throwable t) {
+                Toast.makeText(ClientPaiementPanier.this, "Erreur réseau panier", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void generateUniqueIdAndContinue(ApiService apiService, List<Panier> panierList) {
+
+
+        String newId = generateRandomAlphanumeric(10);
+
+        apiService.getByIdTransaction(newId).enqueue(new Callback<List<Vente>>() {
+            @Override
+            public void onResponse(Call<List<Vente>> call, Response<List<Vente>> response) {
+                if (response.isSuccessful() && (response.body() == null || response.body().isEmpty())) {
+                    int[] completedCount = {0};
+                    int totalItems = panierList.size();
+
                     for (Panier item : panierList) {
                         Vente vente = new Vente();
-                        vente.idTransaction=generateRandomAlphanumeric(10);
+                        vente.idTransaction = newId;
                         vente.login_boutique = item.login_boutique;
-                        vente.idClient = item.idClient;
+                        vente.idClient = identifiant;
                         vente.nom_produit = item.nom_produit;
                         vente.quantite = item.quantite;
                         vente.nom_adresse = selectedAddress;
@@ -309,11 +362,16 @@ public class ClientPaiementPanier extends Activity {
                         apiService.addVente(vente).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                apiService.removeFromCart(item.login_boutique, item.nom_produit, item.idClient)
+                                apiService.removeFromCart(item.login_boutique, item.nom_produit, identifiant)
                                         .enqueue(new Callback<Void>() {
                                             @Override
                                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                                // OK
+                                                completedCount[0]++;
+                                                if (completedCount[0] == totalItems) {
+                                                    Intent intent = new Intent(ClientPaiementPanier.this, ClientPaiementValidation.class);
+                                                    intent.putExtra("id", identifiant);
+                                                    startActivity(intent);
+                                                }
                                             }
 
                                             @Override
@@ -330,21 +388,19 @@ public class ClientPaiementPanier extends Activity {
                         });
                     }
 
-                    Toast.makeText(ClientPaiementPanier.this, "Paiement effectué avec la carte : " + selectedCard, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ClientPaiementPanier.this, ClientPaiementValidation.class);
-                    intent.putExtra("id", identifiant);
-                    startActivity(intent);
                 } else {
-                    Toast.makeText(ClientPaiementPanier.this, "Erreur récupération panier", Toast.LENGTH_SHORT).show();
+                    generateUniqueIdAndContinue(apiService, panierList);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Panier>> call, Throwable t) {
-                Toast.makeText(ClientPaiementPanier.this, "Erreur réseau panier", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<Vente>> call, Throwable t) {
+                Toast.makeText(ClientPaiementPanier.this, "Erreur de vérification ID", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
 
     public String generateRandomAlphanumeric(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -358,5 +414,27 @@ public class ClientPaiementPanier extends Activity {
 
         return sb.toString();
     }
+
+    private void generateUniqueTransactionId(Callback<String> callback) {
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        String newId = generateRandomAlphanumeric(10);
+        apiService.getByIdTransaction(newId).enqueue(new Callback<List<Vente>>() {
+            @Override
+            public void onResponse(Call<List<Vente>> call, Response<List<Vente>> response) {
+                if (response.isSuccessful() && (response.body() == null || response.body().isEmpty())) {
+                    callback.onResponse(null, Response.success(newId));
+                } else {
+                    generateUniqueTransactionId(callback);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Vente>> call, Throwable t) {
+                Toast.makeText(ClientPaiementPanier.this, "Erreur de vérification d'ID", Toast.LENGTH_SHORT).show();
+                callback.onFailure(null, t);
+            }
+        });
+    }
+
 
 }
