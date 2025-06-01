@@ -244,7 +244,7 @@ public class BoutiqueProfilInfos extends Activity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Intent intent = new Intent(BoutiqueProfilInfos.this, Connexion.class); // ou MainActivity
+                    Intent intent = new Intent(BoutiqueProfilInfos.this, MainActivity.class); // ou MainActivity
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();

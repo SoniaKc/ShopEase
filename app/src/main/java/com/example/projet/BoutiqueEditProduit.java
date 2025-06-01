@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,8 +86,8 @@ public class BoutiqueEditProduit extends Activity {
             @Override
             public void onClick(View v) {
                 String nom = nomProduit.getText().toString().trim();
-                String reduction = reductionProduit.getText().toString().trim();
-                String prix = prixProduit.getText().toString().trim();
+                String reduction = reductionProduit.getText().toString().trim().replaceAll("[€$£¥₹]", "");
+                String prix = prixProduit.getText().toString().trim().replaceAll("[€$£¥₹]", "");
                 String description = descriptionProduit.getText().toString().trim();
                 Drawable drawable = imageProduit.getDrawable();
 
@@ -158,6 +159,43 @@ public class BoutiqueEditProduit extends Activity {
             }
         });
 
+        Call<List<Commentaire>> call = apiService.getCommentairesByProduit(identifiant,nom_Produit);
+        call.enqueue(new Callback<List<Commentaire>>() {
+            @Override
+            public void onResponse(Call<List<Commentaire>> call, Response<List<Commentaire>> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        List<Commentaire> commentaires = response.body();
+                        LinearLayout container = findViewById(R.id.commentairesContainer);
+                        container.removeAllViews();
+
+                        LayoutInflater inflater = LayoutInflater.from(BoutiqueEditProduit.this);
+                        for (Commentaire commentaire : commentaires) {
+                            View view = inflater.inflate(R.layout.item_commentaire_page_produit, container, false);
+
+                            TextView nomClient = view.findViewById(R.id.nomClient);
+                            RatingBar noteProduit = view.findViewById(R.id.noteProduit);
+                            TextView texteCommentaire = view.findViewById(R.id.texteCommentaire);
+
+                            nomClient.setText(commentaire.idClient);
+                            noteProduit.setRating(Float.parseFloat(commentaire.note));
+                            texteCommentaire.setText(commentaire.commentaire);
+
+                            container.addView(view);
+                        }
+                    } else {
+                        //Toast.makeText(BoutiqueEditProduit.this, "Aucune donnée reçue", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    //Toast.makeText(BoutiqueEditProduit.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Commentaire>> call, Throwable t) {
+                //Toast.makeText(BoutiqueEditProduit.this, "Erreur réseau: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
         setupBottomNavigation();
     }
 
@@ -193,8 +231,8 @@ public class BoutiqueEditProduit extends Activity {
                 if (response.isSuccessful() && response.body() != null) {
                     Produit produit = response.body();
                     nomProduit.setText(produit.nom);
-                    reductionProduit.setText(produit.reduction);
-                    prixProduit.setText(produit.prix);
+                    reductionProduit.setText(produit.reduction.replaceAll("[€$£¥₹]", ""));
+                    prixProduit.setText(produit.prix.replaceAll("[€$£¥₹]", ""));
                     descriptionProduit.setText(produit.description);
                     ImageHandler.handleProduitImages(produit.image,imageProduit);
 

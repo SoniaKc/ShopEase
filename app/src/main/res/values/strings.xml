@@ -309,7 +309,9 @@ L\'éditeur se réserve le droit de modifier à tout moment les présentes menti
     <string name="recherche">Rechercher...</string>
     <string name="Categorie">Catégories :</string>
     <string name="reduction">Réduction :</string>
+    <string name="hintReduction">Ex : 5</string>
     <string name="prix">Prix :</string>
+    <string name="hintPrix">Ex : 25,90</string>
     <string name="description">Description :</string>
     <string name="validerAjoutProduit">✔ Valider les modifications de ce produit</string>
     <string name="AnnulerAjoutProduit">🗑 Supprimer ce produit</string>

@@ -64,8 +64,10 @@ public class ClientPageProduit extends Activity {
                     Produit produit = response.body();
 
                     nom.setText(produit.nom);
-                    prix.setText(produit.prix);
-                    reduction.setText(produit.reduction);
+                    prix.setText(produit.prix.replaceAll("[^\\d.,]", "") + " $");
+                    if (!produit.reduction.equals("")){
+                        reduction.setText("-" + produit.reduction.replaceAll("[^\\d.,]", "") + " $");
+                    }
                     description.setText(produit.description);
                     categories.setText(produit.categories);
                     ImageHandler.handleAllImages(produit.image, imageProduit);

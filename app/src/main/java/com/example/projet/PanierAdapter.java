@@ -50,17 +50,26 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.ViewHolder
 
         holder.nomProduit.setText(produit.nom);
         holder.description.setText(produit.description);
-        holder.prixUnitaire.setText("Prix : " + produit.prix + " $");
+        if (!produit.reduction.equals("")){
+            holder.prixUnitaire.setText("Prix : " + produit.prix + " - " + produit.reduction + " $");
+        }else{
+            holder.prixUnitaire.setText("Prix : " + produit.prix + " $");
+        }
         holder.quantite.setText("Quantité : " + panier.quantite);
         ImageHandler.handleProduitImages(produit.image, holder.image);
 
         try {
             String prixStr = produit.prix.replace(",", ".").trim();
             double prix = Double.parseDouble(prixStr);
+            double reduc = 0.0;
+            if (!produit.reduction.equals("")){
+                String reducStr = produit.reduction.replace(",", ".").trim();
+                reduc = Double.parseDouble(reducStr);
+            }
 
             int quantiteInt = Integer.parseInt(panier.quantite.trim());
 
-            double total = prix * quantiteInt;
+            double total = (prix - reduc) * quantiteInt;
             holder.totalProduit.setText("Total : " + total + " $");
         } catch (NumberFormatException e) {
             holder.totalProduit.setText("Total : -");

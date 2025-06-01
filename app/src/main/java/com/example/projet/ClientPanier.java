@@ -133,6 +133,8 @@ public class ClientPanier extends Activity {
                                         public void onResponse(Call<Produit> call, Response<Produit> response) {
                                             if (response.isSuccessful() && response.body() != null) {
                                                 Produit produit = response.body();
+                                                produit.prix = produit.prix.replaceAll("[€$£¥₹]", "");
+                                                produit.reduction = produit.reduction.replaceAll("[€$£¥₹]", "");
                                                 PanierDisplayItem displayItem = new PanierDisplayItem(produit, item);
                                                 panierDisplayItems.add(displayItem);
                                                 adapter.notifyDataSetChanged();
@@ -169,7 +171,12 @@ public class ClientPanier extends Activity {
                 int qte = Integer.parseInt(item.getPanier().quantite.trim());
                 String prixStr = item.getProduit().prix.replace(",", ".");
                 double prix = Double.parseDouble(prixStr.trim());
-                double sousTotal = prix * qte;
+                double reduc = 0.0;
+                if (!item.getProduit().reduction.equals("")){
+                    String reducStr = item.getProduit().reduction.replace(",", ".").trim();
+                    reduc = Double.parseDouble(reducStr);
+                }
+                double sousTotal = (prix - reduc) * qte;
                 total += sousTotal;
              } catch (NumberFormatException e) {
                 System.err.println("Erreur conversion prix ou quantité pour " + item.getProduit().nom);

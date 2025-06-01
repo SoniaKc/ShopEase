@@ -326,7 +326,7 @@ public class ClientProfilInfos extends Activity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(ClientProfilInfos.this, "Compte supprimé", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ClientProfilInfos.this, Connexion.class);
+                    Intent intent = new Intent(ClientProfilInfos.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {

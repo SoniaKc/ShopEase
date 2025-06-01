@@ -82,8 +82,8 @@ public class BoutiqueAjouterProduit extends Activity {
             @Override
             public void onClick(View v) {
                 String nom = nomProduit.getText().toString().trim();
-                String reduction = reductionProduit.getText().toString().trim();
-                String prix = prixProduit.getText().toString().trim();
+                String reduction = reductionProduit.getText().toString().trim().replaceAll("[€$£¥₹]", "");
+                String prix = prixProduit.getText().toString().trim().replaceAll("[€$£¥₹]", "");
                 String description = descriptionProduit.getText().toString().trim();
                 Drawable drawable = imageProduit.getDrawable();
 
@@ -114,7 +114,7 @@ public class BoutiqueAjouterProduit extends Activity {
                             } else {
                                 try {
                                     String errorBody = response.errorBody().string();
-                                    Toast.makeText(BoutiqueAjouterProduit.this, "Erreur: " + errorBody, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(BoutiqueAjouterProduit.this, "Nom, Prix et Description obligatoires" + errorBody, Toast.LENGTH_LONG).show();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }

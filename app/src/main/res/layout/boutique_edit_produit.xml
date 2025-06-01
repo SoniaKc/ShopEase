@@ -220,6 +220,24 @@
                 android:backgroundTint="@android:color/darker_gray"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="8dp" />
+
+
+            <!-- COMMENTAIRES -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/commentairesClient"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:id="@+id/commentairesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical" />
         </LinearLayout>
     </ScrollView>
 

@@ -148,7 +148,8 @@
                 <EditText
                     android:id="@+id/reductionProduit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hintReduction"/>
             </LinearLayout>
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9" />
@@ -174,7 +175,8 @@
                 <EditText
                     android:id="@+id/prixProduit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hintPrix"/>
             </LinearLayout>
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#D1C4E9" />
