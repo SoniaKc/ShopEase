@@ -1,9 +1,381 @@
 <resources>
     <string name="app_name">ShopEase</string>
+
+    <!-- Global -->
+    <string name="Valider">Valider</string>
+    <string name="Supprimer">Supprimer</string>
+    <string name="Modifier">Modifier</string>
+    <string name="Enregistrer">Enregistrer</string>
+    <string name="Deconnexion">Déconnexion</string>
+
+    <!-- Dialog -->
+    <string name="nomProduit">Nom du produit</string>
+    <string name="Commentaire">Commentaire :</string>
+    <string name="VotreAvis">Votre avis...</string>
+
+    <!-- Items -->
+    <string name="Description">Description</string>
+    <string name="Prix">Prix : </string>
+    <string name="Quantite">Quantité : </string>
+    <string name="nomAdresse">Nom de l\'adresse</string>
+    <string name="numRue">Numéro et rue</string>
+    <string name="CpVillePays">Code Postal, Ville, Pays</string>
+
+
+    <!--Pages Connexion et Inscriptions -->
+    <string name="connexion">Connexion</string>
+    <string name="connexionEntrezID">Entrez votre identifiant</string>
+    <string name="mdp">Mot de passe :</string>
+    <string name="mdpSecu">Mot de passe sécurisé</string>
+    <string name="seConnecter">Se connecter</string>
+
+    <string name="inscriptionBoutique">Inscription \nBoutique</string>
+    <string name="identifiant">Identifiant :</string>
+    <string name="entrezIndentifiant">Entrez votre identifiant</string>
+    <string name="nomBoutique">Nom de la Boutique :</string>
+    <string name="nomCommercial">Nom commercial de la Boutique</string>
+    <string name="numSiret">Numéro de Siret</string>
+    <string name="exempleNumSiret">123 456 789 00012</string>
+    <string name="formeJur">Forme juridique</string>
+    <string name="SARL">SAS, SARL, etc</string>
+    <string name="sInscrire">S\’inscrire</string>
+
+    <string name="inscriptionClient">Inscription Client</string>
+    <string name="mdpSimple">Mot de passe</string>
+    <string name="indentifiantSimple">Identifiant</string>
+    <string name="nom">Nom</string>
+    <string name="prenom">Prénom</string>
+    <string name="mail">Adresse mail</string>
+    <string name="dob">Date de naissance</string>
+
+
+    <string name="client">Client</string>
+    <string name="inscClient2">Inscription\nClient</string>
+    <string name="connClient">Connection\nClient</string>
+    <string name="boutique">Boutique</string>
+    <string name="connBoutique">Connection\nBoutique</string>
+
+
+    <!--Pages Mes Infos Client et Boutique -->
+    <string name="mesInfos">Mes informations</string>
+    <string name="mesAdresses">Mes adresses</string>
+    <string name="HistoriqueAchat">Historique des achats</string>
+    <string name="HistoriqueVentes">Historique des ventes</string>
+    <string name="moyenPaiement">Moyens de paiement</string>
+    <string name="avis">Mes Avis</string>
+
+    <string name="fleurCie">Nom boutique : Fleur et Cie</string>
+    <string name="modifNomBoutique">Modifier Nom boutique</string>
+    <string name="mailBoutique">E-mail : FleurCie@gmail.com</string>
+    <string name="modifMail">Modifier E-mail</string>
+    <string name="telBoutique">Téléphone : 0458510269</string>
+    <string name="modifTel">Modifier Téléphone</string>
+    <string name="idBoutique">Identifiant : FleurCie</string>
+    <string name="modifId">Modifier Identifiant</string>
+    <string name="mdpBoutique">Mot de Passe : **********</string>
+    <string name="modifMdp">Modifier Mot de Passe</string>
+    <string name="formeJurBoutique">Forme juridique : SARL</string>
+    <string name="modifFormeJur">Modifier Forme juridique</string>
+    <string name="numSiretBoutique">Numéro SIRET : 31J</string>
+    <string name="modifSiret">Modifier SIRET</string>
+    <string name="siegeSocialBoutique">Siège social : 21 rue Albert, Paris</string>
+    <string name="modifAdresse">Modifier adresse</string>
+    <string name="paysBoutique">Pays d\'enregistrement : France</string>
+    <string name="modifPays">Modifier pays</string>
+    <string name="iban">IBAN : **********</string>
+    <string name="modifIban">Modifier IBAN</string>
+    <string name="supprBoutique">Supprimer la boutique</string>
+    <string name="modifPhoto">Modifier Photo</string>
+
+
+
+    <!--Pages Paramètres Client et Boutique -->
+    <string name="params">Paramètres</string>
+    <string name="paramLangue">Langue :</string>
+    <string name="paramCookie">Cookies: </string>
+    <string name="paramNotifs">Notifications : Push, e-mail, SMS</string>
+    <string name="supprCompte">Supprimer le compte</string>
+
+    <!-- Global Client -->
+
+    <!-- Client Panier (3 activités) -->
+    <string name="Payer">Payer</string>
+    <string name="votrePanier">Votre panier</string>
+    <string name="valeurPanier">Valeur totale : 0,00 $ </string>
+    <string name="panierVide">Votre panier est vide. </string>
+
+
+    <string name="nomClient">Prénom Nom</string>
+    <string name="felicitationAchat">Félicitation pour votre achat !</string>
+    <string name="preparationAchat">Il est en cours de préparation et ne tardera pas à arriver devant votre porte.</string>
+    <string name="remerciementAchat">Merci pour votre confiance. En espérant vous revoir rapidement, L\'équipe de ShopEase.</string>
+
+
+    <string name="methodePaiement">Votre moyen de règlement</string>
+    <string name="adressePaiement">Votre adresse de Livraison</string>
+    <string name="promoPaiement">Code promotion ou carte cadeau</string>
+    <string name="validerPaiement">Valider et Payer</string>
+    <string name="carteEx">Carte 1 : 4111 **** **** 1111</string>
+    <string name="adresseEx">Adresse 1 : 49 rue de l\'Olivette, 34089 St Jacques, France</string>
+
+    <string name="choisirAutreCarte">Choisir une autre carte</string>
+    <string name="choisirAutreAdresse">Choisir une autre adresse</string>
+    <string name="promoCode">Code :</string>
+
+    <string name="modeLivraison">Mode de livraison</string>
+
+
+    <!-- Adresse et Cartes -->
+    <string name="AjoutPaiement"> Ajouter une carte</string>
+    <string name="AjoutAdresse"> Ajouter une adresse</string>
+
+    <string name="nomCarte">Nom de la carte</string>
+    <string name="nomCarteEx">Ex: Ma Carte Bancaire</string>
+    <string name="numCarteEx">1234 5678 9012 3456</string>
+    <string name="titulaireCarteEx">Ex: Jean DUPONT</string>
+    <string name="DateExpiration">Date d\'expiration</string>
+    <string name="cvcEx">123</string>
+
+
+    <!-- Produit -->
+    <string name="AJouterFavoris">Ajouter aux favoris</string>
+    <string name="AJouterPanier">Ajouter au Panier</string>
+
+
+    <!-- Avis et LaisserAvis -->
+    <string name="noteEx">Note :</string>
+    <string name="article">Article :</string>
+    <string name="noteEntree">Entrez votre note</string>
+    <string name="commentaire">Commentaire :</string>
+    <string name="partagerAvis">Partagez votre avis ici...</string>
+    <string name="laisserAvis">Votre avis</string>
+    <string name="Envoyer">Envoyer</string>
+
+    <!-- Favoris -->
+    <string name="favoris1">Votre liste</string>
+    <string name="favoris2">de souhaits</string>
+
+    <!-- Edit carte et adresse -->
+    <string name="modifCarte">Modifier la carte</string>
+    <string name="modifAdresse2">Modifier l\'adresse</string>
+    <string name="numCarte">Numéro de carte</string>
+    <string name="titulaireCarte">Titulaire de la carte</string>
+    <string name="moisAnnee">MM/AA</string>
+    <string name="CVC">CVC</string>
+
+    <string name="Numero">Numéro</string>
+    <string name="Rue">Rue</string>
+    <string name="CodePostal">Code Postal</string>
+    <string name="Ville">Ville</string>
+    <string name="Pays">Pays</string>
+
+    <!--Historique achat et ventes client et boutique -->
+    <string name="totalCommande">Total commande : </string>
+    <string name="valider">Valider la commande</string>
+    <string name="refuser">Refuser la commande</string>
+
+    <!-- Global Boutique -->
+
+    <!-- Ajouter/Editer produit -->
+    <string name="nomAddP">Nom : </string>
+
     <string name="accueil">Accueil</string>
     <string name="favoris">Favoris</string>
+    <string name="ventes">Ventes</string>
     <string name="compte">Compte</string>
-    <string name="consultesRecemment">Consultés récemment</string>
+    <string name="tousLesProduits"><u>Accédez à tous nos produits ici</u></string>
     <string name="clientsAdorent">Nos clients les adorent</string>
     <string name="rechercher">Rechercher...</string>
+    <string name="aProposTitre">À propos</string>
+
+    <string name="vosProduits">Vos produits</string>
+
+
+
+
+    <string name="email">E-mail :</string>
+    <string name="telephone">Téléphone :</string>
+    <string name="formeJuridique">Forme Juridique :</string>
+    <string name="siret">SIRET :</string>
+    <string name="siegeSociel">Siège Social :</string>
+    <string name="PaysEnre">Pays d\'Enregistrement :</string>
+    <string name="label">Label :</string>
+
+
+
+
+
+    <string name="mentionsLegales">Mentions Légales</string>
+
+
+
+
+    <!-- FAQ client et Boutique -->
+    <string name="FAQBoutique">FAQ Boutique</string>
+    <string name="FAQClient">FAQ Client</string>
+
+    <string name="Q1C"> Q : Est-ce que mes informations de paiement sont sécurisées ? \n
+    R : Absolument. ShopEase utilise un protocole de paiement sécurisé (SSL) et des plateformes de paiement reconnues pour garantir la confidentialité de vos données.</string>
+    <string name="Q2C"> Q : Puis-je retourner un produit si je ne suis pas satisfait ? \n
+        R : Oui, vous avez un délai de 14 jours après réception pour retourner un produit, sauf mention contraire du vendeur. </string>
+    <string name="Q3C"> Q : Comment sont déterminées les recommandations de produits ? \n
+        R : ShopEase analyse vos préférences, votre historique de navigation et vos achats précédents pour vous suggérer des produits pertinents via notre moteur d’intelligence artificielle.</string>
+
+    <string name="Q1B"> Q : Comment ajouter un nouveau produit à ma boutique ? \n
+        R : Depuis votre tableau de bord vendeur, sélectionnez "Ajouter un produit", puis remplissez les champs obligatoires : titre, description, prix, stock, et ajoutez une ou plusieurs images.</string>
+    <string name="Q2B"> Q : Quels types de paiements puis-je accepter ? \n
+        R : ShopEase gère les paiements pour vous via notre solution sécurisée. Vous recevez ensuite les fonds directement sur votre compte bancaire après validation de la commande.</string>
+    <string name="Q3B"> Q : Puis-je gérer mes stocks directement dans l application ? \n
+        R : Oui, vous pouvez mettre à jour le stock de chaque produit depuis l’interface vendeur. Le stock s’ajuste également automatiquement après chaque vente.</string>
+
+
+
+
+
+
+
+
+
+
+    <string name="aPropos">🛒 À propos de ShopEase \n
+Bienvenue sur ShopEase, votre nouvelle plateforme mobile de e-commerce intelligente, conçue pour rendre l’achat et la vente de produits plus simple, rapide et personnalisée que jamais. \n
+Notre mission ? Offrir à chacun, particulier ou commerçant, un espace sécurisé et intuitif pour acheter et vendre une grande variété de produits. Que vous soyez à la recherche d’un article spécifique ou que vous souhaitiez lancer votre propre boutique en ligne, ShopEase est là pour vous accompagner à chaque étape. \n\n
+🚀 Ce que nous offrons : \n
+Un catalogue riche et facile à parcourir, avec des filtres avancés pour trouver rapidement ce que vous cherchez. \n
+Une expérience utilisateur fluide, adaptée à vos goûts grâce à notre moteur de recommandations intelligent. \n
+Des paiements sécurisés et un suivi en temps réel de vos commandes. \n
+Un système de notation et d’avis pour vous aider à faire les bons choix. \n
+Une interface moderne pensée à la fois pour les acheteurs et les vendeurs. \n\n
+🤝 Pour les vendeurs : \n
+Créez votre boutique en quelques minutes, gérez vos produits et suivez vos ventes en toute autonomie grâce à un tableau de bord complet et facile à utiliser. \n
+ShopEase, c’est bien plus qu’un simple marketplace : c’est une communauté dynamique, propulsée par la technologie et centrée sur la confiance et la qualité. \n\n
+N’hésitez pas à nous contacter ou visiter la section FAQ pour toute question. Merci de faire partie de l’aventure ! 🌟</string>
+
+    <string name="MentionsLegales">
+        Nom de l application : ShopEase\n
+        Éditeur : Sonia KECHAOU et Fannie RUIZ\n
+        Forme juridique : Auto-entrepreneur\n
+        Adresse du siège social : 123 Rue de l\'Innovation, 75010 Paris, France\n
+        Email de contact : contact@shopease.app\n
+        Numéro de téléphone : 04 34 11 45 66\n
+        SIRET : 123 456 789 00010\n
+        Directeur de la publication : Sonia KECHAOU\n
+\n
+---\n
+\n
+        📡 Hébergement\n
+\n
+Hébergeur : OVHcloud\n
+Adresse : 2 Rue Kellermann, 59100 Roubaix, France\n
+Site web : https://www.ovhcloud.com\n
+\n
+---\n
+\n
+ 🔒 Données personnelles\n
+\n
+Les données personnelles collectées sur l application sont traitées dans le respect de la réglementation applicable (notamment le RGPD). Vous disposez d’un droit d’accès, de rectification, de suppression et de portabilité de vos données.\n
+Pour exercer vos droits, contactez-nous à l adresse suivante : contact@shopease.app.\n
+\n
+Pour plus d informations, veuillez consulter notre Politique de confidentialité.\n
+\n
+---\n
+\n
+ ⚖️ Propriété intellectuelle\n
+\n
+Tous les contenus présents sur l application (textes, images, logos, icônes, interfaces, etc.) sont la propriété exclusive de Sonia KECHAOU et Fannie RUIZ, sauf mention contraire, et sont protégés par les lois en vigueur sur la propriété intellectuelle.\n
+Toute reproduction ou utilisation non autorisée est strictement interdite.\n
+\n
+---\n
+\n
+ 📱 Conditions d’utilisation\n
+\n
+L\'utilisation de l application implique l acceptation pleine et entière de nos Conditions Générales d’Utilisation.\n
+L\'éditeur se réserve le droit de modifier à tout moment les présentes mentions légales.\n
+    </string>
+
+
+
+
+
+
+    <string name="TVmodif">Nouveau</string>
+    <string name="Confirmer">Confirmer</string>
+    <string name="Retour">Retour</string>
+
+    <string name="mesProduits"> Mes produits</string>
+    <string name="Historique">Historique des ventes</string>
+    <string name="faq">FAQ</string>
+
+    <string name="recherche">Rechercher...</string>
+    <string name="Categorie">Catégories :</string>
+    <string name="reduction">Réduction :</string>
+    <string name="hintReduction">Ex : 5</string>
+    <string name="prix">Prix :</string>
+    <string name="hintPrix">Ex : 25,90</string>
+    <string name="description">Description :</string>
+    <string name="validerAjoutProduit">✔ Valider les modifications de ce produit</string>
+    <string name="AnnulerAjoutProduit">🗑 Supprimer ce produit</string>
+    <string name="bienvenue">Bonjour, NOM Prénom :)</string>
+    
+
+
+    <!-- Adresses -->
+    <string name="address_1">Adresse 1</string>
+    <string name="address_1_street">49 rue de l\'olivette</string>
+    <string name="address_1_city">34089 St Jacques France</string>
+
+    <string name="address_2">Adresse 2</string>
+    <string name="address_2_street">42 rue des Licornes Volantes,</string>
+    <string name="address_2_city">99999 Fantaisie-sur-Mer Bolivie</string>
+
+
+    <string name="adresses">Mes Adresses</string>
+    <string name="add_card_button">+ Ajouter une carte</string>
+
+    <!-- Cartes de paiement -->
+    <string name="card_1">Carte 1</string>
+    <string name="card_1_number">Numéro de carte : 4111 **** **** 1111</string>
+    <string name="card_1_holder">Titulaire : Jean Testeur</string>
+    <string name="card_1_expiry">Date d\'expiration : 12/27</string>
+
+    <string name="card_2">Carte 2</string>
+    <string name="card_2_number">Numéro de carte : 5500 **** **** 0004</string>
+    <string name="card_2_holder">Nom : Marie Démo</string>
+    <string name="card_2_expiry">Date d\'expiration : 08/26</string>
+
+    <!-- Boutons -->
+    <string name="edit_button">Modifier</string>
+    <string name="delete_button">Supprimer</string>
+
+    <!-- Titres et en-têtes -->
+    <string name="my_infos_title">Mes informations</string>
+    <string name="delete_account_button">Supprimer mon compte</string>
+    <string name="deconnect_account_button">Se déconnecter</string>
+
+
+    <!-- Labels des champs -->
+    <string name="lastname_label">Nom :</string>
+    <string name="firstname_label">Prénom :</string>
+
+
+
+
+    <!-- Content descriptions -->
+    <string name="edit_name_desc">Modifier le nom</string>
+    <string name="edit_email_desc">Modifier l\'email</string>
+    <string name="edit_phone_desc">Modifier le téléphone</string>
+    <string name="edit_username_desc">Modifier l\'identifiant</string>
+    <string name="edit_password_desc">Modifier le mot de passe</string>
+
+
+
+    <!-- Navigation -->
+    <string name="home">Accueil</string>
+    <string name="favorites">Favoris</string>
+    <string name="account">Compte</string>
+
+
+    <string name="commentairesClient">Commentaires Clients</string>
+    <string name="vosCommandes">Vos commandes</string>
+    <string name="vosVentes">Vos ventes</string>
 </resources>

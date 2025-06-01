@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adresse_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorcartes"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="2dp">
+
+        <TextView
+            android:id="@+id/nom_adresse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="@string/nomAdresse" />
+
+        <TextView
+            android:id="@+id/rue_adresse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_marginTop="4dp"
+            android:text="@string/numRue" />
+
+        <TextView
+            android:id="@+id/code_ville_pays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_marginTop="4dp"
+            android:text="@string/CpVillePays" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Modifier"
+                android:backgroundTint="@android:color/transparent"
+                android:textColor="@color/purple_500" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Supprimer"
+                android:backgroundTint="@android:color/transparent"
+                android:textColor="#B00020" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

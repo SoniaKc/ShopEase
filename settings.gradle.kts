@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ShopEase"
+rootProject.name = "Projet"
 include(":app")
+ 

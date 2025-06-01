@@ -1,0 +1,48 @@
+package com.example.projet;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+public class BoutiqueMentionsLegales extends Activity {
+    String identifiant;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.boutique_mentions_legales);
+
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        identifiant = getIntent().getStringExtra("id");
+
+        ImageView photoProfil = findViewById(R.id.profilePhoto);
+        ImageHandler.getBoutiqueAndHandleAllImages(apiService, identifiant, photoProfil);
+
+        setupBottomNavigation();
+    }
+
+    private void setupBottomNavigation() {
+        LinearLayout navHome = findViewById(R.id.navHome);
+        LinearLayout navVentes = findViewById(R.id.navVentes);
+        LinearLayout navProfile2 = findViewById(R.id.navProfile);
+
+        navHome.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueMesProduits.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navVentes.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueHistoriqueVentes.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+
+        navProfile2.setOnClickListener(v -> {
+            Intent i = new Intent(this, BoutiqueProfilAccueil.class);
+            i.putExtra("id", identifiant);
+            startActivity(i);
+        });
+    }
+}

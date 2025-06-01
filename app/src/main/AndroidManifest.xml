@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
 
     <application
         android:allowBackup="true"
@@ -10,18 +21,90 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ShopEase"
-        tools:targetApi="31" >
-
+        android:theme="@style/Theme.Projet"
+        tools:targetApi="31">
         <activity
-            android:name=".AccueilClient"
-            android:exported="true"
-            android:theme="@style/Theme.ShopEase">
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Connexion" />
+
+
+
+
+
+
+        <activity
+            android:name=".ClientInscription"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".ClientAccueil" />
+        <activity android:name=".ClientProfilAcceuil" />
+        <activity android:name=".ClientTousProduits" />
+        <activity android:name=".ClientPageProduit" />
+
+        <activity android:name=".ClientFaq" />
+
+        <activity android:name=".ClientParametres" />
+        <activity android:name=".ClientApropos" />
+        <activity android:name=".ClientMentionsLegales" />
+        <activity android:name=".ClientAvis" />
+
+        <activity android:name=".ClientPanier" />
+        <activity android:name=".ClientFavoris" />
+        <activity android:name=".ClientProfilInfos" />
+        <activity android:name=".ClientHistoriqueAchats" />
+
+        <activity android:name=".ClientCB" />
+        <activity android:name=".ClientEditPayement" />
+        <activity android:name=".ClientAddPayment" />
+
+        <activity android:name=".ClientAdresse" />
+        <activity android:name=".ClientEditAdresse" />
+        <activity android:name=".ClientAddAdresse" />
+
+        <activity android:name=".ClientPaiementPanier" />
+        <activity android:name=".ClientPaiementValidation" />
+
+        <activity android:name=".ClientCommandeDetail" />
+        <activity android:name=".ClientLaisserAvis" />
+
+
+
+
+
+        <activity
+            android:name=".BoutiqueInscription"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".BoutiqueFaq" />
+
+
+        <activity android:name=".BoutiqueProfilInfos" />
+        <activity android:name=".BoutiqueProfilAccueil" />
+        <activity android:name=".BoutiqueApropos" />
+        <activity android:name=".BoutiqueMentionsLegales"/>
+        <activity android:name=".BoutiqueParametres"/>
+
+        <activity android:name=".BoutiqueMesProduits" />
+        <activity android:name=".BoutiqueAjouterProduit"/>
+        <activity android:name=".BoutiqueEditProduit" />
+
+        <activity android:name=".BoutiqueHistoriqueVentes"/>
+        <activity android:name=".BoutiqueCommandeDetail"/>
+
+
+
+
+
 
     </application>
 
