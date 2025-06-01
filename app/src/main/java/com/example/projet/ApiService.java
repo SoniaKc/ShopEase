@@ -131,6 +131,9 @@ public interface ApiService {
     @GET("api/produit/getAllProduits")
     Call<List<Produit>> getAllProduits();
 
+    @GET("api/produit/getProduitsRecherche")
+    Call<List<Produit>> getProduitsRecherche(@Query("recherche") String recherche);
+
 
 
 

@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,7 +46,30 @@ public class ClientTousProduits extends Activity {
         ImageView photoProfil = findViewById(R.id.profilePhoto);
         ImageHandler.getClientAndHandleAllImages(apiService, identifiant, photoProfil);
 
-        loadProduitsPopulaires();
+        String but = getIntent().getStringExtra("but");
+        if (but.equals("allProduits")){
+            loadAllProduits();
+        }else{
+            loadProduitsRecherche(but);
+        }
+
+        SearchView searchView = findViewById(R.id.barreRecherche);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String recherche) {
+                Intent i = new Intent(getApplicationContext(), ClientTousProduits.class);
+                i.putExtra("but",recherche);
+                i.putExtra("id", identifiant);
+                startActivity(i);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         setupTopBottomNavigation();
     }
 
@@ -85,7 +108,7 @@ public class ClientTousProduits extends Activity {
     }
 
 
-    private void loadProduitsPopulaires() {
+    private void loadAllProduits() {
         Call<List<Produit>> call = apiService.getAllProduits();
         call.enqueue(new Callback<List<Produit>>() {
             @Override
@@ -96,6 +119,28 @@ public class ClientTousProduits extends Activity {
                     adapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(ClientTousProduits.this, "Erreur de chargement", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Produit>> call, Throwable t) {
+                Toast.makeText(ClientTousProduits.this, "Erreur réseau", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    private void loadProduitsRecherche(String recherche) {
+        Call<List<Produit>> call = apiService.getProduitsRecherche(recherche);
+        call.enqueue(new Callback<List<Produit>>() {
+            @Override
+            public void onResponse(Call<List<Produit>> call, Response<List<Produit>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    produitList.clear();
+                    produitList.addAll(response.body());
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(ClientTousProduits.this, "Aucun produit ne correspond à votre recherche", Toast.LENGTH_SHORT).show();
                 }
             }
 

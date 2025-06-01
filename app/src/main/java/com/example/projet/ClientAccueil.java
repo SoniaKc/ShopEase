@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,11 +51,30 @@ public class ClientAccueil extends Activity {
         TextView tousProduits = findViewById(R.id.tousLesProduits);
         tousProduits.setOnClickListener(v -> {
             Intent i = new Intent(ClientAccueil.this, ClientTousProduits.class);
+            i.putExtra("but","allProduits");
             i.putExtra("id", identifiant);
             startActivity(i);
         });
 
         loadProduitsPopulaires();
+
+        SearchView searchView = findViewById(R.id.barreRecherche);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String recherche) {
+                Intent i = new Intent(getApplicationContext(), ClientTousProduits.class);
+                i.putExtra("but",recherche);
+                i.putExtra("id", identifiant);
+                startActivity(i);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         setupTopBottomNavigation();
     }
 
